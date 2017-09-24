@@ -30,3 +30,24 @@
 *.exe
 *.out
 *.app
+
+# Mac
+.DS_Store
+
+# tmp text files
+__tmp__*.txt
+
+# IGNORE everything under these directories
+**/binary
+**/build
+**/buildscripts
+**/.vscode
+**/source.tmp.cleaned-up
+
+# INCLUDE everything under these directories -- list this at the very bottom
+!dependencies/*
+
+/cmake-build-debug/
+#/.idea/
+
+#EOF
