@@ -1,11 +1,17 @@
-/* ch01.programing-exercise-15.c */
+/* ch01.programing-exercise-14.c */
 
 /* ===================================80 chars=============================== */
 
 /*
-	The line joining the points (2,2) and (5,6) which lie on the 
-	circumference of the circle is the diameter of the circle. 
-	Write a program to compute the area of the circle.
+   A point on the circumferenceInt of a circle whose center is (0,0) is (4,5).
+   Write a program to compute perimeter and areaInt of the circle.
+
+   Hint: Use the formula given in Exercise 1.11.
+*/
+
+/*
+	Compiled & tested with:
+	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>
@@ -14,29 +20,26 @@
 /* Required for: sqrt() */
 #include <math.h>
 
-/* Required for: assertions */
-#include <assert.h>
 typedef struct {
 	int x, y;
 } Point;
 
-#define P1X 2
-#define P1Y 2
-#define P2X 5
-#define P2Y 6
+#define P1X 0
+#define P1Y 0
+#define P2X 4
+#define P2Y 5
 #define DEBUG 0
 #define PI 3.14159265359
 
 /*
-	The Triangle Inequality Theorem
+   The Triangle Inequality Theorem
 
-	The Triangle Inequality Theorem states that the sum of any 2 sides of a
-	triangle must be greater than the measure of the third side.
+   The Triangle Inequality Theorem states that the sum of any 2 sides of a
+   triangle must be greater than the measure of the third side.
 
-	Note: This rule must be satisfied for all 3 conditions of the sides.
-	In other words, as soon as you know that the sum of 2 sides is less than
-	(or equal to ) the measure of a third side, then you know that the sides
-	do not make up a triangle.
+    Note: This rule must be satisfied for all 3 conditions of the sides.
+    In other words, as soon as you know that the sum of 2 sides is less than (or equal to ) the measure of a third side,
+    then you know that the sides do not make up a triangle.
 */
 /* returns 0 if triangle is legal, or returns 1 if triangle is illegal */
 int checkTriangleIsOk( int a, int b, int c )
@@ -57,8 +60,10 @@ int checkTriangleIsOk( int a, int b, int c )
 }
 
 /*
-	Distance between two points (x₁, y₁) and (x₂, y₂) is governed by the
-	formula:	D² = (x₂ - x₁)² + (y₂ - y₁)²
+        Distance between two points (x₁, y₁) and (x₂, y₂) is governed
+        by the formula:	D² = (x₂ - x₁)² + (y₂ - y₁)²
+
+        rounded to nearest int.
 */
 int pointDistanceInt( Point p1, Point p2 )
 {
@@ -101,8 +106,6 @@ int main( void )
 	p2.x = P2X;
 	p2.y = P2Y;
 
-	assert( P1X >= 10 );
-
 	radiusInt = pointDistanceInt( p2, p1 );
 	radiusFloat = pointDistanceFloat( p2, p1 );
 	diameterInt = 2 * radiusInt;
@@ -112,15 +115,15 @@ int main( void )
 	areaInt = PI * radiusInt * radiusInt;
 	areaFloat = ( float )PI * radiusFloat * radiusFloat;
 	/*
-	if ( checkTriangleIsOk( a, b, c ) == 1 ) {
-	printf( "INPUT ERROR: Invalid Triangle Ratio!\n" );
-	exit( 1 );
-	} else {
-	printf( "Triangle is valid.\n" );
-	}
-	perimeter = a + b + c;
-	s = perimeter / 2;
-	areaInt = sqrt( s * ( s - a ) * ( s - b ) * ( s - c ) );
+	        if ( checkTriangleIsOk( a, b, c ) == 1 ) {
+	                printf( "INPUT ERROR: Invalid Triangle Ratio!\n" );
+	                exit( 1 );
+	        } else {
+	                printf( "Triangle is valid.\n" );
+	        }
+	        perimeter = a + b + c;
+	        s = perimeter / 2;
+	        areaInt = sqrt( s * ( s - a ) * ( s - b ) * ( s - c ) );
 
 	*/
 	printf( "\n\n" );

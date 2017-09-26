@@ -10,6 +10,12 @@
         <snip>
         5 x 10 = 50
 */
+
+/*
+    Compiled & tested with:
+    gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+*/
+
 #include <stdio.h>
 
 #define NUMBER 5

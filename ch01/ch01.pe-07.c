@@ -9,6 +9,12 @@
         20 + 10 = 30
         20 - 10 = 10
 */
+
+/*
+	Compiled & tested with:
+	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+*/
+
 #include <stdio.h>
 
 add( int a, int b )

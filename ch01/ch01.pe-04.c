@@ -13,6 +13,12 @@
         (a) a = 250, b = 85, c = 25
         (b) a = 300, b = 70, c = 70
 */
+
+/*
+	Compiled & tested with:
+	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+*/
+
 #include <stdio.h>
 
 #define	A1 250

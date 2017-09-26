@@ -10,6 +10,12 @@
         |	|	>>--------->		|	|
         |-------|				|-------|
 */
+
+/*
+	Compiled & tested with:
+	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+*/
+
 #include <stdio.h>
 
 int main( void )

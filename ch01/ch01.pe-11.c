@@ -15,6 +15,12 @@
         where s=(a+b+c)/2 or perimeter/2
         //--------------------------------
 */
+
+/*
+	Compiled & tested with:
+	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+*/
+
 #include <stdio.h>
 /* Required for: sqrt() */
 #include <math.h>

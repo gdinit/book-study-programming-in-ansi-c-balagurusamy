@@ -6,6 +6,12 @@
    Write a program to display the equation of a line in the form "ax + by = c"
    for a=5, b=8, and c=18
 */
+
+/*
+	Compiled & tested with:
+	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+*/
+
 #include <stdio.h>
 
 #define a 5

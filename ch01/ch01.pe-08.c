@@ -12,6 +12,12 @@
    ch01.programming-exercise 08:
    Modify the above program to provide border lines to the address.
 */
+
+/*
+  Compiled & tested with:
+  gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+*/
+
 #include <stdio.h>
 
 int main( void )

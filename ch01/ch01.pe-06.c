@@ -7,6 +7,12 @@
    area. Use a symbolic constant to define the PI value and assume a suitable
    value for radius.
 */
+
+/*
+	Compiled & tested with:
+	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+*/
+
 #include <stdio.h>
 
 #define PI 3.14159265359
