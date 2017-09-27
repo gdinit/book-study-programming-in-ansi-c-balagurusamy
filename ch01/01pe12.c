@@ -65,7 +65,6 @@ int main( void )
 	printf( "\t\t|=======|\t\t\t\t|=======|\n" );
 	printf( "\n" );
 	printf( "\n" );
-
 	return 0;
 }
 
