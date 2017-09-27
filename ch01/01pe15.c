@@ -20,6 +20,8 @@
 #include <math.h>
 /* Required for: assertions */
 #include <assert.h>
+#include "round.h"
+
 typedef struct {
 	int x, y;
 } Point;
@@ -28,7 +30,6 @@ typedef struct {
 #define P1Y 2
 #define P2X 5
 #define P2Y 6
-#define DEBUG 0
 #define PI 3.14159265359
 
 /*
@@ -53,13 +54,11 @@ int main( void )
 	Point	p1;
 	/* Given Point */
 	Point	p2;
-	int	debug;
 	float	radiusFloat;
 	float	diameterFloat;
 	float	circumferenceFloat;
 	float	areaFloat;
 
-	debug = DEBUG;
 	/* origin */
 	p1.x = P1X;
 	p1.y = P1Y;
@@ -89,6 +88,7 @@ int main( void )
 	printf( "areaFloat\t\t\t\t: %f\n",			areaFloat );
 	printf( "--------------------------------------------\n" );
 	printf( "\n" );
+	return 0;
 }
 
 /* ===================================80 chars=============================== */

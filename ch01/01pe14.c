@@ -19,6 +19,7 @@
 #include <stdlib.h>
 /* Required for: sqrt() */
 #include <math.h>
+#include "round.h"
 
 typedef struct {
 	int x, y;
@@ -28,7 +29,6 @@ typedef struct {
 #define P1Y 0
 #define P2X 4
 #define P2Y 5
-#define DEBUG 0
 #define PI 3.14159265359
 
 /*
@@ -88,7 +88,6 @@ int main( void )
 	int	perimeter;
 	float	s;
 	*/
-	int	debug;
 	int	radiusInt;
 	float	radiusFloat;
 	int	diameterInt;
@@ -98,7 +97,6 @@ int main( void )
 	int	areaInt;
 	float	areaFloat;
 
-	debug = DEBUG;
 	/* origin */
 	p1.x = P1X;
 	p1.y = P1Y;
@@ -148,9 +146,11 @@ int main( void )
 	printf( "areaFloat\t\t\t: %f\n",			areaFloat );
 	printf( "--------------------------------------------\n" );
 	printf( "\n" );
+	return 0;
 }
 
 /* ===================================80 chars=============================== */
 
 /* EOF */
 
+ 
