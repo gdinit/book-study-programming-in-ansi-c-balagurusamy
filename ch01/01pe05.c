@@ -34,6 +34,7 @@ int main( void )
 	/* 94 F = ? C */
 	c = ( FVAL - 32 ) * 5 / 9;
 	printf( "%f Fahrenheit = %f Celsius\n", FVAL, c );
+	return 0;
 }
 
 /* ===================================80 chars=============================== */

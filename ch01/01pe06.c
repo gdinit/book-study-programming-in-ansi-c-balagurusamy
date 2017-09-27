@@ -30,6 +30,7 @@ int main( void )
 	*/
 	area = PI * RADIUS * RADIUS;
 	printf( "PI = %f\tRadius = %f\tArea = %f\n", PI, RADIUS, area );
+	return 0;
 }
 
 /* ===================================80 chars=============================== */

@@ -43,6 +43,7 @@ int main( void )
 
 	result = sub( NUM1, NUM2 );
 	printf( "sub(%d, %d) = %d\n",	NUM1,	NUM2,	result );
+	return 0;
 }
 
 /* ===================================80 chars=============================== */

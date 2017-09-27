@@ -101,6 +101,7 @@ int main( void )
 	} else {
 		/* ; */
 	}
+	return 0;
 }
 
 int checkTriangleIsOk( int a, int b, int c )

@@ -21,6 +21,7 @@ int main( void )
 	printf( "First Line\t\t: Anthony Hopkins\n" );
 	printf( "Second Line\t\t: 21b, Park High Road\n" );
 	printf( "Third Line\t\t: London, W1 G4U\n" );
+	return 0;
 }
 
 /* ===================================80 chars=============================== */
