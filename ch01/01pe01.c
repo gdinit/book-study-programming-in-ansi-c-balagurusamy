@@ -23,7 +23,8 @@ int main( void )
 	printf( "\n" );
 	printf( "%dx + %dy = %d\n", a, b, c );
 	printf( "\n" );
-	return 0;
+
+        return 0;
 }
 
 /* ===================================80 chars=============================== */

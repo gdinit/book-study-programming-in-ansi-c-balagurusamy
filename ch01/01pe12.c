@@ -10,8 +10,8 @@
 */
 
 /*
-	Compiled & tested with:
-	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+        Compiled & tested with:
+        gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>
@@ -65,6 +65,7 @@ int main( void )
 	printf( "\t\t|=======|\t\t\t\t|=======|\n" );
 	printf( "\n" );
 	printf( "\n" );
+
 	return 0;
 }
 

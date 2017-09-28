@@ -15,8 +15,8 @@
 */
 
 /*
-	Compiled & tested with:
-	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+        Compiled & tested with:
+        gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>
@@ -57,6 +57,7 @@ int main( void )
 	printf( "b = %d\n",		b );
 	printf( "c = %d\n",		c );
 	printf( "result = %f\n",	result );
+
 	/* ================================== */
 	return 0;
 }

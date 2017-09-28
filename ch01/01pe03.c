@@ -27,6 +27,7 @@ int main( void )
 	for ( n = 1; n <= HIGHERLIMIT; ++n )
 		printf( "%d x %d = %d\n", NUMBER, n, ( NUMBER * n ) );
 	printf( "\n" );
+
 	return 0;
 }
 

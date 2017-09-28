@@ -3,14 +3,14 @@
 /* ===================================80 chars=============================== */
 
 /*
-	The line joining the points (2,2) and (5,6) which lie on the 
-	circumference of the circle is the diameter of the circle. 
-	Write a program to compute the area of the circle.
+        The line joining the points (2,2) and (5,6) which lie on the
+        circumference of the circle is the diameter of the circle.
+        Write a program to compute the area of the circle.
 */
 
 /*
-	Compiled & tested with:
-	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+        Compiled & tested with:
+        gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>
@@ -33,8 +33,8 @@ typedef struct {
 #define PI 3.14159265359
 
 /*
-	Distance between two points (x₁, y₁) and (x₂, y₂) is governed by the
-	formula:	D² = (x₂ - x₁)² + (y₂ - y₁)²
+        Distance between two points (x₁, y₁) and (x₂, y₂) is governed by the
+        formula:	D² = (x₂ - x₁)² + (y₂ - y₁)²
 */
 int pointDistanceInt( Point p1, Point p2 )
 {
@@ -80,14 +80,16 @@ int main( void )
 	printf( "--------------------------------------------\n" );
 	printf( "CALCULATION RESULTS\n\n" );
 	printf( "*** FLOAT **********************************\n" );
-	printf( "pointDistanceFloat (p2->p1 distance)\t: %f\n",	pointDistanceFloat( p2, p1 ) );
+	printf( "pointDistanceFloat (p2->p1 distance)\t: %f\n"
+		,	pointDistanceFloat( p2, p1 ) );
 	printf( "radiusFloat\t\t\t\t: %f\n",	radiusFloat );
-	printf( "diameterFloat\t\t\t\t: %f\n",			diameterFloat );
+	printf( "diameterFloat\t\t\t\t: %f\n",	diameterFloat );
 	printf( "circumferenceFloat\t\t\t: %f\n"
 		, circumferenceFloat );
-	printf( "areaFloat\t\t\t\t: %f\n",			areaFloat );
+	printf( "areaFloat\t\t\t\t: %f\n",	areaFloat );
 	printf( "--------------------------------------------\n" );
 	printf( "\n" );
+
 	return 0;
 }
 

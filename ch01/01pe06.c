@@ -9,8 +9,8 @@
 */
 
 /*
-	Compiled & tested with:
-	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+        Compiled & tested with:
+        gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>
@@ -30,6 +30,7 @@ int main( void )
 	*/
 	area = PI * RADIUS * RADIUS;
 	printf( "PI = %f\tRadius = %f\tArea = %f\n", PI, RADIUS, area );
+
 	return 0;
 }
 

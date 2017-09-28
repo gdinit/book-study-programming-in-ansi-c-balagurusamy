@@ -14,8 +14,8 @@
 */
 
 /*
-	Compiled & tested with:
-	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+        Compiled & tested with:
+        gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>
@@ -34,6 +34,7 @@ int main( void )
 	/* 94 F = ? C */
 	c = ( FVAL - 32 ) * 5 / 9;
 	printf( "%f Fahrenheit = %f Celsius\n", FVAL, c );
+
 	return 0;
 }
 

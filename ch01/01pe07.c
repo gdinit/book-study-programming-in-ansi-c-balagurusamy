@@ -11,8 +11,8 @@
 */
 
 /*
-	Compiled & tested with:
-	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+        Compiled & tested with:
+        gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>
@@ -43,6 +43,7 @@ int main( void )
 
 	result = sub( NUM1, NUM2 );
 	printf( "sub(%d, %d) = %d\n",	NUM1,	NUM2,	result );
+
 	return 0;
 }
 
