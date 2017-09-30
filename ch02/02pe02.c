@@ -23,6 +23,7 @@ int main( void )
 	char	noNeed;
 
 	float	price;
+
 	price = 0;
 
 	printf( "Enter the price of item (e.g.: 7.00):  " );

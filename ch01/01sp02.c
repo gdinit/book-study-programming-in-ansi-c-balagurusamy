@@ -1,18 +1,18 @@
-/* ch01.sample-program-02.c */
-
+/* 01sp02.c */
 /* ===================================80 chars=============================== */
 
 /*
-   Program ADDITION		line-1
-   Written by EBG		line-2
- */
-main()	/* line-3 */
-{/* line-4 */
+Program ADDITION	line-1
+Written by EBG		line-2
+*/
+main() {/* line-3 */
+	/* line-4 */
 	int	number;		/* line-5 */
 	float	amount;		/*
 				   line-6
 				   line-7
 				 */
+
 	number = 100;	/*
 			           line-8
 			           line-9

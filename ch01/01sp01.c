@@ -1,9 +1,7 @@
-/* ch01.sample-program-01.c */
-
+/* 01sp01.c */
 /* ===================================80 chars=============================== */
 
-main()
-{
+main() {
 	/*.............printing begins.........*/
 	printf( "I see, I remember" );
 	/*.............printing ends...........*/

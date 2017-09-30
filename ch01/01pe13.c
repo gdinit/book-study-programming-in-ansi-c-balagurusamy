@@ -1,17 +1,16 @@
-/* ch01.programing-exercise-13.c */
-
+/* 01pe13.c */
 /* ===================================80 chars=============================== */
 
 /*
-   Distance between two points (x₁, y₁) and (x₂, y₂) is governed by the formula:
-        D² = (x₂ - x₁)² + (y₂ - y₁)²
+Distance between two points (x₁, y₁) and (x₂, y₂) is governed by the formula:
+D² = (x₂ - x₁)² + (y₂ - y₁)²
 
-   Write a program to computer D given the coordinates of the points.
+Write a program to computer D given the coordinates of the points.
 */
 
 /*
-        Compiled & tested with:
-        gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+Compiled & tested with:
+gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>

@@ -1,15 +1,12 @@
 /* round.c */
-
-/*
-        see header for copyright information
-*/
-
 /* ===================================80 chars=============================== */
+
+/* See header for copyright information */
 
 long round( double number )
 /*
-        Returns the rounded (long) value of the number.
-        Handles negative numbers as well as positive.
+Returns the rounded (long) value of the number.
+Handles negative numbers as well as positive.
 */
 {
 	int remainder = ( number - ( long )number ) * 10;

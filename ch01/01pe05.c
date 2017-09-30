@@ -1,30 +1,29 @@
-/* ch01.programing-exercise-05.c */
-
+/* 01pe05.c */
 /* ===================================80 chars=============================== */
 
 /*
-   Relationship between Celsius and Fahrenheit is governed by the formula:
-             9C
-        F = ---- + 32
-             5
+Relationship between Celsius and Fahrenheit is governed by the formula:
+9C
+F = ---- + 32
+5
 
-   Write a program to convert the temperature:
-        (a) from Celsius to Fahrenheit, and
-        (b) from Fahrenheit to Celsius.
+Write a program to convert the temperature:
+(a) from Celsius to Fahrenheit, and
+(b) from Fahrenheit to Celsius.
 */
 
 /*
-        Compiled & tested with:
-        gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+Compiled & tested with:
+gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>
 
+#define CVAL 25.0
+#define FVAL 94.0
+
 int main( void )
 {
-	#define CVAL 25.0
-	#define FVAL 94.0
-
 	float c, f;
 
 	/* 25 C = ? F */

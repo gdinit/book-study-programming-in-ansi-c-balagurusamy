@@ -1,15 +1,14 @@
-/* ch01.sample-program-03.c */
-
+/* 01sp03.c */
 /* ===================================80 chars=============================== */
 
 /*____________ INVESTMENT PROBLEM ____________ */
 #define PERIOD 10
 #define PRINCIPAL 5000.00
 /*____________ MAIN PROGRAM BEGINS ____________ */
-main()
-{/*____________ DECLARATION STATEMENTS ____________ */
+main() {/*____________ DECLARATION STATEMENTS ____________ */
 	int	year;
 	float	amount, value, inrate;
+
 	/*____________ ASSIGNMENT STATEMENTS ____________ */
 	amount = PRINCIPAL;
 	inrate = 0.11;

@@ -23,6 +23,7 @@ extern unsigned _floatconvert;
 int promptReadFirstNumber( void )
 {
 	int lastInput_;
+
 	printf( "\n\n" );
 	printf( "Enter the first number & press ENTER (0 to exit): " );
 	scanf( "%d", &lastInput_ );
@@ -33,6 +34,7 @@ int promptReadFirstNumber( void )
 int promptReadAdditionalNumber( void )
 {
 	int lastInput_;
+
 	printf( "\n\n" );
 	printf( "Enter another number & press ENTER (0 to exit): " );
 	scanf( "%d", &lastInput_ );
@@ -57,7 +59,7 @@ void displayStats( int lastInput_, int negCount_, int posCount_ )
 
 void displayFinalStats( int negCount_, int posCount_ )
 {
-	printf(	"TERMINATION REQUESTED\n\n"
+	printf(	"\n\n\nTERMINATION REQUESTED\n\n"
 		"--- FINAL STATS -----------------------\n"
 		"Negatives: %d\tPositives: %d\tTotal: %d\n"
 		"-----------------------------------------\n"

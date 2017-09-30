@@ -1,24 +1,23 @@
-/* ch01.programing-exercise-11.c */
-
+/* 01pe11.c */
 /* ===================================80 chars=============================== */
 
 /*
-   Area of a triangle is given by the formula:
+Area of a triangle is given by the formula:
 
-        A = SQRT( S (S-a) (S-b) (S-c)  )
-   Where a, b, and c are sides of the triangle and 2S = a + b + c.
-   Write a program to compute the area of the triangle given the values of a, b,
-   and c.
+A = SQRT( S (S-a) (S-b) (S-c)  )
+Where a, b, and c are sides of the triangle and 2S = a + b + c.
+Write a program to compute the area of the triangle given the values of a, b,
+and c.
 
-        //--------------------------------
-        Area=SQRT(s(s-a)(s-b)(s-c)),
-        where s=(a+b+c)/2 or perimeter/2
-        //--------------------------------
+--------------------------------
+Area=SQRT(s(s-a)(s-b)(s-c)),
+where s=(a+b+c)/2 or perimeter/2
+--------------------------------
 */
 
 /*
-        Compiled & tested with:
-        gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+Compiled & tested with:
+gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>
@@ -26,12 +25,6 @@
 #include <math.h>
 /* Required for: exit() */
 #include <stdlib.h>
-
-/*
-#define A 12
-#define B 10
-#define C 8
-*/
 
 #define A 14
 #define B 6
@@ -108,10 +101,11 @@ int main( void )
 int checkTriangleIsOk( int a, int b, int c )
 {
 	/*
-	        returns 0 if triangle is legal
-	        returs 1 if triangle is illegal
+	return 0 if triangle is legal
+	return 1 if triangle is illegal
 	*/
 	int r;
+
 	/* ASSERT: a + b > c */
 	if ( ( a + b > c )
 		/* ASSERT: a + c > b */

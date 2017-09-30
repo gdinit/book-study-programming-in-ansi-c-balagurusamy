@@ -1,16 +1,15 @@
-/* ch01.programing-exercise-15.c */
-
+/* 01pe15.c */
 /* ===================================80 chars=============================== */
 
 /*
-        The line joining the points (2,2) and (5,6) which lie on the
-        circumference of the circle is the diameter of the circle.
-        Write a program to compute the area of the circle.
+The line joining the points (2,2) and (5,6) which lie on the
+circumference of the circle is the diameter of the circle.
+Write a program to compute the area of the circle.
 */
 
 /*
-        Compiled & tested with:
-        gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+Compiled & tested with:
+gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>
@@ -20,7 +19,13 @@
 #include <math.h>
 /* Required for: assertions */
 #include <assert.h>
+/* On Borland C++ v.3.1 we use round() from custom implementation */
+#ifdef _WIN32
+#elif defined __unix__
+#elif defined __APPLE__
+#else
 #include "round.h"
+#endif
 
 typedef struct {
 	int x, y;
@@ -33,8 +38,8 @@ typedef struct {
 #define PI 3.14159265359
 
 /*
-        Distance between two points (x₁, y₁) and (x₂, y₂) is governed by the
-        formula:	D² = (x₂ - x₁)² + (y₂ - y₁)²
+Distance between two points (x₁, y₁) and (x₂, y₂) is governed by the
+formula:	D² = (x₂ - x₁)² + (y₂ - y₁)²
 */
 int pointDistanceInt( Point p1, Point p2 )
 {

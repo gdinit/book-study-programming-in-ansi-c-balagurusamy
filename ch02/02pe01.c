@@ -13,14 +13,6 @@
         gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#ifdef _WIN32
-#elif defined __unix__
-#elif defined __APPLE__
-#else
-extern unsigned _floatconvert;
-#pragma extref _floatconvert
-#endif
-
 /* Required to prevent -> "scanf: floating point formats not linked" */
 #ifdef _WIN32
 #elif defined __unix__
@@ -31,17 +23,6 @@ extern unsigned _floatconvert;
 #endif
 
 #include <stdio.h>
-/*
-   Required for: exit()
-   #include <stdlib.h>
-   Required for: sqrt()
-   #include <math.h>
-   Required for: assertions
-   #include <assert.h>
-   #include "round.h"
- */
-
-/* #define GIVENVAL 5 */
 
 int main( void )
 {
@@ -69,25 +50,6 @@ int main( void )
 	printf( "Total number of additions completed: %d\n",	limit );
 	printf( "FINAL VALUE: %f\n",				sum );
 
-	/*
-	printf( "\n\n" );
-	printf( "--------------------------------------------\n" );
-	printf( "INPUT\n\n" );
-	printf( "Points\t\t\t: p1=%d,%d   p2=%d,%d\n", p1.x, p1.y, p2.x, p2.y );
-	printf( "--------------------------------------------\n" );
-	printf( "\n\n" );
-	printf( "--------------------------------------------\n" );
-	printf( "CALCULATION RESULTS\n\n" );
-	printf( "*** FLOAT **********************************\n" );
-	printf( "pointDistanceFloat (p2->p1 distance)\t: %f\n",	pointDistanceFloat( p2, p1 ) );
-	printf( "radiusFloat\t\t\t\t: %f\n",	radiusFloat );
-	printf( "diameterFloat\t\t\t\t: %f\n",			diameterFloat );
-	printf( "circumferenceFloat\t\t\t: %f\n"
-	        , circumferenceFloat );
-	printf( "areaFloat\t\t\t\t: %f\n",			areaFloat );
-	printf( "--------------------------------------------\n" );
-	printf( "\n" );
-	*/
 	return 0;
 }
 

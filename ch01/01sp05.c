@@ -1,5 +1,4 @@
-/* ch01.sample-program-05.c */
-
+/* 01sp05.c */
 /* ===================================80 chars=============================== */
 
 /*____________ PROGRAM USING COSINE FUNCTION ____________ */
@@ -8,10 +7,10 @@
 #define PI 3.1416
 #define MAX 180
 
-main()
-{
+main() {
 	int	angle;
 	float	x, y;
+
 	angle = 0;
 	printf( "Angle      Cos(angle)\n\n" );
 	while ( angle <= MAX ) {

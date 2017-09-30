@@ -15,6 +15,7 @@ static int
 promptForNumber( const char* const which )
 {
 	int num = 0;
+
 	printf( "\n\nEnter %s number & press ENTER (0 to exit): ", which );
 	scanf( "%d", &num );
 
@@ -50,7 +51,7 @@ main( void )
 	setvbuf(	stdout, 0,	_IONBF, 0 );
 	setvbuf(	stdin,	0,	_IONBF, 0 );
 
-	for ( ; num = promptForNumber( whichStr ); whichStr = "another" ) {
+	for ( ; ( num = promptForNumber( whichStr ) ); whichStr = "another" ) {
 		if ( num < 0 ) {
 			++nNeg;
 		} else if ( num > 0 ) {
@@ -61,7 +62,7 @@ main( void )
 		printTotals( nNeg, nPos );
 	}
 	printf(	"TERMINATION REQUESTED\n\n"
-			"--- FINAL STATS -----------------------\n");
+		"--- FINAL STATS -----------------------\n" );
 	printTotals( nNeg, nPos );
 
 	printf( "\n\nPress any key to quit \n" );
@@ -71,6 +72,7 @@ main( void )
 	return 0;
 }
 
-// ===================================80 chars=================================|
+/* ===================================80 chars=================================|
+   */
 /* EOF */
 

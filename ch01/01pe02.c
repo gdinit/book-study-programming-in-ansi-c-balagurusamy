@@ -1,17 +1,16 @@
-/* ch01.programing-exercise-02.c */
-
+/* 01pe02.c */
 /* ===================================80 chars=============================== */
 
 /*
-   Write a program that will print your mailing address in the following form:
-        First line	:	Name
-        Second line	:	Door No, Street
-        Third line	:	City, Pin code
+Write a program that will print your mailing address in the following form:
+First line	:	Name
+Second line	:	Door No, Street
+Third line	:	City, Pin code
 */
 
 /*
-	Compiled & tested with:
-	gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+Compiled & tested with:
+gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>

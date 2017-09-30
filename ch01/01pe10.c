@@ -1,19 +1,18 @@
-/* ch01.programing-exercise-10.c */
-
+/* 01pe10.c */
 /* ===================================80 chars=============================== */
 
 /*
-   Write a program that will print the following figure using suitable
-   characters
+Write a program that will print the following figure using suitable
+characters
 
-        |-------|				|-------|
-        |	|	>>--------->		|	|
-        |-------|				|-------|
+|-------|                       |-------|
+|       |	>>--------->	|       |
+|-------|			|-------|
 */
 
 /*
-        Compiled & tested with:
-        gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+Compiled & tested with:
+gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>

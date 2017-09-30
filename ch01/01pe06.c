@@ -1,33 +1,28 @@
-/* ch01.programing-exercise-06.c */
-
+/* 01pe06.c */
 /* ===================================80 chars=============================== */
 
 /*
-   Given the radius of a circle, write a program to compute and display its
-   area. Use a symbolic constant to define the PI value and assume a suitable
-   value for radius.
+Given the radius of a circle, write a program to compute and display its
+area. Use a symbolic constant to define the PI value and assume a suitable
+value for radius.
 */
 
 /*
-        Compiled & tested with:
-        gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+Compiled & tested with:
+gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
 #include <stdio.h>
 
 #define PI 3.14159265359
+#define RADIUS 3.0
 
 int main( void )
 {
 	/* INPUT: Radius */
-	#define RADIUS 3.0
 	float area;
 
-	/*
-	        CALCULATE: Area
-
-	        Area = Pi * r * r
-	*/
+	/* CALCULATE: Area */
 	area = PI * RADIUS * RADIUS;
 	printf( "PI = %f\tRadius = %f\tArea = %f\n", PI, RADIUS, area );
 
