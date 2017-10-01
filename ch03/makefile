@@ -7,6 +7,10 @@ all:
 	gcc -o 03pe06 03pe06.c
 	gcc -o 03pe07 03pe07.c
 	gcc -o 03pe08 03pe08.c
+	gcc -o 03pe09 03pe09.c
+	gcc -o 03pe10 03pe10.c
+	gcc -o 03pe11 03pe11.c
+	gcc -o 03pe12 03pe12.c
 
 .PHONY : clean
 clean:
