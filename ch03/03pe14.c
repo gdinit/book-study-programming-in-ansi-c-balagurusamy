@@ -1,10 +1,10 @@
-/* 03pe13.c */
+/* 03pe14.c */
 
 /* ===================================80 chars=============================== */
 
 /*
-Write a program to read three values and print ouf the largest of them without
-using if statement.
+Write a program to read two integer values m and n.
+Decide and print whether m is a multiple of n.
 */
 
 /*
@@ -40,18 +40,22 @@ int main( void )
 {
 	/* BEGIN: Declare Variables ***************************************** */
 	char	ch = '\0';
-	double	d1 = 0.0, d2 = 0.0, d3 = 0.0, max = 0.0;
+	int	m = 0, n = 0;
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
 	fflush( stdin );
-	printf( "Please enter three numbers separated with space: " );
-	scanf( "%lf %lf %lf", &d1, &d2, &d3 );
-	printf( "Numbers READ:\t%lf\t%lf\t%lf\n",	d1, d2, d3 );
-	max = d1 > d2 ? ( d1 > d3 ? d1 : d3 ) : ( d2 > d3 ? d2 : d3 );
-	printf( "LARGEST NUMBER is: %.1lf\n",		max );
+	printf( "Please enter two integer numbers separated with space: " );
+	scanf( "%d %d", &m, &n );
+	printf( "Numbers READ:\t%d\t%d\n", m, n );
+	if ( m % n == 0 ) {
+		printf( "m (%d) IS a multiple of n (%d)\n", m, n );
+	} else {
+		printf( "m (%d) IS NOT a multiple of n (%d)\n", m, n );
+	}
 	/* END: Program Main Code ******************************************* */
+
 	/* BEGIN: Standard Footer Section *********************************** */
 	printf( "\n\n\nPress space to quit\n" );
 	/* disable input buffer */
