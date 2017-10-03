@@ -22,7 +22,7 @@ gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 #include <math.h>
 
 /*
-Required to prevent -> "scanf: floating point formats not linked"
+Required to prevent -> "scanf: floating point formats not linked																															"
 */
 #ifdef _WIN32
 #elif defined __unix__
@@ -37,56 +37,65 @@ extern unsigned _floatconvert;
 void cls( void )
 {
 	int n;
-
-	for ( n = 0; n < LINESTOCLEARSCREEN; n++ )
+	for ( n = 0; n < LINESTOCLEARSCREEN; n++ ) {
 		printf( "\n" );
-}
-
-/* Calculate and Formatted Display Currency for a given Capacitance */
-void calcFrmtDisF( float c )
-{
-	printf( "| C = %.2f\tF = %.2f\n", c, c + 3 * 0.58 );
+	}
 }
 
 int main( void )
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char	gotChar = '\0';
+	int	ch = 0;
 	/*
-	        l:      inductance
-	        c:	capacitance
-	        r:	resistance
-	        f:      frequency
+	                                                                                                                                                                                                                                                l (L)	: inductance
+	        r	: resistance
+	        c	: capacitance
+	        f	: frequency
+	        d	: discrimant
 	*/
-	float	l = 0, c = 0, r = 0, f = 0;
+	float	l = 0.f, r = 0.f, c = 0.f, f = 0.f, d = 0.f;
 
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
+	fflush( stdin );
+	printf(	"|--------------------------------------------------------\n"
+		"| FREQUENCY CALCULATOR\n|\n|\n" );
+	printf( "| Please enter INDUCTANCE (L): " );
+	scanf( "%f", &l );
+	printf( "| Please enter RESISTANCE (R): " );
+	scanf( "%f", &r );
 	printf(	"|--------------------------------------------------------\n"
 		"| FREQUENCY TABLE\n"
 		"|\n"
+		"| Inductance (L)\t%.6f\n"
+		"| Resistance (R)\t%.6f\n"
 		"|\n"
-		"|\n" );
-	for ( c = 0.01; c < 5.10; c = c + 0.01 ) ; {
-		calcFrmtDisF( c );
+		, l, r );
+	c = 0.01;
+	while ( c <= 0.10 ) {
+		d = ( ( 1 / ( l * c ) ) - ( ( r * r ) / ( 4 * c * c ) ) );
+		if ( d > 0 ) {
+			f = sqrt( d );
+		} else {
+			printf( "ERROR: discrimant [%f] is non-positive!\n",
+				d );
+		}
+		printf( "| Capacitance = %.2f\tFrequency = %.3f\n", c,
+			sqrt( d ) );
+		c += 0.01;
 	}
-	printf(	"|\n"
-		"|--------------------------------------------------------\n"
+	printf(	"|--------------------------------------------------------\n"
 		"\n" );
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
-
-	/* disable input & output buffers */
-	setvbuf(	stdout, 0,	_IONBF, 0 );
-	setvbuf(	stdin,	0,	_IONBF, 0 );
-	printf( "\n\n" );
-	printf( "\n\nPress any key to quit \n" );
-	gotChar = getchar();
-	/* required to suppress "Error: var not used!" */
-	gotChar += 1;
+	printf( "\n\n\nPress space bar key to quit\n" );
+	/* disable input buffer */
+	setvbuf( stdin,	0, _IONBF, 0 );
+	while ( ( ch = getchar() ) != ' ' && ch != EOF ) {
+	}
 	/* END: Standard Footer Section ************************************* */
 
 	return 0;
