@@ -55,7 +55,6 @@ int main( void )
 		printf( "m (%d) IS NOT a multiple of n (%d)\n", m, n );
 	}
 	/* END: Program Main Code ******************************************* */
-
 	/* BEGIN: Standard Footer Section *********************************** */
 	printf( "\n\n\nPress space to quit\n" );
 	/* disable input buffer */

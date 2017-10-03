@@ -30,7 +30,6 @@ extern unsigned _floatconvert;
 void cls( void )
 {
 	int n;
-
 	for ( n = 0; n < LINESTOCLEARSCREEN; n++ ) {
 		printf( "\n" );
 	}

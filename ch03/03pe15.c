@@ -66,10 +66,11 @@ int main( void )
 	max = d1 > d2 ? ( d1 > d3 ? d1 : d3 ) : ( d2 > d3 ? d2 : d3 );
 	printf( "LARGEST\t\t\t%.1lf\n",			max );
 
+	/* TODO: SMALLEST */
 	min = d1 < d2 ? ( d1 < d3 ? d1 : d3 ) : ( d2 < d3 ? d2 : d3 );
 	printf( "SMALLEST\t\t%.1lf\n", min );
+
 	/* END: Program Main Code ******************************************* */
-	
 	/* BEGIN: Standard Footer Section *********************************** */
 	printf( "\n\n\nPress space to quit\n" );
 	/* disable input buffer */

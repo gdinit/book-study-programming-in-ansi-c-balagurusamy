@@ -43,7 +43,6 @@ int main( void )
 	int	num = 0;
 	/*	e.g. number 1234 <-> d1 = 1, d2 = 2, d3 = 3, d4 = 4 */
 	int	d1 = 0, d2 = 0, d3 = 0, d4 = 0;
-
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
