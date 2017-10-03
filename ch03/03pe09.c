@@ -3,7 +3,19 @@
 /* ===================================80 chars=============================== */
 
 /*
+In inventory management, the Economic Order Quantity (EOQ) for a single item is
+given by:
+           (  2 x demand rate x setup costs	)
+EOQ = SQRT ( ---------------------------------- )
+           (  holding cost per item unit time	)
 
+and the optimal Time Between Orders (TBO):
+           (		2 x setup costs			)
+TBO = SQRT ( ------------------------------------------	)
+           ( demand rate x holding cost per unit time	)
+
+Write a program to compute EOQ and TBO, given demand rate (items per unit time),
+setup costs (per order), and the holding cost (per unit per time).
 */
 
 /*
@@ -40,50 +52,53 @@ int main( void )
 	/* BEGIN: Declare Variables ***************************************** */
 	char	gotChar = '\0';
 	/*
-	        s: total displacement (distance) (meters)
-	        u: initial velocity (meters per second)
-	        t: time taken (total time) (seconds)
-	        a: acceleration (meters per second) constant throughout
+	        dr:	Demand Rate (items per unit time)
+	        sc:	Setup Costs (per order)
+	        hc:	Holding Cost (per item per unit time)
+	        eoq:	Economic Order Quantity (units)
+	        tbo:	Time Between Orders (unit time)
 	*/
-
-	float	s = 0, u = 0, t = 0, a = 0;
+	float	dr = 0, sc = 0, hc = 0, eoq = 0, tbo = 0;
 
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
-	printf(
-		"|---------------------------------------|\n"
-		"| DISPLACEMENT CALCULATOR\t|\n"
-		"|\t\t\t\t\t|\n"
+	printf(	"|--------------------------------------------------------\n"
+		"| INVENTORY CALCULATOR\n"
+		"|\n"
 		"| Please enter the values for computation\n"
-		"|\t\t\t\t\t|\n"
-		"|---------------------------------------|\n\n" );
-	printf(	"Enter initial velocity (meters/sec): " );
+		"|\n"
+		"|\n"
+		);
+	printf(	"Enter DEMAND RATE (items/day): " );
 	fflush( stdin );
-	scanf( "%f", &u );
-	printf(	"Enter acceleration (meters/sec): " );
+	scanf( "%f", &dr );
+	printf(	"Enter SETUP COSTS (per order): " );
 	fflush( stdin );
-	scanf( "%f", &a );
-	printf(	"Enter time taken (total time seconds): " );
+	scanf( "%f", &sc );
+	printf(	"Enter HOLDING COST (item/day): " );
 	fflush( stdin );
-	scanf( "%f", &t );
-	printf( "\n\n"
-		"|---------------------------------------\n"
+	scanf( "%f", &hc );
+	printf( "|\n"
+		"|\n"
 		"|  DATA READ\n"
 		"|\n"
-		"|  Initial Velocity\t%.2f\n"
-		"|  Acceleration\t%.2f\n"
-		"|  Time Taken\t%.2f\n"
-		"|---------------------------------------\n\n"
-		, u, a, t );
-	s = ( u * t ) + ( ( a * t * t ) / 2 );
-	printf(	"|---------------------------------------\n"
-		"|  CALCULATION RESULT\n"
+		"|  DEMAND RATE (item/day)\t%.2f\n"
+		"|  SETUP COSTS (per order)\tGBP%.2f\n"
+		"|  HOLDING COST (item/day)\tGBP%.2f\n"
 		"|\n"
-		"|  Distance Travelled\t%.2f meters\n"
-		"|---------------------------------------\n"
-		, s );
+		"|\n"
+		, dr, sc, hc );
+	eoq = sqrt( ( 2 * dr * sc ) / ( hc ) );
+	tbo = sqrt( ( 2 * sc ) / ( dr * hc ) );
+	printf(	"| CALCULATION RESULTS\n"
+		"|\n"
+		"|  EOQ (Economic Order Quantity)\t%.0f items\n"
+		"| oTBO (optimal Time Between Orders)\t%.1f days\n"
+		"|--------------------------------------------------------\n"
+		"\n"
+		, eoq, tbo );
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
