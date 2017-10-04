@@ -15,6 +15,7 @@ all:
 	gcc -o 03pe14 03pe14.c
 	gcc -o 03pe15 03pe15.c
 	gcc -o 03pe16 03pe16.c
+	gcc -o 03pe17 03pe17.c
 
 .PHONY : clean
 clean:
