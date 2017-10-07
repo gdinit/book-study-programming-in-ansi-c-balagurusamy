@@ -31,12 +31,6 @@ extern unsigned _floatconvert;
 
 #define LINESTOCLEARSCREEN 90
 
-typedef struct threeInt_t {
-	int n1;
-	int n2;
-	int n3;
-} threeInt;
-
 void cls( void )
 {
 	int n;
@@ -47,47 +41,27 @@ void cls( void )
 
 void printHeader( void )
 {
-	printf(	"-------------- TWO INT MULTIPLICATION --------------\n" );
+	printf(	"-------------- EXPONENTIAL FORMAT DEMO --------------\n" );
 }
 
 void printFooter( void )
 {
-	printf(	"----------------------------------------------------\n" );
-}
-
-void getNumbers( threeInt* pti )
-{
-	printf( "Please enter three integers: " );
-	scanf( "%d %d %d", &( pti->n1 ), &( pti->n2 ), &( pti->n3 ) );
-}
-
-void printSolution( threeInt* pti )
-{
-	printf( "\n" );
-	printf( "Number 1 is:\t%d\n",	pti->n1 );
-	printf( "Number 2 is:\t%d\n",	pti->n2 );
-	printf( "Number 3 is:\t%d\n",	pti->n3 );
-	printf( "Number 1, 2, 3 with HEX conversion specifier is:\t%#x %#x %#x\n"
-		, pti->n1, pti->n2,
-		pti->n3 );
-	printf( "Number 1, 2, 3 without any conversion specifiers is:\t%d %d %d\n"
-		, pti->n1, pti->n2,
-		pti->n3 );
+	printf(	"-----------------------------------------------------\n" );
 }
 
 int main( void )
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char		ch = '\0';
-	threeInt	ti;
-	threeInt*	pti = &ti;
+	char	ch = '\0';
+	double	n = 10.45678;
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
 	printHeader();
-	getNumbers( pti );
-	printSolution( pti );
+	printf( "%.2e\n",	n );
+	printf( "%.4e\n",	n );
+	printf( "%.8e\n",	n );
 	printFooter();
 	/* END: Program Main Code ******************************************* */
 

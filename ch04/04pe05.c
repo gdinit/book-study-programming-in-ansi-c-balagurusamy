@@ -109,13 +109,13 @@ void printSolution( twoInt* pti, char* parr )
 	printf( "\t\t\t%4d\n",			pti->n1 );
 	printf( "\t\tx\t%4d\n",			pti->n2 );
 	printf( "\t\t------------\n" );
-	printf( "\t%d x %d   is\t%4d\n",	parr [ 1 ],	pti->n1,
-		parr [ 1 ] * pti->n1 );
-	printf( "\t%d x %d   is\t%4d\n",	parr [ 0 ],	pti->n1,
-		parr [ 0 ] * pti->n1 );
+	printf( "\t%d x %d   is\t%4d\n",	parr [ 1 ],	pti->n1
+		, parr [ 1 ] * pti->n1 );
+	printf( "\t%d x %d   is\t%4d\n",	parr [ 0 ],	pti->n1
+		, parr [ 0 ] * pti->n1 );
 	printf( "\t\t------------\n" );
-	printf( "\tAdd them\t%4d\n",
-		( parr [ 1 ] * pti->n1 ) + ( parr [ 0 ] * pti->n1 ) * 10 );
+	printf( "\tAdd them\t%4d\n"
+		, ( parr [ 1 ] * pti->n1 ) + ( parr [ 0 ] * pti->n1 ) * 10 );
 }
 
 int main( void )

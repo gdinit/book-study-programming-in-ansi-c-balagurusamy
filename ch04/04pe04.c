@@ -66,8 +66,8 @@ void printFooter( void )
 void getNumbers( fourNumber* pfn )
 {
 	printf( "Please enter four numbers (min: 0, max: 20): " );
-	scanf( "%lf %lf %lf %lf", &( pfn->n1 ), &( pfn->n2 ), &( pfn->n3 ),
-		&( pfn->n4 ) );
+	scanf( "%lf %lf %lf %lf", &( pfn->n1 ), &( pfn->n2 ), &( pfn->n3 )
+		, &( pfn->n4 ) );
 	if ( pfn->n1 < 0 || pfn->n1 > 20 ) {
 		pfn->n1 = 0;
 	}

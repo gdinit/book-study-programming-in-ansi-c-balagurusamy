@@ -68,10 +68,12 @@ void printSolution( threeInt* pti )
 	printf( "Number 2 is:\t%d\n",	pti->n2 );
 	printf( "Number 3 is:\t%d\n",	pti->n3 );
 	printf( "Number 1, 2, 3 with HEX conversion specifier is:\t%#x %#x %#x\n"
-		, pti->n1, pti->n2,
+		, pti->n1, pti->n2
+		,
 		pti->n3 );
 	printf( "Number 1, 2, 3 without any conversion specifiers is:\t%d %d %d\n"
-		, pti->n1, pti->n2,
+		, pti->n1, pti->n2
+		,
 		pti->n3 );
 }
 
