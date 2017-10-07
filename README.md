@@ -1,2 +1,2 @@
 # book-study-programming-in-ansi-c-balagurusamy
-Homework is boring
+I like C now
