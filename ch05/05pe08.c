@@ -203,8 +203,6 @@ int main( void )
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
-	printf(	"In this phase of project, a predetermined amount is calculated"
-		"\nIn the future, it will be values based on user input.\n" );
 	displayHeader();
 	run( pord );
 	displayFooter();
