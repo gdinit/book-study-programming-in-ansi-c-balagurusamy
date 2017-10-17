@@ -5,6 +5,9 @@ all:
 	gcc -o 05pe04 05pe04.c
 	gcc -o 05pe05 05pe05.c
 	gcc -o 05pe06 05pe06.c
+	gcc -o 05pe07 05pe07.c
+	gcc -o 05pe08 05pe08.c
+	gcc -o 05pe09 05pe09.c
 	
 .PHONY : clean
 clean:
