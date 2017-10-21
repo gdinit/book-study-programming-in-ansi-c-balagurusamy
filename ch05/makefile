@@ -11,6 +11,7 @@ all:
 	#skipped due to being too boring! gcc -o binary/05pe10 05pe10.c
 	gcc -o binary/05pe11 05pe11.c
 	gcc -o binary/05pe12 05pe12.c
+	gcc -o binary/05pe13 05pe13.c
 	
 .PHONY : clean
 clean:
