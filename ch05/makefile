@@ -13,6 +13,7 @@ all:
 	gcc -o binary/05pe12 05pe12.c
 	gcc -o binary/05pe13 05pe13.c
 	gcc -o binary/05pe14 05pe14.c
+	gcc -o binary/05pe15 05pe15.c
 	
 .PHONY : clean
 clean:
