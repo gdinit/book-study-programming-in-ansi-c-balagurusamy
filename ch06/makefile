@@ -2,7 +2,7 @@ all:
 	gcc -o binary/06pe01 06pe01.c
 	gcc -o binary/06pe02 06pe02.c
 	gcc -o binary/06pe03 06pe03.c
-	#gcc -o binary/06pe04 06pe04.c
+	gcc -o binary/06pe04 06pe04.c
 	#gcc -o binary/06pe05 06pe05.c
 	#gcc -o binary/06pe06 06pe06.c
 	#gcc -o binary/06pe07 06pe07.c
