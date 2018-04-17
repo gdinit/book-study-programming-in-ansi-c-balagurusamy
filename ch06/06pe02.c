@@ -3,9 +3,9 @@
 /* ===================================80 chars=============================== */
 
 /*
-The factorial of an integer m is the product of consecutive integers from 1 to 
+The factorial of an integer m is the product of consecutive integers from 1 to
 m. That is,
-	factorial m = m! = m x (m-1) x ... x 1
+        factorial m = m! = m x (m-1) x ... x 1
 Write a program that computes and prints a table of factorials for any given m.
 */
 
@@ -78,18 +78,19 @@ void getN( Data* pdata )
 
 void process( Data* pdata )
 {
-	long int	m = pdata->m;
-	long int	i = 0;
+	long int		m = pdata->m;
+	long int		i = 0;
 	unsigned long int	f = 0;
 
-	if( m < 0) {
-		printf("ERROR: m is negative! Factorial of a negative number doesn't!\n");
-		exit(1);
+	if ( m < 0 ) {
+		printf(
+			"ERROR: m is negative! Factorial of a negative number doesn't!\n" );
+		exit( 1 );
 	} else {
-		for((f=1,i=1); i<=m; i++) {
+		for ( ( f = 1, i = 1 ); i <= m; i++ ) {
 			f *= i;
 		}
-		printf("Factorial of %ld is %lu\n", m, f);
+		printf( "Factorial of %ld is %lu\n", m, f );
 		pdata->f = f;
 	}
 }
@@ -124,3 +125,4 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
+

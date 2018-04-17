@@ -34,7 +34,7 @@ extern unsigned _doubleconvert;
 
 typedef struct Data_t {
 	long int nn;
-	char arr[ARR_SIZE];
+	char arr [ ARR_SIZE ];
 } Data;
 
 void cls( void )
@@ -67,8 +67,8 @@ void displayFooter( void )
 void getNum( Data* pdata )
 {
 	printf( "Enter an integer number to be digit-sum'd: " );
-	scanf(	"%ld", &pdata->nn );
-	printf(	"n is read as %ld\n", pdata->nn);
+	scanf( "%ld", &pdata->nn );
+	printf(	"n is read as %ld\n", pdata->nn );
 }
 
 void process( Data* pdata )
@@ -83,30 +83,31 @@ void process( Data* pdata )
 	for ( len = 0; nn != 0; len++ ) {
 		nn /= 10;
 	}
-	printf("\nlen is counted as: %d\n", len);
+	printf( "\nlen is counted as: %d\n", len );
 
 	nn = pdata->nn;
 
 	/* compute the digit sum */
-	for( (digits=len, k=1, sum=0); digits > 0; (digits--, k *= 10) ) {
+	for ( ( digits = len, k = 1, sum = 0 ); digits > 0;
+	      ( digits--, k *= 10 ) ) {
 		sum += nn / k % 10 * 1;
-		if( CFGDEBUG && k <= 1000 ) {
-			printf("nn mod: %ld\tk: %ld\t\tdigits: %d\tsum: "
-			"%d\n", nn / k % 10, k, digits, sum );
-		} else if(CFGDEBUG && k>1000) {
-			printf("nn mod: %ld\tk: %ld\tdigits: %d\tsum: "
-			"%d\n", nn / k % 10, k, digits, sum );
+		if ( CFGDEBUG && k <= 1000 ) {
+			printf( "nn mod: %ld\tk: %ld\t\tdigits: %d\tsum: "
+				"%d\n", nn / k % 10, k, digits, sum );
+		} else if ( CFGDEBUG && k > 1000 ) {
+			printf( "nn mod: %ld\tk: %ld\tdigits: %d\tsum: "
+				"%d\n", nn / k % 10, k, digits, sum );
 		}
 	}
-	printf("\nSUM is: %d\n", sum);
+	printf( "\nSUM is: %d\n", sum );
 }
 
 /* zero initialize a Data struct */
 void zinit( Data* pdata )
 {
 	int j;
-	for( j = 0; j < ARR_SIZE; j++ ) {
-		pdata->arr[j] = '\0';
+	for ( j = 0; j < ARR_SIZE; j++ ) {
+		pdata->arr [ j ] = '\0';
 	}
 }
 
@@ -141,3 +142,4 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
+
