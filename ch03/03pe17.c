@@ -18,11 +18,12 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 
 /*
-Required to prevent -> "scanf: floating point formats not linked																															"
+Required to prevent -> "scanf: floating point formats not linked
+"
 */
 #ifdef _WIN32
 #elif defined __unix__
@@ -38,62 +39,61 @@ extern unsigned _floatconvert;
 #define ANGLE_START 0
 #define ANGLE_INCREMENT 0
 
-void cls( void )
+void cls(void)
 {
 	int n;
-	for ( n = 0; n < LINESTOCLEARSCREEN; n++ ) {
-		printf( "\n" );
+	for (n = 0; n < LINESTOCLEARSCREEN; n++) {
+		printf("\n");
 	}
 }
 
-void printHeader( void )
+void printHeader(void)
 {
-	printf(
-		"-----------------------------------------------------------\n"
-		"x degrees\t\tsin(x)\t\t\tcos(x)\n"
-		"-----------------------------------------------------------\n" );
+	printf("-----------------------------------------------------------\n"
+	       "x degrees\t\tsin(x)\t\t\tcos(x)\n"
+	       "-----------------------------------------------------------\n");
 }
 
-void printFooter( void )
+void printFooter(void)
 {
-	printf( "-----------------------------------------------------------\n" );
+	printf("-----------------------------------------------------------\n");
 }
 
 /* print cos(x) and sin(x) for a given x(degrees) */
-void printSinCos( double x )
+void printSinCos(double x)
 {
-	double	val = 0.0;
-	double	rsin = 0.0;
-	double	rcos = 0.0;
+	double val = 0.0;
+	double rsin = 0.0;
+	double rcos = 0.0;
 
 	val = PI / 180;
-	rsin = sin( x * val );
-	rcos = cos( x * val );
-	printf(	"%f\t\t%f\t\t%f\n", x, rsin, rcos );
+	rsin = sin(x * val);
+	rcos = cos(x * val);
+	printf("%f\t\t%f\t\t%f\n", x, rsin, rcos);
 }
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char	ch = '\0';
-	double	x = 0;
+	char ch = '\0';
+	double x = 0;
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
-	fflush( stdin );
+	fflush(stdin);
 	printHeader();
-	for ( x = 0; x <= 180; x += 15 ) {
-		printSinCos( x );
+	for (x = 0; x <= 180; x += 15) {
+		printSinCos(x);
 	}
 	printFooter();
 
 	/* END: Program Main Code ******************************************* */
 	/* BEGIN: Standard Footer Section *********************************** */
-	printf( "\n\n\nPress space to quit\n" );
+	printf("\n\n\nPress space to quit\n");
 	/* disable input buffer */
-	setvbuf( stdin,	0, _IONBF, 0 );
-	while ( ( ch = getchar() ) != ' ' && ch != EOF ) {
+	setvbuf(stdin, 0, _IONBF, 0);
+	while ((ch = getchar()) != ' ' && ch != EOF) {
 	}
 	/* END: Standard Footer Section ************************************* */
 
@@ -103,4 +103,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

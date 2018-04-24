@@ -13,8 +13,8 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -34,47 +34,48 @@ extern unsigned _doubleconvert;
 #define LINES_TO_CLEAR_SCREEN 90
 #define DASH_COUNT_FOR_HEADER_FOOTER 66
 
-void cls( void )
+void cls(void)
 {
 	int n;
-	for ( n = 0; n < LINES_TO_CLEAR_SCREEN; n++ ) {
-		printf( "\n" );
+	for (n = 0; n < LINES_TO_CLEAR_SCREEN; n++) {
+		printf("\n");
 	}
 }
 
-void displayHeader( void )
+void displayHeader(void)
 {
-	char	s [] = TITLE;
-	int	tmp = 0;
-	for ( tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++ ) {
-		printf( "-" );
+	char s[] = TITLE;
+	int tmp = 0;
+	for (tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++) {
+		printf("-");
 	}
-	printf( "\n%s\n\n", s );
+	printf("\n%s\n\n", s);
 }
 
-void displayFooter( void )
+void displayFooter(void)
 {
 	int tmp = 0;
-	for ( tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++ ) {
-		printf( "-" );
+	for (tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++) {
+		printf("-");
 	}
-	printf( "\n" );
+	printf("\n");
 }
 
-void computeDisplay( void )
+void computeDisplay(void)
 {
 	int count = 0, n = 0, sum = 0;
-	for ( n = 0; n < 100; n++ ) {
-		if ( n % 6 == 0 && n % 4 != 0 ) {
+	for (n = 0; n < 100; n++) {
+		if (n % 6 == 0 && n % 4 != 0) {
 			count++;
 			sum += n;
-			printf( "Number %2d is divisible by 6 and not by 4.\t"
-				"Count %2d | Sum %2d\n", n, count, sum );
+			printf("Number %2d is divisible by 6 and not by 4.\t"
+			       "Count %2d | Sum %2d\n",
+			       n, count, sum);
 		}
 	}
 }
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
 	char ch = '\0';
@@ -88,10 +89,10 @@ int main( void )
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
-	printf( "\nPress space to quit\n" );
+	printf("\nPress space to quit\n");
 	/* disable input buffer */
-	setvbuf( stdin,	0, _IONBF, 0 );
-	while ( ( ch = getchar() ) != ' ' && ch != EOF ) {
+	setvbuf(stdin, 0, _IONBF, 0);
+	while ((ch = getchar()) != ' ' && ch != EOF) {
 	}
 	/* END: Standard Footer Section ************************************* */
 
@@ -101,4 +102,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

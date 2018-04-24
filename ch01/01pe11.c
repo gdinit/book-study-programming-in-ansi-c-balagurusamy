@@ -31,15 +31,15 @@ gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 #define C 12
 #define DEBUG 0
 
-int checkTriangleIsOk( int a, int b, int c );
+int checkTriangleIsOk(int a, int b, int c);
 
-int main( void )
+int main(void)
 {
-	int	a, b, c;
-	int	perimeter;
-	float	s;
-	float	area;
-	int	debug;
+	int a, b, c;
+	int perimeter;
+	float s;
+	float area;
+	int debug;
 
 	a = A;
 	b = B;
@@ -48,49 +48,51 @@ int main( void )
 
 	/*
 	the Triangle Inequality Theorem
-	The Triangle Inequality Theorem states that the sum of any 2 sides of a triangle must be greater than the measure of the third side.
-	Note: This rule must be satisfied for all 3 conditions of the sides.
-	In other words, as soon as you know that the sum of 2 sides is less than (or equal to ) the measure of a third side, then you know that the sides do not make up a triangle.
+	The Triangle Inequality Theorem states that the sum of any 2 sides of a
+	triangle must be greater than the measure of the third side. Note: This
+	rule must be satisfied for all 3 conditions of the sides. In other
+	words, as soon as you know that the sum of 2 sides is less than (or
+	equal to ) the measure of a third side, then you know that the sides do
+	not make up a triangle.
 	*/
 
-	if ( checkTriangleIsOk( a, b, c ) == 1 ) {
-		printf( "INPUT ERROR: Invalid Triangle Ratio!\n" );
-		exit( 1 );
+	if (checkTriangleIsOk(a, b, c) == 1) {
+		printf("INPUT ERROR: Invalid Triangle Ratio!\n");
+		exit(1);
 	} else {
-		printf( "Triangle is valid.\n" );
+		printf("Triangle is valid.\n");
 	}
 	perimeter = a + b + c;
 	s = perimeter / 2;
-	area = sqrt( s * ( s - a ) * ( s - b ) * ( s - c ) );
+	area = sqrt(s * (s - a) * (s - b) * (s - c));
 
-	printf( "\n\n" );
-	printf( "--------------------------------------------\n" );
-	printf( "INPUT\n\n" );
-	printf( "sides\t\t\t: a=%d   b=%d   c=%d\n", a, b, c );
-	printf( "--------------------------------------------\n" );
-	printf( "\n\n" );
-	printf( "--------------------------------------------\n" );
-	printf( "CALCULATION RESULTS\n\n" );
-	printf( "perimeter calculated as\t: %d\n",	perimeter );
-	printf( "s calculated as\t\t: %f\n",		s );
-	printf( "area calculated as\t: %f\n",		area );
-	printf( "--------------------------------------------\n" );
-	printf( "\n" );
+	printf("\n\n");
+	printf("--------------------------------------------\n");
+	printf("INPUT\n\n");
+	printf("sides\t\t\t: a=%d   b=%d   c=%d\n", a, b, c);
+	printf("--------------------------------------------\n");
+	printf("\n\n");
+	printf("--------------------------------------------\n");
+	printf("CALCULATION RESULTS\n\n");
+	printf("perimeter calculated as\t: %d\n", perimeter);
+	printf("s calculated as\t\t: %f\n", s);
+	printf("area calculated as\t: %f\n", area);
+	printf("--------------------------------------------\n");
+	printf("\n");
 
-	if ( debug == 1 ) {
-		printf( "\n\n" );
-		printf( "--------------------------------------------\n" );
-		printf( "*** DEBUG ***\n" );
-		printf( "perimeter = %d\n",	perimeter );
-		printf( "s = %f\n",		s );
-		printf( "s-a = %f\n",		s - a );
-		printf( "s-b = %f\n",		s - b );
-		printf( "s-c = %f\n",		s - c );
-		printf( "(s-a) (s-b) (s-c) = %f\n"
-			, ( s - a ) * ( s - b ) * ( s - c ) );
-		printf( "s * (s-a) * (s-b) * (s-c) = %f\n"
-			, s * ( ( s - a ) * ( s - b ) * ( s - c ) ) );
-		printf( "s = %f\n", area );
+	if (debug == 1) {
+		printf("\n\n");
+		printf("--------------------------------------------\n");
+		printf("*** DEBUG ***\n");
+		printf("perimeter = %d\n", perimeter);
+		printf("s = %f\n", s);
+		printf("s-a = %f\n", s - a);
+		printf("s-b = %f\n", s - b);
+		printf("s-c = %f\n", s - c);
+		printf("(s-a) (s-b) (s-c) = %f\n", (s - a) * (s - b) * (s - c));
+		printf("s * (s-a) * (s-b) * (s-c) = %f\n",
+		       s * ((s - a) * (s - b) * (s - c)));
+		printf("s = %f\n", area);
 	} else {
 		/* ; */
 	}
@@ -98,7 +100,7 @@ int main( void )
 	return 0;
 }
 
-int checkTriangleIsOk( int a, int b, int c )
+int checkTriangleIsOk(int a, int b, int c)
 {
 	/*
 	return 0 if triangle is legal
@@ -107,11 +109,11 @@ int checkTriangleIsOk( int a, int b, int c )
 	int r;
 
 	/* ASSERT: a + b > c */
-	if ( ( a + b > c )
-		/* ASSERT: a + c > b */
-	     && ( a + c > b )
-		/* ASSERT: b + c > a */
-	     && ( b + c > a ) ) {
+	if ((a + b > c)
+	    /* ASSERT: a + c > b */
+	    && (a + c > b)
+	    /* ASSERT: b + c > a */
+	    && (b + c > a)) {
 		r = 0;
 	} else {
 		r = 1;
@@ -123,4 +125,3 @@ int checkTriangleIsOk( int a, int b, int c )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

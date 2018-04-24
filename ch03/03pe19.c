@@ -12,11 +12,12 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 
 /*
-Required to prevent -> "scanf: floating point formats not linked																															"
+Required to prevent -> "scanf: floating point formats not linked
+"
 */
 #ifdef _WIN32
 #elif defined __unix__
@@ -32,60 +33,59 @@ extern unsigned _floatconvert;
 #define NUMEND 100
 #define NUMINC 10
 
-void cls( void )
+void cls(void)
 {
 	int n;
-	for ( n = 0; n < LINESTOCLEARSCREEN; n++ ) {
-		printf( "\n" );
+	for (n = 0; n < LINESTOCLEARSCREEN; n++) {
+		printf("\n");
 	}
 }
 
-void printHeader( void )
+void printHeader(void)
 {
-	printf(
-		"-----------------------------------------------------------\n"
-		"EVEN/ODD DETECTOR\n" );
+	printf("-----------------------------------------------------------\n"
+	       "EVEN/ODD DETECTOR\n");
 }
 
-void printFooter( void )
+void printFooter(void)
 {
-	printf(	"Thanks and have a nice day!\n"
-		"-----------------------------------------------------------\n" );
+	printf("Thanks and have a nice day!\n"
+	       "-----------------------------------------------------------\n");
 }
 
 /* print cos(x) and sin(x) for a given x(degrees) */
-int getRetNum( void )
+int getRetNum(void)
 {
 	int n = -9999, i = 0;
 
-	printf( "Please enter an integer (0 to exit) and press ENTER: " );
-	i = scanf( "%d", &n );
+	printf("Please enter an integer (0 to exit) and press ENTER: ");
+	i = scanf("%d", &n);
 
 	/*
 	if(i >= 1) {
-	        printf("\tNew number read: %d\n", n);
+		printf("\tNew number read: %d\n", n);
 	} else {
-	        printf("\n");
+		printf("\n");
 	}
 	*/
 	return n;
 }
 
 /* Check and report a given integer's even/oddness */
-int checkRepNum( int n )
+int checkRepNum(int n)
 {
-	if ( n % 2 == 0 ) {
-		printf( "number %d is even!\n", n );
+	if (n % 2 == 0) {
+		printf("number %d is even!\n", n);
 	} else {
-		printf( "number %d is odd!\n", n );
+		printf("number %d is odd!\n", n);
 	}
 }
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char	ch = '\0';
-	int	num = 1;
+	char ch = '\0';
+	int num = 1;
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
@@ -93,19 +93,19 @@ int main( void )
 	printHeader();
 	do {
 		num = getRetNum();
-		if ( num != 0 ) {
-			checkRepNum( num );
+		if (num != 0) {
+			checkRepNum(num);
 		}
-	} while ( num != 0 );
+	} while (num != 0);
 	printFooter();
 
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
-	printf( "\n\n\nPress space to quit\n" );
+	printf("\n\n\nPress space to quit\n");
 	/* disable input buffer */
-	setvbuf( stdin,	0, _IONBF, 0 );
-	while ( ( ch = getchar() ) != ' ' && ch != EOF ) {
+	setvbuf(stdin, 0, _IONBF, 0);
+	while ((ch = getchar()) != ' ' && ch != EOF) {
 	}
 	/* END: Standard Footer Section ************************************* */
 
@@ -115,4 +115,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

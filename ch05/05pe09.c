@@ -6,9 +6,9 @@
 Write a program that will read the value of x and evaluate the following
 function:
 
-                { 1	for x<0
-        y =     { 0	for x=0
-                {-1	for x>0
+		{ 1	for x<0
+	y =     { 0	for x=0
+		{-1	for x>0
 using
 (a) nested if statements,
 (b) else if statements, and
@@ -20,12 +20,13 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 /*
-Required to prevent -> "scanf: doubleing point formats not linked																															"
+Required to prevent -> "scanf: doubleing point formats not linked
+"
 */
 #ifdef _WIN32
 #elif defined __unix__
@@ -44,90 +45,90 @@ extern unsigned _doubleconvert;
 #define UNIT_BASE_COST_HI 89.99
 */
 
-void cls( void )
+void cls(void)
 {
 	int n;
-	for ( n = 0; n < LINESTOCLEARSCREEN; n++ ) {
-		printf( "\n" );
+	for (n = 0; n < LINESTOCLEARSCREEN; n++) {
+		printf("\n");
 	}
 }
 
-void displayHeader( void )
+void displayHeader(void)
 {
-	char	s [] = TITLE;
-	int	tmp = 0;
-	for ( tmp = 0; tmp < 66; tmp++ ) {
-		printf( "-" );
+	char s[] = TITLE;
+	int tmp = 0;
+	for (tmp = 0; tmp < 66; tmp++) {
+		printf("-");
 	}
-	printf( "\n%s\n", s );
+	printf("\n%s\n", s);
 }
 
-void displayFooter( void )
+void displayFooter(void)
 {
 	int tmp = 0;
-	for ( tmp = 0; tmp < 66; tmp++ ) {
-		printf( "-" );
+	for (tmp = 0; tmp < 66; tmp++) {
+		printf("-");
 	}
-	printf( "\n" );
+	printf("\n");
 }
 
-int getMethod( void )
+int getMethod(void)
 {
 	int m = 0;
-	fflush( stdin );
-	scanf( "%d", &m );
+	fflush(stdin);
+	scanf("%d", &m);
 
 	return m;
 }
 
-void dispChooseMethodInst( void )
+void dispChooseMethodInst(void)
 {
-	printf(	"METHODS\n"
-		"\t1. Nested if statements\n"
-		"\t2. Else if statements\n"
-		"\t3. Conditional operator\n"
-		"Your choice: " );
+	printf("METHODS\n"
+	       "\t1. Nested if statements\n"
+	       "\t2. Else if statements\n"
+	       "\t3. Conditional operator\n"
+	       "Your choice: ");
 }
 
-void methodOne( void )
+void methodOne(void)
 {
-	printf(	"Nested If Statements selected. Unfortunately this method is "
-		"not available! :(\n" );
+	printf("Nested If Statements selected. Unfortunately this method is "
+	       "not available! :(\n");
 }
 
-void methodTwo( void )
+void methodTwo(void)
 {
 	int x = -333, y = -444;
-	printf( "Else If Statements selected.\nENTER value of x: " );
-	fflush( stdin );
-	scanf( "%d", &x );
-	printf(	"\nx is set to %d\t and ", x );
-	if ( x < 0 ) {
+	printf("Else If Statements selected.\nENTER value of x: ");
+	fflush(stdin);
+	scanf("%d", &x);
+	printf("\nx is set to %d\t and ", x);
+	if (x < 0) {
 		y = 1;
-	} else if ( x == 0 ) {
+	} else if (x == 0) {
 		y = 0;
-	} else if ( x > 0 ) {
+	} else if (x > 0) {
 		y = -1;
 	}
-	printf( "y is calculated as %d\n", y );
+	printf("y is calculated as %d\n", y);
 }
 
-void methodThree( void )
+void methodThree(void)
 {
 	int x = -555, y = -666;
-	printf( "Conditional Operator ? : selected.\nENTER value of x: " );
-	fflush( stdin );
-	scanf( "%d", &x );
-	printf(	"\nx is set to %d\tand ",	x );
+	printf("Conditional Operator ? : selected.\nENTER value of x: ");
+	fflush(stdin);
+	scanf("%d", &x);
+	printf("\nx is set to %d\tand ", x);
 	/* NOTE: paranthesis needed for conditional operator subsections
 	in Borland C++ v.3.01 */
-	x <= 0 ? ( x < 0 ? ( y = 1 ) : ( y = 0 ) ) : ( y = -1 );
-	printf( "y is calculated as %d\n",	y );
+	x <= 0 ? (x < 0 ? (y = 1) : (y = 0)) : (y = -1);
+	printf("y is calculated as %d\n", y);
 }
 
-void handleMethod( int m )
+void handleMethod(int m)
 {
-	switch ( m ) {
+	switch (m) {
 	case 1:
 		methodOne();
 		break;
@@ -140,11 +141,11 @@ void handleMethod( int m )
 	}
 }
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char	ch = '\0';
-	int	m = 0;
+	char ch = '\0';
+	int m = 0;
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
@@ -152,16 +153,16 @@ int main( void )
 	displayHeader();
 	dispChooseMethodInst();
 	m = getMethod();
-	printf( "Method read as: %d\n", m );
-	handleMethod( m );
+	printf("Method read as: %d\n", m);
+	handleMethod(m);
 	displayFooter();
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
-	printf( "\nPress space to quit\n" );
+	printf("\nPress space to quit\n");
 	/* disable input buffer */
-	setvbuf( stdin,	0, _IONBF, 0 );
-	while ( ( ch = getchar() ) != ' ' && ch != EOF ) {
+	setvbuf(stdin, 0, _IONBF, 0);
+	while ((ch = getchar()) != ' ' && ch != EOF) {
 	}
 	/* END: Standard Footer Section ************************************* */
 
@@ -171,4 +172,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

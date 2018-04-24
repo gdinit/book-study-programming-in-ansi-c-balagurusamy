@@ -20,8 +20,8 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 /*
@@ -43,84 +43,83 @@ typedef struct Triangle_t {
 	int a, b, c, x, y, z;
 } Triangle;
 
-void cls( void )
+void cls(void)
 {
 	int n;
-	for ( n = 0; n < LINESTOCLEARSCREEN; n++ ) {
-		printf( "\n" );
+	for (n = 0; n < LINESTOCLEARSCREEN; n++) {
+		printf("\n");
 	}
 }
 
-void displayHeader( void )
+void displayHeader(void)
 {
-	char	s [] = TITLE;
-	int	tmp = 0;
-	for ( tmp = 0; tmp < 66; tmp++ ) {
-		printf( "-" );
+	char s[] = TITLE;
+	int tmp = 0;
+	for (tmp = 0; tmp < 66; tmp++) {
+		printf("-");
 	}
-	printf( "\n%s\n", s );
+	printf("\n%s\n", s);
 }
 
-void displayFooter( void )
+void displayFooter(void)
 {
 	int tmp = 0;
-	for ( tmp = 0; tmp < 66; tmp++ ) {
-		printf( "-" );
+	for (tmp = 0; tmp < 66; tmp++) {
+		printf("-");
 	}
-	printf( "\n" );
+	printf("\n");
 }
 
-void getValues( Triangle* pt )
+void getValues(Triangle *pt)
 {
-	printf(	"Please enter the three sides of triangle, "
-		"separated with space: " );
-	fflush( stdin );
-	scanf( "%d%d%d", &( pt->a ), &( pt->b ), &( pt->c ) );
+	printf("Please enter the three sides of triangle, "
+	       "separated with space: ");
+	fflush(stdin);
+	scanf("%d%d%d", &(pt->a), &(pt->b), &(pt->c));
 }
 
-void calcXYZ( Triangle* pt )
+void calcXYZ(Triangle *pt)
 {
-	printf(	"One moment please: calculating x, y, z...\n" );
+	printf("One moment please: calculating x, y, z...\n");
 	pt->x = pt->a * pt->a;
 	pt->y = pt->b * pt->b;
 	pt->z = pt->c * pt->c;
-	printf(	"Done.\n" );
+	printf("Done.\n");
 }
 
-void testDisplayRightAngle( const Triangle* pt )
+void testDisplayRightAngle(const Triangle *pt)
 {
-	if ( ( pt->a > pt->b ) && ( pt->a > pt->c ) &&
-	     ( pt->x == pt->y + pt->z ) ) {
-		printf( "Triangle IS right-angled.\n" );
+	if ((pt->a > pt->b) && (pt->a > pt->c) && (pt->x == pt->y + pt->z)) {
+		printf("Triangle IS right-angled.\n");
 	} else {
-		printf( "Triangle IS NOT right-angled.\n" );
+		printf("Triangle IS NOT right-angled.\n");
 	}
 }
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char		ch = '\0';
-	Triangle	t;
-	Triangle*	pt = &t;
+	char ch = '\0';
+	Triangle t;
+	Triangle *pt = &t;
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
 	displayHeader();
-	getValues( pt );
-	printf( "Triangle Side Values are: %d %d %d\n", t.a, t.b, t.c );
-	calcXYZ( pt );
-	printf( "X, Y, Z Values are: %d %d %d\n", t.x, t.y, t.z );
-	testDisplayRightAngle( pt );
+	getValues(pt);
+	printf("Triangle Side Values are: %d %d %d\n", t.a, t.b, t.c);
+	calcXYZ(pt);
+	printf("X, Y, Z Values are: %d %d %d\n", t.x, t.y, t.z);
+	testDisplayRightAngle(pt);
 	displayFooter();
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
-	printf( "\nPress space to quit\n" );
+	printf("\nPress space to quit\n");
 	/* disable input buffer */
-	setvbuf( stdin,	0, _IONBF, 0 );
-	while ( ( ch = getchar() ) != ' ' && ch != EOF ) {
+	setvbuf(stdin, 0, _IONBF, 0);
+	while ((ch = getchar()) != ' ' && ch != EOF) {
 	}
 	/* END: Standard Footer Section ************************************* */
 
@@ -130,4 +129,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

@@ -11,16 +11,15 @@ FIX:		Next line
 PROBLEM:	Wrong main function return type -> void main( void )
 FIX:		Next line
 */
-int main( void )
+int main(void)
 {
 	/*
 	PROBLEM:	Wrong function name -> print()
 	FIX:		Next line
 	*/
-	printf( "Hello C" );
+	printf("Hello C");
 }
 
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

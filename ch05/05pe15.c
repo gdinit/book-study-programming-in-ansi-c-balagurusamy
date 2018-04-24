@@ -19,8 +19,8 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -48,122 +48,116 @@ typedef struct Data_t {
 	double a;
 } Data;
 
-void cls( void )
+void cls(void)
 {
 	int n;
-	for ( n = 0; n < LINES_TO_CLEAR_SCREEN; n++ ) {
-		printf( "\n" );
+	for (n = 0; n < LINES_TO_CLEAR_SCREEN; n++) {
+		printf("\n");
 	}
 }
 
-void displayHeader( void )
+void displayHeader(void)
 {
-	char	s [] = TITLE;
-	int	tmp = 0;
-	for ( tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++ ) {
-		printf( "-" );
+	char s[] = TITLE;
+	int tmp = 0;
+	for (tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++) {
+		printf("-");
 	}
-	printf( "\n%s\n\n", s );
+	printf("\n%s\n\n", s);
 }
 
-void displayFooter( void )
+void displayFooter(void)
 {
 	int tmp = 0;
-	for ( tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++ ) {
-		printf( "-" );
+	for (tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++) {
+		printf("-");
 	}
-	printf( "\n" );
+	printf("\n");
 }
 
-void getX( Data* pdata )
+void getX(Data *pdata)
 {
-	printf( "Enter the value of X (angle in radians): " );
-	scanf( "%lf", &pdata->x );
-	printf( "X is supplied as: %f\n", pdata->x );
+	printf("Enter the value of X (angle in radians): ");
+	scanf("%lf", &pdata->x);
+	printf("X is supplied as: %f\n", pdata->x);
 }
 
-void getT( Data* pdata )
+void getT(Data *pdata)
 {
-	printf(	"Trigonometric Function Codes\n"
-		"\tS for sin\n"
-		"\tC for cos\n"
-		"\tT for tan\n" );
-	printf( "Enter trigonometric function code: " );
-	fflush( stdin );
-	scanf( "%c", &pdata->t );
-	printf( "Value supplied as: %c\n", pdata->t );
+	printf("Trigonometric Function Codes\n"
+	       "\tS for sin\n"
+	       "\tC for cos\n"
+	       "\tT for tan\n");
+	printf("Enter trigonometric function code: ");
+	fflush(stdin);
+	scanf("%c", &pdata->t);
+	printf("Value supplied as: %c\n", pdata->t);
 }
 
 /* (i) using if...else statement */
-void process1( Data* pdata )
+void process1(Data *pdata)
 {
 	double val = 0.0;
 	val = PI / 180.0;
-	printf( "\n\nProcessing X=%f & T=%c using method #1\n"
-		, pdata->x, pdata->t );
-	if ( pdata->t == 's' || pdata->t == 'S' ) {
-		printf( "sin(%f) is: %f\n"
-			, pdata->x, sin( pdata->x * val ) );
-	} else if ( pdata->t == 'c' || pdata->t == 'C' ) {
-		printf( "cos(%f) is: %f\n"
-			, pdata->x, cos( pdata->x * val ) );
-	} else if ( pdata->t == 't' || pdata->t == 'T' ) {
-		printf( "tan(%f) is: %f\n"
-			, pdata->x, tan( pdata->x * val ) );
+	printf("\n\nProcessing X=%f & T=%c using method #1\n", pdata->x,
+	       pdata->t);
+	if (pdata->t == 's' || pdata->t == 'S') {
+		printf("sin(%f) is: %f\n", pdata->x, sin(pdata->x * val));
+	} else if (pdata->t == 'c' || pdata->t == 'C') {
+		printf("cos(%f) is: %f\n", pdata->x, cos(pdata->x * val));
+	} else if (pdata->t == 't' || pdata->t == 'T') {
+		printf("tan(%f) is: %f\n", pdata->x, tan(pdata->x * val));
 	}
 }
 
 /* (ii) using switch statement */
-void process2( Data* pdata )
+void process2(Data *pdata)
 {
 	double val = 0.0;
 	val = PI / 180.0;
-	printf( "\n\nProcessing X=%f & T=%c using method #2\n"
-		, pdata->x, pdata->t );
-	switch ( pdata->t ) {
+	printf("\n\nProcessing X=%f & T=%c using method #2\n", pdata->x,
+	       pdata->t);
+	switch (pdata->t) {
 	case 83:
 	case 115:
-		printf( "sin(%f) is: %f\n"
-			, pdata->x, sin( pdata->x * val ) );
+		printf("sin(%f) is: %f\n", pdata->x, sin(pdata->x * val));
 		break;
 	case 67:
 	case 99:
-		printf( "cos(%f) is: %f\n"
-			, pdata->x, cos( pdata->x * val ) );
+		printf("cos(%f) is: %f\n", pdata->x, cos(pdata->x * val));
 		break;
 	case 84:
 	case 116:
-		printf( "tan(%f) is: %f\n"
-			, pdata->x, tan( pdata->x * val ) );
+		printf("tan(%f) is: %f\n", pdata->x, tan(pdata->x * val));
 		break;
 	default:
-		printf( "ERROR: Unknown operation!\n" );
+		printf("ERROR: Unknown operation!\n");
 	}
 }
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char	ch = '\0';
-	Data	data;
-	Data*	pdata = &data;
+	char ch = '\0';
+	Data data;
+	Data *pdata = &data;
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
 	displayHeader();
-	getX( pdata );
-	getT( pdata );
-	process1( pdata );
-	process2( pdata );
+	getX(pdata);
+	getT(pdata);
+	process1(pdata);
+	process2(pdata);
 	displayFooter();
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
-	printf( "\nPress space to quit\n" );
+	printf("\nPress space to quit\n");
 	/* disable input buffer */
-	setvbuf( stdin,	0, _IONBF, 0 );
-	while ( ( ch = getchar() ) != ' ' && ch != EOF ) {
+	setvbuf(stdin, 0, _IONBF, 0);
+	while ((ch = getchar()) != ' ' && ch != EOF) {
 	}
 	/* END: Standard Footer Section ************************************* */
 
@@ -173,4 +167,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

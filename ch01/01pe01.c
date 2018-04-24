@@ -17,11 +17,11 @@ gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 #define B 8
 #define C 18
 
-int main( void )
+int main(void)
 {
-	printf( "\n" );
-	printf( "%dx + %dy = %d\n", A, B, C );
-	printf( "\n" );
+	printf("\n");
+	printf("%dx + %dy = %d\n", A, B, C);
+	printf("\n");
 
 	return 0;
 }
@@ -29,4 +29,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

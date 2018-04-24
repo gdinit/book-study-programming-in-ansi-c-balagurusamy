@@ -21,35 +21,34 @@ int main()
 {
 	/*
 	PROBLEM:	ISO C90 forbids mixing declarations and code
-	                [-Werror,-Wdeclaration-after-statement]
+			[-Werror,-Wdeclaration-after-statement]
 	FIX:		Next line (Y declaration moved above X = 2.5 statement)
 	*/
-	float	Y;
-	float	X;
+	float Y;
+	float X;
 
 	/*
 	PROBLEM:	Missing variable type identifier -> Y = ex(x);
-	                wrong capitalization -> ex(x);
+			wrong capitalization -> ex(x);
 	FIX:		Next line
 	*/
 	X = 2.5;
 
 	/*
 	PROBLEM:	ISO C90 forbids mixing declarations and code
-	                -> float Y = exp( X );
+			-> float Y = exp( X );
 	FIX:		Next line
 	*/
 
-	Y = exp( X );
+	Y = exp(X);
 	/*
 	PROBLEM:	Wrong printf function name && wrong format
-	                && wrong capitalization -> Print(x,y);
+			&& wrong capitalization -> Print(x,y);
 	FIX:		Next line
 	*/
-	printf( "%f, %f", X, Y );
+	printf("%f, %f", X, Y);
 }
 
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

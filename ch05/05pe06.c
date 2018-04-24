@@ -25,12 +25,13 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 /*
-Required to prevent -> "scanf: floating point formats not linked																															"
+Required to prevent -> "scanf: floating point formats not linked
+"
 */
 #ifdef _WIN32
 #elif defined __unix__
@@ -42,33 +43,33 @@ extern unsigned _floatconvert;
 
 #define LINESTOCLEARSCREEN 90
 #define MAX_SUBJECTS 3
-#define	BLANK_MARK -1
-#define	COL_SIZE 20
+#define BLANK_MARK -1
+#define COL_SIZE 20
 
-void cls( void )
+void cls(void)
 {
 	int n;
-	for ( n = 0; n < LINESTOCLEARSCREEN; n++ ) {
-		printf( "\n" );
+	for (n = 0; n < LINESTOCLEARSCREEN; n++) {
+		printf("\n");
 	}
 }
 
-void printHeader( void )
+void printHeader(void)
 {
 	int tmp = 0;
-	for ( tmp = 0; tmp < 66; tmp++ ) {
-		printf( "-" );
+	for (tmp = 0; tmp < 66; tmp++) {
+		printf("-");
 	}
-	printf( "\nTWO DIMENSIONAL SQUARE ROOT TABLE\n" );
+	printf("\nTWO DIMENSIONAL SQUARE ROOT TABLE\n");
 }
 
-void printFooter( void )
+void printFooter(void)
 {
 	int tmp = 0;
-	for ( tmp = 0; tmp < 66; tmp++ ) {
-		printf( "-" );
+	for (tmp = 0; tmp < 66; tmp++) {
+		printf("-");
 	}
-	printf( "\n" );
+	printf("\n");
 }
 
 /*
@@ -79,44 +80,44 @@ Number	0.0	0.1	0.2	...	0.9
 3.0	__	__	x	...	y
 9.0	__	__	__	...	__
 */
-void printTable( void )
+void printTable(void)
 {
-	int	r = 0, tmp = 0;
-	float	j = 0.0f, c = 0.0f;
+	int r = 0, tmp = 0;
+	float j = 0.0f, c = 0.0f;
 
-	printf( "\n" );
-	for ( r = 0; r <= 9; r++ ) {
-		if ( r == 0 ) {
-			for ( tmp = 0; tmp < 66; tmp++ ) {
-				printf( "-" );
+	printf("\n");
+	for (r = 0; r <= 9; r++) {
+		if (r == 0) {
+			for (tmp = 0; tmp < 66; tmp++) {
+				printf("-");
 			}
-			printf( "\n" );
-			printf( "Number\t" );
-			for ( j = 0.0f; j < 0.91f; j += 0.1f ) {
-				printf( "%.2f  ", j );
+			printf("\n");
+			printf("Number\t");
+			for (j = 0.0f; j < 0.91f; j += 0.1f) {
+				printf("%.2f  ", j);
 			}
-			printf( "\n" );
-			for ( tmp = 0; tmp < 66; tmp++ ) {
-				printf( "-" );
+			printf("\n");
+			for (tmp = 0; tmp < 66; tmp++) {
+				printf("-");
 			}
-			printf( "\n" );
+			printf("\n");
 		}
-		printf( "%1d.0\t", r );
-		for ( j = 0.0f; j < 0.91f; j += 0.1f ) {
-			printf( "%.2f  ", sqrt( ( float )r + j ) );
+		printf("%1d.0\t", r);
+		for (j = 0.0f; j < 0.91f; j += 0.1f) {
+			printf("%.2f  ", sqrt((float)r + j));
 		}
-		printf( "\n" );
+		printf("\n");
 	}
 }
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char	ch = '\0';
-	int	marks [ MAX_SUBJECTS ] = { -1 };
-	int*	pmarks = &marks [ 0 ];
-	int	readCount = 0;
-	int*	preadCount = &readCount;
+	char ch = '\0';
+	int marks[MAX_SUBJECTS] = {-1};
+	int *pmarks = &marks[0];
+	int readCount = 0;
+	int *preadCount = &readCount;
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
@@ -128,10 +129,10 @@ int main( void )
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
-	printf( "\nPress space to quit\n" );
+	printf("\nPress space to quit\n");
 	/* disable input buffer */
-	setvbuf( stdin,	0, _IONBF, 0 );
-	while ( ( ch = getchar() ) != ' ' && ch != EOF ) {
+	setvbuf(stdin, 0, _IONBF, 0);
+	while ((ch = getchar()) != ' ' && ch != EOF) {
 	}
 	/* END: Standard Footer Section ************************************* */
 
@@ -141,4 +142,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

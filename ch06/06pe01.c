@@ -5,9 +5,9 @@
 /*
 Given a number, write a program using while loop to reverse the digits of the
 number. For example, the number:
-        12345
+	12345
 should be written as:
-        54321
+	54321
 
 Hint: Use modulus operator to extract the last digit and the integer division by
 10 to get the n-1 digit number from the n gidit number.
@@ -18,8 +18,8 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 /*
 #include <stdlib.h>
 #include <string.h>
@@ -47,92 +47,92 @@ extern unsigned _doubleconvert;
  */
 typedef struct Data_t {
 	long int n;
-	int r [ 16 ];
+	int r[16];
 } Data;
 
-void cls( void )
+void cls(void)
 {
 	int n;
-	for ( n = 0; n < LINES_TO_CLEAR_SCREEN; n++ ) {
-		printf( "\n" );
+	for (n = 0; n < LINES_TO_CLEAR_SCREEN; n++) {
+		printf("\n");
 	}
 }
 
-void displayHeader( void )
+void displayHeader(void)
 {
-	char	s [] = TITLE;
-	int	tmp = 0;
-	for ( tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++ ) {
-		printf( "-" );
+	char s[] = TITLE;
+	int tmp = 0;
+	for (tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++) {
+		printf("-");
 	}
-	printf( "\n%s\n\n", s );
+	printf("\n%s\n\n", s);
 }
 
-void displayFooter( void )
+void displayFooter(void)
 {
 	int tmp = 0;
-	for ( tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++ ) {
-		printf( "-" );
+	for (tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++) {
+		printf("-");
 	}
-	printf( "\n" );
+	printf("\n");
 }
 
-void getN( Data* pdata )
+void getN(Data *pdata)
 {
-	printf( "Enter an integer number to be reversed: " );
-	scanf( "%ld", &pdata->n );
-	printf( "N is supplied as: %ld\n", pdata->n );
+	printf("Enter an integer number to be reversed: ");
+	scanf("%ld", &pdata->n);
+	printf("N is supplied as: %ld\n", pdata->n);
 }
 
-void process( Data* pdata )
+void process(Data *pdata)
 {
-	long int	n = pdata->n;
-	int		len = -1, k = -1, it = -1, j = -1;
-	for ( len = 0; n != 0; len++ ) {
+	long int n = pdata->n;
+	int len = -1, k = -1, it = -1, j = -1;
+	for (len = 0; n != 0; len++) {
 		n /= 10;
 	}
-	printf( "Reversed number is: " );
+	printf("Reversed number is: ");
 	n = pdata->n;
-	for ( ( it = len, k = 1, j = 0 ); it > 0; ( it--, k *= 10, j++ ) ) {
-		printf( "%ld", n / k % 10 );
-		pdata->r [ j ] = n / k % 10;
+	for ((it = len, k = 1, j = 0); it > 0; (it--, k *= 10, j++)) {
+		printf("%ld", n / k % 10);
+		pdata->r[j] = n / k % 10;
 	}
-	printf( "\n" );
+	printf("\n");
 }
 
 /* zero initialize a Data struct */
-void zinit( Data* pdata )
+void zinit(Data *pdata)
 {
 	int n = 0;
 	pdata->n = 0;
-	for ( n = 0; n < 16; n++ ) {
-		pdata->r [ n ] = -1;
+	for (n = 0; n < 16; n++) {
+		pdata->r[n] = -1;
 	}
 }
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char	ch = '\0';
-	Data	data;
-	Data*	pdata = &data;
-	data.r [ 0 ] = 0;
+	char ch = '\0';
+	Data data;
+	Data *pdata = &data;
+	data.r[0] = 0;
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
 	displayHeader();
-	zinit( pdata );
-	getN( pdata );
-	process( pdata );
+	zinit(pdata);
+	getN(pdata);
+	process(pdata);
 	displayFooter();
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
-	printf( "\nPress space to quit\n" );
+	printf("\nPress space to quit\n");
 	/* disable input buffer */
-	setvbuf( stdin,	0, _IONBF, 0 );
-	while ( ( ch = getchar() ) != ' ' && ch != EOF ) {
+	setvbuf(stdin, 0, _IONBF, 0);
+	while ((ch = getchar()) != ' ' && ch != EOF) {
 	}
 	/* END: Standard Footer Section ************************************* */
 
@@ -142,4 +142,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

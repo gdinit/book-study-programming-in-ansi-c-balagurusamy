@@ -17,14 +17,14 @@ gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 #define PI 3.14159265359
 #define RADIUS 3.0
 
-int main( void )
+int main(void)
 {
 	/* INPUT: Radius */
 	float area;
 
 	/* CALCULATE: Area */
 	area = PI * RADIUS * RADIUS;
-	printf( "PI = %f\tRadius = %f\tArea = %f\n", PI, RADIUS, area );
+	printf("PI = %f\tRadius = %f\tArea = %f\n", PI, RADIUS, area);
 
 	return 0;
 }
@@ -32,4 +32,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

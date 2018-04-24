@@ -8,12 +8,8 @@ FIX:            Next line
 
 /* A Simple program */
 
-int main()
-{
-	/* Does nothing */
-}
+int main() { /* Does nothing */ }
 
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

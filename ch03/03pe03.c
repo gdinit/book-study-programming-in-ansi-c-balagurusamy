@@ -12,11 +12,11 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 
 /*
-        Required to prevent -> "scanf: floating point formats not linked"
+	Required to prevent -> "scanf: floating point formats not linked"
 */
 #ifdef _WIN32
 #elif defined __unix__
@@ -28,56 +28,56 @@ extern unsigned _floatconvert;
 
 #define LINESTOCLEARSCREEN 90
 
-void cls( void )
+void cls(void)
 {
 	int n;
 
-	for ( n = 0; n < LINESTOCLEARSCREEN; n++ )
-		printf( "\n" );
+	for (n = 0; n < LINESTOCLEARSCREEN; n++)
+		printf("\n");
 }
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char	gotChar = '\0';
-	double	number = 0.f;
-	double	intg = 0.f, frac = 0.f;
-	int	rght2 = 0;
+	char gotChar = '\0';
+	double number = 0.f;
+	double intg = 0.f, frac = 0.f;
+	int rght2 = 0;
 
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
-	printf( "Please enter a floating point number: " );
-	scanf( "%lf", &number );
-	printf(	"|---------------------------------------|\n"
-		"|\t      INITIAL VALUE\t\t|\n"
-		"|\t\t\t\t\t|\n"
-		"|\tnumber\t%f\t\t|\n"
-		"|---------------------------------------|\n"
-		, number );
-	frac = modf( number, &intg );
-	rght2 = ( int )intg % 100;
-	printf( "\n\n" );
-	printf(	"|---------------------------------------|\n"
-		"|\t      CALCULATED VALUES\t\t|\n"
-		"|\t\t\t\t\t|\n"
-		"|\tnumber\t%f\t\t|\n"
-		"|\t\t\t\t\t|\n"
-		"|\tintg\t%f\t\t|\n"
-		"|\tfrac\t%f\t\t|\n"
-		"|\trght2\t%d\t\t\t|\n"
-		"|---------------------------------------|\n"
-		, number, intg, frac, rght2 );
+	printf("Please enter a floating point number: ");
+	scanf("%lf", &number);
+	printf("|---------------------------------------|\n"
+	       "|\t      INITIAL VALUE\t\t|\n"
+	       "|\t\t\t\t\t|\n"
+	       "|\tnumber\t%f\t\t|\n"
+	       "|---------------------------------------|\n",
+	       number);
+	frac = modf(number, &intg);
+	rght2 = (int)intg % 100;
+	printf("\n\n");
+	printf("|---------------------------------------|\n"
+	       "|\t      CALCULATED VALUES\t\t|\n"
+	       "|\t\t\t\t\t|\n"
+	       "|\tnumber\t%f\t\t|\n"
+	       "|\t\t\t\t\t|\n"
+	       "|\tintg\t%f\t\t|\n"
+	       "|\tfrac\t%f\t\t|\n"
+	       "|\trght2\t%d\t\t\t|\n"
+	       "|---------------------------------------|\n",
+	       number, intg, frac, rght2);
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
 
 	/* disable input & output buffers */
-	setvbuf(	stdout, 0,	_IONBF, 0 );
-	setvbuf(	stdin,	0,	_IONBF, 0 );
-	printf( "\n\n" );
-	printf( "\n\nPress any key to quit \n" );
+	setvbuf(stdout, 0, _IONBF, 0);
+	setvbuf(stdin, 0, _IONBF, 0);
+	printf("\n\n");
+	printf("\n\nPress any key to quit \n");
 	gotChar = getchar();
 	/* required to suppress "Error: var not used!" */
 	gotChar += 1;
@@ -89,4 +89,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

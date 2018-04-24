@@ -17,11 +17,12 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 
 /*
-Required to prevent -> "scanf: floating point formats not linked																															"
+Required to prevent -> "scanf: floating point formats not linked
+"
 */
 #ifdef _WIN32
 #elif defined __unix__
@@ -37,62 +38,61 @@ extern unsigned _floatconvert;
 #define NUMEND 100
 #define NUMINC 10
 
-void cls( void )
+void cls(void)
 {
 	int n;
-	for ( n = 0; n < LINESTOCLEARSCREEN; n++ ) {
-		printf( "\n" );
+	for (n = 0; n < LINESTOCLEARSCREEN; n++) {
+		printf("\n");
 	}
 }
 
-void printHeader( void )
+void printHeader(void)
 {
-	printf(
-		"-----------------------------------------------------------\n"
-		"NUMBER\t\tSQUARE-ROOT\t\tSQUARE\n"
-		"-----------------------------------------------------------\n" );
+	printf("-----------------------------------------------------------\n"
+	       "NUMBER\t\tSQUARE-ROOT\t\tSQUARE\n"
+	       "-----------------------------------------------------------\n");
 }
 
-void printFooter( void )
+void printFooter(void)
 {
-	printf( "-----------------------------------------------------------\n" );
+	printf("-----------------------------------------------------------\n");
 }
 
 /* print cos(x) and sin(x) for a given x(degrees) */
-void printNumSqrtSqre( int x )
+void printNumSqrtSqre(int x)
 {
-	double		sqrt_ = 0.0;
-	long int	sqre_ = 0;
+	double sqrt_ = 0.0;
+	long int sqre_ = 0;
 
-	sqrt_ = sqrt( x );
-	if ( x > 0 ) {
+	sqrt_ = sqrt(x);
+	if (x > 0) {
 		sqre_ = x * x;
 	}
-	printf(	"%d\t\t%f\t\t%ld\n", x, sqrt_, sqre_ );
+	printf("%d\t\t%f\t\t%ld\n", x, sqrt_, sqre_);
 }
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char	ch = '\0';
-	int	x = 0;
+	char ch = '\0';
+	int x = 0;
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
 	printHeader();
-	for ( x = NUMBEG; x <= NUMEND; x += NUMINC ) {
-		printNumSqrtSqre( x );
+	for (x = NUMBEG; x <= NUMEND; x += NUMINC) {
+		printNumSqrtSqre(x);
 	}
 	printFooter();
 
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
-	printf( "\n\n\nPress space to quit\n" );
+	printf("\n\n\nPress space to quit\n");
 	/* disable input buffer */
-	setvbuf( stdin,	0, _IONBF, 0 );
-	while ( ( ch = getchar() ) != ' ' && ch != EOF ) {
+	setvbuf(stdin, 0, _IONBF, 0);
+	while ((ch = getchar()) != ' ' && ch != EOF) {
 	}
 	/* END: Standard Footer Section ************************************* */
 
@@ -102,4 +102,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

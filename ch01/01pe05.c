@@ -22,17 +22,17 @@ gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 #define CVAL 25.0
 #define FVAL 94.0
 
-int main( void )
+int main(void)
 {
 	float c, f;
 
 	/* 25 C = ? F */
-	f = ( 9 * CVAL / 5 ) + 32;
-	printf( "%f Celsius = %f Fahrenheit\n", CVAL, f );
+	f = (9 * CVAL / 5) + 32;
+	printf("%f Celsius = %f Fahrenheit\n", CVAL, f);
 
 	/* 94 F = ? C */
-	c = ( FVAL - 32 ) * 5 / 9;
-	printf( "%f Fahrenheit = %f Celsius\n", FVAL, c );
+	c = (FVAL - 32) * 5 / 9;
+	printf("%f Fahrenheit = %f Celsius\n", FVAL, c);
 
 	return 0;
 }
@@ -40,4 +40,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

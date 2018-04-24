@@ -20,13 +20,13 @@ gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 #define NUMBER 5
 #define HIGHERLIMIT 10
 
-int main( void )
+int main(void)
 {
 	int n;
 
-	for ( n = 1; n <= HIGHERLIMIT; ++n )
-		printf( "%d x %d = %d\n", NUMBER, n, ( NUMBER * n ) );
-	printf( "\n" );
+	for (n = 1; n <= HIGHERLIMIT; ++n)
+		printf("%d x %d = %d\n", NUMBER, n, (NUMBER * n));
+	printf("\n");
 
 	return 0;
 }
@@ -34,4 +34,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

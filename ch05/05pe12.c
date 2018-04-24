@@ -22,8 +22,8 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -55,86 +55,86 @@ extern unsigned _doubleconvert;
 #define OVERUSE_SURCHARGE_RATIO 15
 
 typedef struct customer_t {
-	char fname [ 24 ];
+	char fname[24];
 	long int consumed;
 	/* bill amount */
 	double ba;
 } customer;
 
-void cls( void )
+void cls(void)
 {
 	int n;
-	for ( n = 0; n < LINES_TO_CLEAR_SCREEN; n++ ) {
-		printf( "\n" );
+	for (n = 0; n < LINES_TO_CLEAR_SCREEN; n++) {
+		printf("\n");
 	}
 }
 
-void displayHeader( void )
+void displayHeader(void)
 {
-	char	s [] = TITLE;
-	int	tmp = 0;
-	for ( tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++ ) {
-		printf( "-" );
+	char s[] = TITLE;
+	int tmp = 0;
+	for (tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++) {
+		printf("-");
 	}
-	printf( "\n%s\n", s );
+	printf("\n%s\n", s);
 }
 
-void displayFooter( void )
+void displayFooter(void)
 {
 	int tmp = 0;
-	for ( tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++ ) {
-		printf( "-" );
+	for (tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++) {
+		printf("-");
 	}
-	printf( "\n" );
+	printf("\n");
 }
 
-void getCustomerData( customer* pcusta )
+void getCustomerData(customer *pcusta)
 {
 	int n = 0;
-	while ( n < CUST_ARR_SIZE && !( pcusta [ n ].consumed < 0 ) ) {
-		printf(	"\n[Customer %d] Please enter customer's Firstname\n"
-			"(or a single character to skip further data entry): "
-			, n + 1 );
-		scanf( "%s", pcusta [ n ].fname );
-		if ( strlen( pcusta [ n ].fname ) < 2 ) {
+	while (n < CUST_ARR_SIZE && !(pcusta[n].consumed < 0)) {
+		printf("\n[Customer %d] Please enter customer's Firstname\n"
+		       "(or a single character to skip further data entry): ",
+		       n + 1);
+		scanf("%s", pcusta[n].fname);
+		if (strlen(pcusta[n].fname) < 2) {
 			break;
 		}
-		printf(	"\n[Customer %d] Please enter consumed Energy Units: "
-			, n + 1 );
-		scanf( "%ld", &pcusta [ n ].consumed );
-		printf( "\n" );
+		printf("\n[Customer %d] Please enter consumed Energy Units: ",
+		       n + 1);
+		scanf("%ld", &pcusta[n].consumed);
+		printf("\n");
 		n++;
 	}
 }
 
-int countCustomers( customer* pcusta )
+int countCustomers(customer *pcusta)
 {
 	int n;
-	for ( n = 0; n < CUST_ARR_SIZE; n++ ) {
+	for (n = 0; n < CUST_ARR_SIZE; n++) {
 		;
 	}
 
 	return n;
 }
 
-double calcCharge( long int consumed )
+double calcCharge(long int consumed)
 {
-	double		rv = BASE_CHARGE;
-	long int	c = consumed, b2 = 0, b3 = 0;
-	if ( c >= 0 && c <= BR1_UVAL ) {
+	double rv = BASE_CHARGE;
+	long int c = consumed, b2 = 0, b3 = 0;
+	if (c >= 0 && c <= BR1_UVAL) {
 		rv += c * BR1_UNIT_PRICE;
-	} else if ( c > BR1_UVAL && c <= BR2_UVAL ) {
+	} else if (c > BR1_UVAL && c <= BR2_UVAL) {
 		rv += BR1_UVAL * BR1_UNIT_PRICE;
 		b2 = c - BR1_UVAL;
 		rv += b2 * BR2_UNIT_PRICE;
-	} else if ( c >= BR3_LVAL && c <= OVERUSE_THRESHOLD_LVAL ) {
+	} else if (c >= BR3_LVAL && c <= OVERUSE_THRESHOLD_LVAL) {
 		rv += BR1_UVAL * BR1_UNIT_PRICE;
-		rv += ( BR2_UVAL - BR1_UVAL ) * BR2_UNIT_PRICE;
+		rv += (BR2_UVAL - BR1_UVAL) * BR2_UNIT_PRICE;
 		b3 = c - BR2_UVAL;
 		rv += b3 * BR3_UNIT_PRICE;
-	} else if ( c >= OVERUSE_THRESHOLD_LVAL ) {
+	} else if (c >= OVERUSE_THRESHOLD_LVAL) {
 		rv += BR1_UVAL * BR1_UNIT_PRICE;
-		rv += ( BR2_UVAL - BR1_UVAL ) * BR2_UNIT_PRICE;
+		rv += (BR2_UVAL - BR1_UVAL) * BR2_UNIT_PRICE;
 		b3 = c - BR2_UVAL;
 		rv += b3 * BR3_UNIT_PRICE;
 		rv *= 1.15;
@@ -143,48 +143,47 @@ double calcCharge( long int consumed )
 	return rv;
 }
 
-void calcDisplayCharges( customer* pcusta )
+void calcDisplayCharges(customer *pcusta)
 {
 	int n;
-	for ( n = 0;
-	      ( ( n < CUST_ARR_SIZE ) && ( ( strlen( pcusta [ n ].fname ) >
-					     1 ) ) ); n++ ) {
-		printf(	"\n\n"
-			"====================\n"
-			"ELECTRIC BILL\n"
-			"Customer name\t\t: %s\n", pcusta [ n ].fname );
-		printf(	"Total consumption\t: %ld\n"
-			, pcusta [ n ].consumed );
-		printf( "Bill Amount\t\t: %5.2f\n"
-			, calcCharge( pcusta [ n ].consumed ) );
+	for (n = 0; ((n < CUST_ARR_SIZE) && ((strlen(pcusta[n].fname) > 1)));
+	     n++) {
+		printf("\n\n"
+		       "====================\n"
+		       "ELECTRIC BILL\n"
+		       "Customer name\t\t: %s\n",
+		       pcusta[n].fname);
+		printf("Total consumption\t: %ld\n", pcusta[n].consumed);
+		printf("Bill Amount\t\t: %5.2f\n",
+		       calcCharge(pcusta[n].consumed));
 		/* while at it, let's store bill amount in the struct */
-		pcusta [ n ].ba = calcCharge( pcusta [ n ].consumed );
+		pcusta[n].ba = calcCharge(pcusta[n].consumed);
 	}
 }
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char		ch = '\0';
-	customer	custa [ CUST_ARR_SIZE ] = { 0 };
-	customer*	pcusta = &( custa [ 0 ] );
+	char ch = '\0';
+	customer custa[CUST_ARR_SIZE] = {0};
+	customer *pcusta = &(custa[0]);
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
 	displayHeader();
-	getCustomerData( pcusta );
-	if ( countCustomers( pcusta ) > 0 ) {
-		calcDisplayCharges( pcusta );
+	getCustomerData(pcusta);
+	if (countCustomers(pcusta) > 0) {
+		calcDisplayCharges(pcusta);
 	}
 	displayFooter();
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
-	printf( "\nPress space to quit\n" );
+	printf("\nPress space to quit\n");
 	/* disable input buffer */
-	setvbuf( stdin,	0, _IONBF, 0 );
-	while ( ( ch = getchar() ) != ' ' && ch != EOF ) {
+	setvbuf(stdin, 0, _IONBF, 0);
+	while ((ch = getchar()) != ' ' && ch != EOF) {
 	}
 	/* END: Standard Footer Section ************************************* */
 
@@ -194,4 +193,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

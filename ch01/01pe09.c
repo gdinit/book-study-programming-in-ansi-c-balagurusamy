@@ -19,12 +19,12 @@ gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 
 #include <stdio.h>
 
-int main( void )
+int main(void)
 {
-	printf(	"*\n"
-		"*\t*\n"
-		"*\t*\t*\n"
-		"*\t*\t*\t*\n" );
+	printf("*\n"
+	       "*\t*\n"
+	       "*\t*\t*\n"
+	       "*\t*\t*\t*\n");
 
 	return 0;
 }
@@ -32,4 +32,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

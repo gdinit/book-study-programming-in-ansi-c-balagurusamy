@@ -17,13 +17,13 @@ gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 #define PI 3.14159265359
 #define RADIUS 3
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char	gotChar = '\0';
-	float	pi = PI;
-	float	radius = RADIUS;
-	float	area;
+	char gotChar = '\0';
+	float pi = PI;
+	float radius = RADIUS;
+	float area;
 
 	/* END: Declare Variables ******************************************* */
 
@@ -31,20 +31,20 @@ int main( void )
 
 	/* Calculate Area = Pi * r * r */
 	area = pi * radius * radius;
-	printf( "PI = %f\tRadius = %f\tArea = %f\n", pi, radius, area );
+	printf("PI = %f\tRadius = %f\tArea = %f\n", pi, radius, area);
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
 
 	/* disable input & output buffers */
-	setvbuf(	stdout, 0,	_IONBF, 0 );
-	setvbuf(	stdin,	0,	_IONBF, 0 );
-	printf( "\n\n" );
-	printf( "\n\nPress any key to quit \n" );
+	setvbuf(stdout, 0, _IONBF, 0);
+	setvbuf(stdin, 0, _IONBF, 0);
+	printf("\n\n");
+	printf("\n\nPress any key to quit \n");
 	gotChar = getchar();
 	/* required to suppress "Error: var not used!" */
 	gotChar += 1;
-	fflush( stdout );
+	fflush(stdout);
 	/* END: Standard Footer Section ************************************* */
 
 	return 0;
@@ -53,4 +53,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

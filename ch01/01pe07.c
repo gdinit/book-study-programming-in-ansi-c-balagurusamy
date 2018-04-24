@@ -16,7 +16,8 @@ gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 
 #include <stdio.h>
 
-int add( int a, int b ) {
+int add(int a, int b)
+{
 	int r;
 
 	r = a + b;
@@ -24,7 +25,8 @@ int add( int a, int b ) {
 	return r;
 }
 
-int sub( int a, int b ) {
+int sub(int a, int b)
+{
 	int r;
 
 	r = a - b;
@@ -32,16 +34,16 @@ int sub( int a, int b ) {
 	return r;
 }
 
-int main( void )
+int main(void)
 {
 #define NUM1 20
 #define NUM2 10
 	int result;
-	result = add( NUM1, NUM2 );
-	printf( "add(%d, %d) = %d\n",	NUM1,	NUM2,	result );
+	result = add(NUM1, NUM2);
+	printf("add(%d, %d) = %d\n", NUM1, NUM2, result);
 
-	result = sub( NUM1, NUM2 );
-	printf( "sub(%d, %d) = %d\n",	NUM1,	NUM2,	result );
+	result = sub(NUM1, NUM2);
+	printf("sub(%d, %d) = %d\n", NUM1, NUM2, result);
 
 	return 0;
 }
@@ -49,4 +51,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

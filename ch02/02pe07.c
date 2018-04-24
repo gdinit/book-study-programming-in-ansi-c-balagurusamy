@@ -17,39 +17,41 @@ Comment on the output.
 #define NUM2 209348
 #define LINESTOCLEARSCREEN 90
 
-void cls( void )
+void cls(void)
 {
 	int n;
 
-	for ( n = 0; n < LINESTOCLEARSCREEN; n++ )
-		printf( "\n" );
+	for (n = 0; n < LINESTOCLEARSCREEN; n++)
+		printf("\n");
 }
 
-int main( void )
+int main(void)
 {
-	char		gotChar;
+	char gotChar;
 
-	int		x = NUM1, y = NUM2;
-	short int	z = x + y;
-	long int	x2 = NUM1, y2 = NUM2;
+	int x = NUM1, y = NUM2;
+	short int z = x + y;
+	long int x2 = NUM1, y2 = NUM2;
 
 	cls();
-	printf( "Supplied values were:\n"
-		"\t\t\tx = %ld && y = %ld\n\n\n", x2, y2 );
+	printf("Supplied values were:\n"
+	       "\t\t\tx = %ld && y = %ld\n\n\n",
+	       x2, y2);
 
-	printf(	"Now, after assignments, variables hold the "
-		"following incorrect values:\n"
-		"\t\t\tx = %d\n"
-		"\t\t\ty = %d\n"
-		"\t\t\tz = %d\n", x, y, z );
+	printf("Now, after assignments, variables hold the "
+	       "following incorrect values:\n"
+	       "\t\t\tx = %d\n"
+	       "\t\t\ty = %d\n"
+	       "\t\t\tz = %d\n",
+	       x, y, z);
 
 	/* STANDARD END SECTION ********************************************* */
 
 	/* Disable Input & Output buffers. */
-	setvbuf(	stdout, 0,	_IONBF, 0 );
-	setvbuf(	stdin,	0,	_IONBF, 0 );
-	printf( "\n\n" );
-	printf( "\n\nPress any key to quit \n" );
+	setvbuf(stdout, 0, _IONBF, 0);
+	setvbuf(stdin, 0, _IONBF, 0);
+	printf("\n\n");
+	printf("\n\nPress any key to quit \n");
 	gotChar = getchar();
 	/* to suppress var not used! */
 	gotChar = gotChar + 1;
@@ -61,4 +63,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

@@ -12,11 +12,12 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 
 /*
-Required to prevent -> "scanf: floating point formats not linked																															"
+Required to prevent -> "scanf: floating point formats not linked
+"
 */
 #ifdef _WIN32
 #elif defined __unix__
@@ -28,38 +29,38 @@ extern unsigned _floatconvert;
 
 #define LINESTOCLEARSCREEN 90
 
-void cls( void )
+void cls(void)
 {
 	int n;
-	for ( n = 0; n < LINESTOCLEARSCREEN; n++ ) {
-		printf( "\n" );
+	for (n = 0; n < LINESTOCLEARSCREEN; n++) {
+		printf("\n");
 	}
 }
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char	ch = '\0';
-	int	m = 0, n = 0;
+	char ch = '\0';
+	int m = 0, n = 0;
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
-	fflush( stdin );
-	printf( "Please enter two integer numbers separated with space: " );
-	scanf( "%d %d", &m, &n );
-	printf( "Numbers READ:\t%d\t%d\n", m, n );
-	if ( m % n == 0 ) {
-		printf( "m (%d) IS a multiple of n (%d)\n", m, n );
+	fflush(stdin);
+	printf("Please enter two integer numbers separated with space: ");
+	scanf("%d %d", &m, &n);
+	printf("Numbers READ:\t%d\t%d\n", m, n);
+	if (m % n == 0) {
+		printf("m (%d) IS a multiple of n (%d)\n", m, n);
 	} else {
-		printf( "m (%d) IS NOT a multiple of n (%d)\n", m, n );
+		printf("m (%d) IS NOT a multiple of n (%d)\n", m, n);
 	}
 	/* END: Program Main Code ******************************************* */
 	/* BEGIN: Standard Footer Section *********************************** */
-	printf( "\n\n\nPress space to quit\n" );
+	printf("\n\n\nPress space to quit\n");
 	/* disable input buffer */
-	setvbuf( stdin,	0, _IONBF, 0 );
-	while ( ( ch = getchar() ) != ' ' && ch != EOF ) {
+	setvbuf(stdin, 0, _IONBF, 0);
+	while ((ch = getchar()) != ' ' && ch != EOF) {
 	}
 	/* END: Standard Footer Section ************************************* */
 
@@ -69,4 +70,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

@@ -29,12 +29,13 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 /*
-Required to prevent -> "scanf: floating point formats not linked																															"
+Required to prevent -> "scanf: floating point formats not linked
+"
 */
 #ifdef _WIN32
 #elif defined __unix__
@@ -49,62 +50,62 @@ extern unsigned _floatconvert;
 #define LINESTOCLEARSCREEN 90
 #define MAX_LINES 14
 
-void cls( void )
+void cls(void)
 {
 	int n;
-	for ( n = 0; n < LINESTOCLEARSCREEN; n++ ) {
-		printf( "\n" );
+	for (n = 0; n < LINESTOCLEARSCREEN; n++) {
+		printf("\n");
 	}
 }
 
-void printHeader( void )
+void printHeader(void)
 {
-	char	s [] = TITLE;
-	int	tmp = 0;
-	for ( tmp = 0; tmp < 66; tmp++ ) {
-		printf( "-" );
+	char s[] = TITLE;
+	int tmp = 0;
+	for (tmp = 0; tmp < 66; tmp++) {
+		printf("-");
 	}
-	printf( "\n%s\n", s );
+	printf("\n%s\n", s);
 }
 
-void printFooter( void )
+void printFooter(void)
 {
 	int tmp = 0;
-	for ( tmp = 0; tmp < 66; tmp++ ) {
-		printf( "-" );
+	for (tmp = 0; tmp < 66; tmp++) {
+		printf("-");
 	}
-	printf( "\n" );
+	printf("\n");
 }
 
-void printTable( void )
+void printTable(void)
 {
 	int line = 0, colw = 0, j = 1, n = 1;
 
-	for ( line = 0; line < MAX_LINES; ( ++line, ++colw ) ) {
-		for ( j = 0; j < colw; ( j++, n++ ) ) {
-			printf( "%d ", n );
+	for (line = 0; line < MAX_LINES; (++line, ++colw)) {
+		for (j = 0; j < colw; (j++, n++)) {
+			printf("%d ", n);
 		}
-		printf( "\n" );
+		printf("\n");
 	}
 }
 
-void printTable2( void )
+void printTable2(void)
 {
 	/* last "first character of line" */
 	int line = 1, colw = 1, j = 0, n = 0, lfc = 0;
 
-	printf( "\n" );
-	for ( line = 1; line < MAX_LINES; ( line++, colw++ ) ) {
+	printf("\n");
+	for (line = 1; line < MAX_LINES; (line++, colw++)) {
 		n = lfc = !lfc;
-		for ( j = 0; j < colw; j++ ) {
-			printf( "%1d ", n );
+		for (j = 0; j < colw; j++) {
+			printf("%1d ", n);
 			n = !n;
 		}
-		printf( "\n" );
+		printf("\n");
 	}
 }
 
-int main( void )
+int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
 	char ch = '\0';
@@ -120,10 +121,10 @@ int main( void )
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
-	printf( "\nPress space to quit\n" );
+	printf("\nPress space to quit\n");
 	/* disable input buffer */
-	setvbuf( stdin,	0, _IONBF, 0 );
-	while ( ( ch = getchar() ) != ' ' && ch != EOF ) {
+	setvbuf(stdin, 0, _IONBF, 0);
+	while ((ch = getchar()) != ' ' && ch != EOF) {
 	}
 	/* END: Standard Footer Section ************************************* */
 
@@ -133,4 +134,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

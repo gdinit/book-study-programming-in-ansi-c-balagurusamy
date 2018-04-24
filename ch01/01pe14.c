@@ -44,37 +44,37 @@ by the formula:	D² = (x₂ - x₁)² + (y₂ - y₁)²
 
 rounded to nearest int.
 */
-int pointDistanceInt( Point p1, Point p2 )
+int pointDistanceInt(Point p1, Point p2)
 {
-	return round( sqrt( ( ( p2.x - p1.x ) * ( p2.x - p1.x ) ) +
-			( ( p2.y - p1.y ) * ( p2.y - p1.y ) ) ) );
+	return round(sqrt(((p2.x - p1.x) * (p2.x - p1.x)) +
+			  ((p2.y - p1.y) * (p2.y - p1.y))));
 }
 
-float pointDistanceFloat( Point p1, Point p2 )
+float pointDistanceFloat(Point p1, Point p2)
 {
-	return sqrt( ( ( p2.x - p1.x ) * ( p2.x - p1.x ) ) +
-		( ( p2.y - p1.y ) * ( p2.y - p1.y ) ) );
+	return sqrt(((p2.x - p1.x) * (p2.x - p1.x)) +
+		    ((p2.y - p1.y) * (p2.y - p1.y)));
 }
 
-int main( void )
+int main(void)
 {
 	/* Origin */
-	Point	p1;
+	Point p1;
 	/* Given Point */
-	Point	p2;
+	Point p2;
 	/*
 	int	a, b, c;
 	int	perimeter;
 	float	s;
 	*/
-	int	radiusInt;
-	float	radiusFloat;
-	int	diameterInt;
-	float	diameterFloat;
-	int	circumferenceInt;
-	float	circumferenceFloat;
-	int	areaInt;
-	float	areaFloat;
+	int radiusInt;
+	float radiusFloat;
+	int diameterInt;
+	float diameterFloat;
+	int circumferenceInt;
+	float circumferenceFloat;
+	int areaInt;
+	float areaFloat;
 
 	/* origin */
 	p1.x = P1X;
@@ -83,37 +83,35 @@ int main( void )
 	p2.x = P2X;
 	p2.y = P2Y;
 
-	radiusInt = pointDistanceInt( p2, p1 );
-	radiusFloat = pointDistanceFloat( p2, p1 );
+	radiusInt = pointDistanceInt(p2, p1);
+	radiusFloat = pointDistanceFloat(p2, p1);
 	diameterInt = 2 * radiusInt;
-	diameterFloat = ( float )2 * radiusFloat;
+	diameterFloat = (float)2 * radiusFloat;
 	circumferenceInt = PI * diameterInt;
 	circumferenceFloat = PI * diameterFloat;
 	areaInt = PI * radiusInt * radiusInt;
-	areaFloat = ( float )PI * radiusFloat * radiusFloat;
+	areaFloat = (float)PI * radiusFloat * radiusFloat;
 
-	printf( "\n\n" );
-	printf( "--------------------------------------------\n" );
-	printf( "INPUT\n\n" );
-	printf( "Points\t\t\t: p1=%d,%d   p2=%d,%d\n", p1.x, p1.y, p2.x, p2.y );
-	printf( "--------------------------------------------\n" );
-	printf( "\n\n" );
-	printf( "--------------------------------------------\n" );
-	printf( "CALCULATION RESULTS\n\n" );
-	printf( "*** INT **********************************\n" );
-	printf( "radiusInt (p2->p1 distance)\t: %d\n",		radiusInt );
-	printf( "diameterInt\t\t\t: %d\n",			diameterInt );
-	printf( "circumferenceInt\t\t: %d\n"
-		, circumferenceInt );
-	printf( "areaInt\t\t\t\t: %d\n",			areaInt );
-	printf( "*** FLOAT **********************************\n" );
-	printf( "radiusFloat (p2->p1 distance)\t: %f\n",	radiusFloat );
-	printf( "diameterFloat\t\t\t: %f\n",			diameterFloat );
-	printf( "circumferenceFloat\t\t: %f\n"
-		, circumferenceFloat );
-	printf( "areaFloat\t\t\t: %f\n",			areaFloat );
-	printf( "--------------------------------------------\n" );
-	printf( "\n" );
+	printf("\n\n");
+	printf("--------------------------------------------\n");
+	printf("INPUT\n\n");
+	printf("Points\t\t\t: p1=%d,%d   p2=%d,%d\n", p1.x, p1.y, p2.x, p2.y);
+	printf("--------------------------------------------\n");
+	printf("\n\n");
+	printf("--------------------------------------------\n");
+	printf("CALCULATION RESULTS\n\n");
+	printf("*** INT **********************************\n");
+	printf("radiusInt (p2->p1 distance)\t: %d\n", radiusInt);
+	printf("diameterInt\t\t\t: %d\n", diameterInt);
+	printf("circumferenceInt\t\t: %d\n", circumferenceInt);
+	printf("areaInt\t\t\t\t: %d\n", areaInt);
+	printf("*** FLOAT **********************************\n");
+	printf("radiusFloat (p2->p1 distance)\t: %f\n", radiusFloat);
+	printf("diameterFloat\t\t\t: %f\n", diameterFloat);
+	printf("circumferenceFloat\t\t: %f\n", circumferenceFloat);
+	printf("areaFloat\t\t\t: %f\n", areaFloat);
+	printf("--------------------------------------------\n");
+	printf("\n");
 
 	return 0;
 }
@@ -121,4 +119,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

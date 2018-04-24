@@ -25,34 +25,33 @@ gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 #define X2 9
 #define Y2 7
 
-int main( void )
+int main(void)
 {
-	int	x1, x2;
-	int	y1, y2;
-	double	distSquared, dist;
+	int x1, x2;
+	int y1, y2;
+	double distSquared, dist;
 
 	x1 = X1;
 	x2 = X2;
 	y1 = Y1;
 	y2 = Y2;
 
-	distSquared = ( ( x2 - x1 ) * ( x2 - x1 ) ) +
-		( ( y2 - y1 ) * ( y2 - y1 ) );
-	dist = sqrt( distSquared );
+	distSquared = ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1));
+	dist = sqrt(distSquared);
 
-	printf( "\n\n" );
-	printf( "--------------------------------------------\n" );
-	printf( "INPUT\n\n" );
-	printf( "Point1: %d,%d\n",	x1,	y1 );
-	printf( "Point2: %d,%d\n",	x2,	y2 );
-	printf( "--------------------------------------------\n" );
-	printf( "\n\n" );
-	printf( "--------------------------------------------\n" );
-	printf( "CALCULATION RESULTS\n\n" );
-	printf( "distSquared=%f\n",	distSquared );
-	printf( "dist=%f\n",		dist );
-	printf( "--------------------------------------------\n" );
-	printf( "\n" );
+	printf("\n\n");
+	printf("--------------------------------------------\n");
+	printf("INPUT\n\n");
+	printf("Point1: %d,%d\n", x1, y1);
+	printf("Point2: %d,%d\n", x2, y2);
+	printf("--------------------------------------------\n");
+	printf("\n\n");
+	printf("--------------------------------------------\n");
+	printf("CALCULATION RESULTS\n\n");
+	printf("distSquared=%f\n", distSquared);
+	printf("dist=%f\n", dist);
+	printf("--------------------------------------------\n");
+	printf("\n");
 
 	return 0;
 }
@@ -60,4 +59,3 @@ int main( void )
 /* ===================================80 chars=============================== */
 
 /* EOF */
-

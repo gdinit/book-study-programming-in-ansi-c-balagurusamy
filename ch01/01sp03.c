@@ -5,9 +5,10 @@
 #define PERIOD 10
 #define PRINCIPAL 5000.00
 /*____________ MAIN PROGRAM BEGINS ____________ */
-main() {/*____________ DECLARATION STATEMENTS ____________ */
-	int	year;
-	float	amount, value, inrate;
+main()
+{ /*____________ DECLARATION STATEMENTS ____________ */
+	int year;
+	float amount, value, inrate;
 
 	/*____________ ASSIGNMENT STATEMENTS ____________ */
 	amount = PRINCIPAL;
@@ -17,8 +18,8 @@ main() {/*____________ DECLARATION STATEMENTS ____________ */
 	  ____________ COMPUTATION STATEMENTS ____________
 	  ____________ COMPUTATION USING While LOOP ____________
 	 */
-	while ( year <= PERIOD ) {
-		printf( "%2d   %8.2f\n", year, amount );
+	while (year <= PERIOD) {
+		printf("%2d   %8.2f\n", year, amount);
 		value = amount + inrate * amount;
 		year = year + 1;
 		amount = value;
@@ -30,4 +31,3 @@ main() {/*____________ DECLARATION STATEMENTS ____________ */
 /* ===================================80 chars=============================== */
 
 /* EOF */
-
