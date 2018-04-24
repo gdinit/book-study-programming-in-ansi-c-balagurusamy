@@ -1,0 +1,4 @@
+20180424
+-Switching to 'Linux Kernel Style' for all existing & future code in this repo. 
+-Switching from uncrustify to clang-format tool to enforce the style automatically.
+-Copied in Linux Project's clang-format.rst file to give introduction to clang-format, pros/cons/howto use etc.
