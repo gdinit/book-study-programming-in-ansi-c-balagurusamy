@@ -2,6 +2,10 @@
 :: and clang-format them in-place.
 @ECHO OFF
 
+:: This BAT is launched either from top-level directory or perhaps from inside
+:: 'process-utils' subdirectory. We need to be at top-level directory.
+IF EXIST process-utils (ECHO At top-level directory already.) ELSE (ECHO Going up to top-level directory && CD ..)
+
 :: Provide initial feedback
 ECHO ****************************************
 ECHO BEGIN clang-formatting
