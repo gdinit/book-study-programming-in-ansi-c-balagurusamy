@@ -29,7 +29,8 @@ Any pull requests (bugfix, improvement) are more than welcome!
 
 ## Authors
 
-* **gdinit** - *Initial work* - [gdinit](https://github.com/gdinit)
+* **gdinit** - *Programming Exercise Solutions* - [gdinit](https://github.com/gdinit)
+* **Eric Sanchis** - *str5 functions* - [web](http://aral.iut-rodez.fr/en/sanchis/miscellaneous/str5/str5.html)
 
 ## License
 
