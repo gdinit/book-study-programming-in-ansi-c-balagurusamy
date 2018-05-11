@@ -110,7 +110,8 @@ void getInput(char *pUserInput)
 /* return: 0=SUCCESS, 1=FAILURE */
 int validate(char *pCorrectAnswer, char *pUserInput)
 {
-	int i, len = strlen(pUserInput), ret = 1, keepGoing = 1;
+	int ret = 1, keepGoing = 1;
+	size_t i, len = strlen(pUserInput);
 
 	if (len != strlen(pCorrectAnswer)) {
 		if (CFGDEBUG) {
@@ -127,7 +128,7 @@ int validate(char *pCorrectAnswer, char *pUserInput)
 		if (tolower(pUserInput[i]) != tolower(pCorrectAnswer[i])) {
 			if (CFGDEBUG) {
 				printf("DEBUG: ERROR\tMismatch detected at "
-				       "character %2d (%c)!\n",
+				       "character %2lu (%c)!\n",
 				       i + 1, pUserInput[i]);
 			}
 			len = 0;
@@ -137,7 +138,7 @@ int validate(char *pCorrectAnswer, char *pUserInput)
 		} else {
 			if (CFGDEBUG) {
 				printf(
-				    "DEBUG: OK\tCharacter %2d (%c) is a match."
+				    "DEBUG: OK\tCharacter %2lu (%c) is a match."
 				    "\n",
 				    i + 1, pUserInput[i]);
 			}
