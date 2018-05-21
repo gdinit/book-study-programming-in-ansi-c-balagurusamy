@@ -100,12 +100,12 @@ int main(void)
 	return 0;
 }
 
+/*
+ * return 0 if triangle is legal
+ * return 1 if triangle is illegal
+ **/
 int checkTriangleIsOk(int a, int b, int c)
 {
-	/*
-	return 0 if triangle is legal
-	return 1 if triangle is illegal
-	*/
 	int r;
 
 	/* ASSERT: a + b > c */
