@@ -3,9 +3,9 @@
 
 /*
 Relationship between Celsius and Fahrenheit is governed by the formula:
-9C
+     9C
 F = ---- + 32
-5
+      5
 
 Write a program to convert the temperature:
 (a) from Celsius to Fahrenheit, and
