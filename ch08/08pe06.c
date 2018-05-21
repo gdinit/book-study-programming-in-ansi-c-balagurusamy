@@ -9,7 +9,7 @@ For example, the word "PASCAL" should be replaced by "C" in the text
 
 /*
 Compiled & tested with:
-	gcc -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment 
+	gcc -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment
 	-Wparentheses -Wformat-zero-length 08pe06.c str5cpy.c -o binary/08pe06
 */
 
@@ -141,21 +141,22 @@ int validateSize(const char *p_new_text, const char *p_search_word,
 
 	nt_len = strlen(p_new_text);
 	if (nt_len <= 0) {
-		printf("new text length <= 0 [value = %d]!\n", nt_len);
+		printf("ERROR: new text length <= 0 [value = %d]!\n", nt_len);
 		exit(EXIT_FAILURE);
 	}
 	sw_len = strlen(p_search_word);
 	if (sw_len <= 0) {
-		printf("search word length <= 0 [value = %d]!\n", sw_len);
+		printf("ERROR: search word length <= 0 [value = %d]!\n", sw_len);
 		exit(EXIT_FAILURE);
 	}
 	rw_len = strlen(p_replace_word);
 	if (rw_len <= 0) {
-		printf("replace word length <= 0 [value = %d]!\n", rw_len);
+		printf("ERROR: replace word length <= 0 [value = %d]!\n", rw_len);
 		exit(EXIT_FAILURE);
 	}
 	if (sw_len < rw_len) {
-		printf("ERROR: sw_len < rw_len! (shamefully, shifting is not implemented yet)\n");
+		printf("ERROR: sw_len < rw_len! (shamefully, shifting is not "
+		       "implemented yet)\n");
 		exit(EXIT_FAILURE);
 	}
 	if (CFGDEBUG) {
@@ -184,7 +185,8 @@ int findStr(const char *p_string, const char *p_substr, char **p_pos)
 		ret = 0;
 		if (CFGDEBUG) {
 			printf("SEARCH: FOUND!\tsubstr has been located in "
-			       "string.\n\there is the substr: %s\n", *p_pos);
+			       "string.\n\there is the substr: %s\n",
+			       *p_pos);
 		}
 	}
 	return ret;
@@ -210,18 +212,19 @@ void replace(char *p_new_text, const char *p_search_word,
 		/* found = replace here */
 		/* TODO delete this debug print */
 		if (CFGDEBUG) {
-			printf("ret is zero (%d)\nsubstring is: %s\n\nProceeding "
-			       "with replace...\n",
-			       ret, p_pos);
+			printf(
+			    "ret is zero (%d)\nsubstring is: %s\n\nProceeding "
+			    "with replace...\n",
+			    ret, p_pos);
 		}
 		position = p_pos - p_new_text;
 		/* STEP 1: replace each char-array-slot with whitespace */
-		for(n = 0; n < sw_len; n++) {
+		for (n = 0; n < sw_len; n++) {
 			p_new_text[position + n] = ' ';
 		}
 
 		/* STEP 2: stamp each char-array-slow with replace word */
-		for(n = 0; n < rw_len; n++) {
+		for (n = 0; n < rw_len; n++) {
 			p_new_text[position + n] = p_replace_word[n];
 		}
 	}
@@ -249,13 +252,13 @@ int main(void)
 	getSearchWord(p_search_word);
 	/* cast is needed for Borland 3.1 otherwise it prints 181453651 */
 	printf("SEARCH word is set to: \"%s\"\tlen=%lu\n\n", p_search_word,
-	       (unsigned long int) strlen(p_search_word));
+	       (unsigned long int)strlen(p_search_word));
 	getReplaceWord(p_replace_word);
 	printf("REPLACE word is set to: \"%s\"\tlen=%lu\n\n", p_replace_word,
-	       (unsigned long int) strlen(p_replace_word));
+	       (unsigned long int)strlen(p_replace_word));
 	getText(p_text);
 	printf("TEXT is set to: \"%s\"\tlen=%lu\n\n", p_text,
-	       (unsigned long int) strlen(p_text));
+	       (unsigned long int)strlen(p_text));
 	copyText(p_text, p_new_text);
 	validateSize(p_new_text, p_search_word, p_replace_word);
 	replace(p_new_text, p_search_word, p_replace_word);
