@@ -27,9 +27,6 @@ with:
 #include <stdlib.h>
 #include <string.h>
 
-/* str5cpy (safe copy) */
-#include "str5.h"
-
 /* BEGIN: FLUSH */
 #ifdef _WIN32
 #define FLUSH fflush(stdin);
