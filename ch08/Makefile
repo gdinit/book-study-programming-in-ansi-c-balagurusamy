@@ -11,5 +11,6 @@ all:
 	gcc -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length 08pe11.c -o binary/08pe11
 	gcc -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length 08pe12.c -o binary/08pe12
 	gcc -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length 08pe13.c str5cpy.c -o binary/08pe13
+	gcc -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length 08pe14.c str5cpy.c -o binary/08pe14
 .PHONY : clean
 clean:
