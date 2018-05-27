@@ -84,7 +84,7 @@ void process(Data *pdata)
 
 	if (m < 0) {
 		printf("ERROR: m is negative! Factorial of a negative number "
-		       "doesn't!\n");
+		       "doesn't exist!\n");
 		exit(1);
 	} else {
 		for ((f = 1, i = 1); i <= m; i++) {
