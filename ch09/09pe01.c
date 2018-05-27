@@ -22,22 +22,6 @@ with:
 #include <stdlib.h>
 #include <string.h>
 
-/* BEGIN: FLUSH */
-#ifdef _WIN32
-#define FLUSH fflush(stdin);
-#elif defined __unix__
-#define FLUSH fpurge(stdin);
-#elif defined __APPLE__
-#define FLUSH fpurge(stdin);
-#else
-#define FLUSH fflush(stdin);
-#endif
-/* END: FLUSH */
-
-/* needed to set macro-variable buffer size for scanf() */
-#define STR(x) #x
-#define XSTR(x) STR(x)
-
 /* CONFIGURATION */
 #define LINES_TO_CLEAR_SCREEN 90
 #define DASH_COUNT_FOR_HEADER_FOOTER 66
@@ -49,7 +33,6 @@ with:
 void cls(void);
 void displayHeader(void);
 void displayFooter(void);
-void getString(char *s);
 void exchange(void);
 
 /* GLOBALS */
@@ -60,7 +43,6 @@ int y = 10;
 int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
-	char ch = '\0';
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */
@@ -71,16 +53,10 @@ int main(void)
 	exchange();
 	printf("POST exchange() execution values:\tx=%d\ty=%d\n", x, y);
 
-	displayFooter();
 	/* END: Program Main Code ******************************************* */
 
 	/* BEGIN: Standard Footer Section *********************************** */
-	/* TODO space works in DOS but is not cross platform. fix or remove */
-	printf("\nPress space to quit\n");
-	/* disable input buffer */
-	setvbuf(stdin, 0, _IONBF, 0);
-	while ((ch = getchar()) != ' ' && ch != EOF) {
-	}
+	displayFooter();
 	/* END: Standard Footer Section ************************************* */
 
 	return 0;
