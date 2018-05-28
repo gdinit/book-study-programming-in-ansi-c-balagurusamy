@@ -30,18 +30,6 @@ with:
 #include "round.h"
 #endif
 
-/* BEGIN: FLUSH */
-#ifdef _WIN32
-#define FLUSH fflush(stdin);
-#elif defined __unix__
-#define FLUSH fpurge(stdin);
-#elif defined __APPLE__
-#define FLUSH fpurge(stdin);
-#else
-#define FLUSH fflush(stdin);
-#endif
-/* END: FLUSH */
-
 /* CONFIGURATION */
 #define LINES_TO_CLEAR_SCREEN 90
 #define DASH_COUNT_FOR_HEADER_FOOTER 66
