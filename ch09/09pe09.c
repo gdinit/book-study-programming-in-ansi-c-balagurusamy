@@ -2,8 +2,19 @@
 /* ===================================80 chars=============================== */
 
 /*
- * Write a function that will scan a character string passed as an argument and
- * convert all lowercase characters into their uppercase equivalents.
+ * Develop a top-down modular program to implement a calculator. The program
+ * should request the user to input two numbers and display one of the following
+ * as per the desire of the user:
+ *
+ *	(a) Sum of the numbers
+ *	(b) Difference of the numbers
+ *	(c) Product of the numbers
+ *	(d) Division of the numbers
+ *
+ * Provide separate functions for performing various tasks such as reading,
+ * calculating and displaying. Calculating module should call second level
+ * modules to perform the individual mathematical operations. The main function
+ * should have only function calls.
  */
 
 /*
@@ -46,8 +57,6 @@
 struct dataCard_t {
 	long int n1;
 	long int n2;
-	int n1_is_set;
-	int n2_is_set;
 };
 
 /* FUNCTION PROTOTYPES */
@@ -122,8 +131,6 @@ void zInit(struct dataCard_t *p_myData)
 {
 	p_myData->n1 = 0;
 	p_myData->n2 = 0;
-	p_myData->n1_is_set = 0;
-	p_myData->n2_is_set = 0;
 }
 
 void mainLoop(struct dataCard_t *p_myData)
