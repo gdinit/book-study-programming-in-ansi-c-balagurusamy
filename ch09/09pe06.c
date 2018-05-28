@@ -1,4 +1,4 @@
-/* 09pe03.c */
+/* 09pe06.c */
 /* ===================================80 chars=============================== */
 
 /*
@@ -13,7 +13,7 @@ Compiled & tested on:
 	Target: x86_64-apple-darwin17.5.0
 with:
 	clang -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment \
-	-Wparentheses -Wformat-zero-length 09pe03.c -o binary/09pe03
+	-Wparentheses -Wformat-zero-length 09pe06.c -o binary/09pe06
 */
 
 #include <ctype.h>
