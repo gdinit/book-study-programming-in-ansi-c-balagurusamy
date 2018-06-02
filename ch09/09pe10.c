@@ -21,6 +21,9 @@
  *	-Wparentheses -Wformat-zero-length 09pe10.c -o binary/09pe10
  */
 
+/* Needed to stop annoying MS _s warnings when compiled with llvm on Windows! */
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <ctype.h>
 #include <math.h>
 #include <stdio.h>
