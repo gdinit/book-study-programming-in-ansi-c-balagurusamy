@@ -6,33 +6,39 @@
  * matrix.
  */
 
+/* Here we have PRNG based random numbers in a matrix.
+ * findLargestElement() will identify the largest element and list details */
+
 /*
  * Compiled & tested on:
  *	Apple LLVM version 9.1.0 (clang-902.0.39.1)
  *	Target: x86_64-apple-darwin17.5.0
  * with:
  *	clang -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment \
- *	-Wparentheses -Wformat-zero-length 09pe11.c mt.c -o binary/09pe11
+ *	-Wparentheses -Wformat-zero-length 09pe11.c -o binary/09pe11.exe
  */
 
-#include <ctype.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+/* Needed to stop annoying MS _s warnings when compiled with llvm on Windows! */
+#define _CRT_SECURE_NO_WARNINGS
 
-#include "mt.h"
+#include <math.h> /* ceil() */
+#include <stdio.h>
+#include <stdlib.h> /* EXIT_SUCCESS */
+#include <string.h> /* for title */
+#include <time.h>   /* srand(time()) */
 
 /* CONFIGURATION */
 #define LINES_TO_CLEAR_SCREEN 90
 #define DASH_COUNT_FOR_HEADER_FOOTER 66
+#define STR(x) #x
+#define XSTR(x) STR(x)
 /* ********************************** */
 #define TITLE "MATRIX LARGEST ELEMENT FINDER"
-#define CFGDEBUG 1
-#define ROW 10
-#define COLUMN 10
+#define CFGDEBUG 0
+#define ROW 5
+#define COLUMN 5
 #define MAXVAL 99
+#define ITERATIONS 256
 
 /* BEGIN: FLUSH */
 #ifdef _WIN32
@@ -48,12 +54,9 @@
 
 struct dataCard_t {
 	long int m[ROW][COLUMN];
-	/* currently known largest element in array, it's i and j subscripts */
-	long int top;
+	long int top; /* known largest element's position */
 	long int top_i;
 	long int top_j;
-
-	long int dummy;
 };
 
 /* FUNCTION PROTOTYPES */
@@ -63,12 +66,14 @@ void displayFooter(void);
 /* ********************************** */
 void init(struct dataCard_t *p_myData);
 void mainLoop(struct dataCard_t *p_myData);
-int getChoice(struct dataCard_t *p_myData);
-void printMainMenu(struct dataCard_t *p_myData);
+int getChoice(void);
+void printMainMenu(void);
 void actionChoice(int choice, struct dataCard_t *p_myData);
 void getNumber(long int *num);
 void showMatrix(struct dataCard_t *p_myData);
 void fillMatrixRandomly(struct dataCard_t *p_myData);
+int randRange(int n);
+void findLargestElement(void *firstElement, const int m, const int n);
 
 /* GLOBALS */
 
@@ -82,7 +87,6 @@ int main(void)
 
 	/* BEGIN: Program Main Code ***************************************** */
 	cls();
-	displayHeader();
 	init(p_myData);
 	mainLoop(p_myData);
 	/* END: Program Main Code ******************************************* */
@@ -103,20 +107,25 @@ void cls(void)
 	}
 }
 
-void displayHeader(void)
+void displayHeaderLine(void)
 {
-	char s[] = TITLE;
-	int tmp = 0;
-	for (tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++) {
+	int n;
+	for (n = 0; n < DASH_COUNT_FOR_HEADER_FOOTER; n++) {
 		printf("-");
 	}
-	printf("\n%s\n\n", s);
+	printf("\n");
+}
+
+void displayHeaderText(void)
+{
+	char s[] = TITLE;
+	printf("%s\n", s);
 }
 
 void displayFooter(void)
 {
-	int tmp = 0;
-	for (tmp = 0; tmp < DASH_COUNT_FOR_HEADER_FOOTER; tmp++) {
+	int n = 0;
+	for (n = 0; n < DASH_COUNT_FOR_HEADER_FOOTER; n++) {
 		printf("-");
 	}
 	printf("\n");
@@ -130,12 +139,12 @@ void mainLoop(struct dataCard_t *p_myData)
 	int choice;
 
 	while (1) {
-		choice = getChoice(p_myData);
+		choice = getChoice();
 		actionChoice(choice, p_myData);
 	}
 }
 
-int getChoice(struct dataCard_t *p_myData)
+int getChoice(void)
 {
 #define ENTRY_LOWEST 1
 #define ENTRY_HIGHEST 3
@@ -143,7 +152,7 @@ int getChoice(struct dataCard_t *p_myData)
 	int num;
 
 	do {
-		printMainMenu(p_myData);
+		printMainMenu();
 		FLUSH
 		scanf("%d", &num);
 		if (num < ENTRY_LOWEST || num > ENTRY_HIGHEST) {
@@ -155,44 +164,25 @@ int getChoice(struct dataCard_t *p_myData)
 	return num;
 }
 
-void printMainMenu(struct dataCard_t *p_myData)
+void printMainMenu(void)
 {
-	printf("\n\n\n*** TITLE MENU ***\n"
+	/* without this ugly hack double quotes do get printed :( */
+	char title[] = XSTR(TITLE);
+	unsigned int len = strlen(title);
+	title[0] = ' ';       /* first double quote */
+	title[len - 1] = ' '; /* second double quote */
+
+	printf("\n\n\n");
+	displayHeaderLine();
+	/*displayHeaderText();*/
+	printf("***%s- MAIN MENU ***\n"
 	       "Valid Choices:\n"
 	       "\t1: SHOW matrix\n"
 	       "\t2: ASSIGN RANDOM integers into matrix\n"
 	       "\t3: EXIT program\n"
-	       "Enter your choice: ");
-
-	/* dummy, just to keep -Wunused-parameter happy */
-	p_myData->dummy = 0;
+	       "Enter your choice: ",
+	       title);
 }
-
-/*
- * find the greatest long int element in a dataCard_t->m matrix
- */
-void findLargestElement(struct dataCard_t *p_myData)
-{
-	/* top = greatest number in array */
-	int i, j;
-	int top = 0;
-	int top_i, top_j;
-
-	for (i = 0; i < ROW; i++) {
-		for (j = 0; j < COLUMN; j++) {
-			if (p_myData->m[i][j] > top) {
-				top = p_myData->m[i][j];
-				top_i = i;
-				top_j = j;
-			}
-		}
-	}
-
-	p_myData->top = top;
-	p_myData->top_i = top_i;
-	p_myData->top_j = top_j;
-}
-
 void actionChoice(int choice, struct dataCard_t *p_myData)
 {
 	switch (choice) {
@@ -213,8 +203,9 @@ void actionChoice(int choice, struct dataCard_t *p_myData)
 		break;
 	}
 
-	/* dummy, just to keep -Wunused-parameter happy */
-	p_myData->dummy = 0;
+	if (p_myData->m[0][0] == 999) {
+		/* dummy. just to keep -Wunused-parameter happy */
+	}
 }
 
 void showMatrix(struct dataCard_t *p_myData)
@@ -228,31 +219,82 @@ void showMatrix(struct dataCard_t *p_myData)
 		printf("\n");
 	}
 
-	findLargestElement(p_myData);
-	printf("\nLargest element: %ld, located at m[%ld][%ld]\n",
-	       p_myData->top, p_myData->top_i, p_myData->top_j);
+	findLargestElement((void *)&(p_myData->m), ROW, COLUMN);
 }
 
-/*
- * fill a dataCard_t->m matrix with randomly generated numbers
- */
+/* fill a dataCard_t->m matrix with randomly generated numbers */
 void fillMatrixRandomly(struct dataCard_t *p_myData)
 {
 
 	int i, j, r;
-	static int mt_seeded = 0;
+	static int rand_seeded = 0;
 
-	if (mt_seeded == 0) {
-		init_genrand(time(NULL));
-		mt_seeded++;
+	if (!rand_seeded) {
+		srand(time(0));
+		rand_seeded++;
+		if (CFGDEBUG) {
+			printf("[DEBUG] rand: seeded!\n");
+		}
+	} else {
+		if (CFGDEBUG) {
+			printf("[DEBUG] rand: no need to seed\n");
+		}
 	}
-
 	for (i = 0; i < ROW; i++) {
 		for (j = 0; j < COLUMN; j++) {
-			r = genrand_int32() % MAXVAL;
+			r = randRange(100);
 			p_myData->m[i][j] = r;
 		}
 	}
+}
+
+int randRange(int n)
+{
+	int r;
+	int limit;
+
+	limit = RAND_MAX - (RAND_MAX % n);
+	while ((r = rand()) >= limit) {
+		/* nothing */
+	}
+
+	return r % n;
+}
+
+void findLargestElement(void *firstElement, const int m, const int n)
+{
+	/* top = greatest number in array */
+	long int top = 0, top_m = 0, top_n = 0;
+	long int *p_data = (long int *)firstElement;
+	long int row = 0, col = 0;
+
+	printf("\n");
+	for (row = 0; row < m; ++row) {		/* Loop of row */
+		for (col = 0; col < n; ++col) { /* Loop for column */
+			/* Read element of 2D array */
+			if (CFGDEBUG) {
+				printf("aiData[%02ld][%02ld] = %02ld", row, col,
+				       *(p_data + (row * n) + col));
+			}
+			/* larger than known largest? */
+			if (*(p_data + (row * n) + col) > top) {
+				top = *(p_data + (row * n) + col);
+				top_m = row;
+				top_n = col;
+				if (CFGDEBUG) {
+					printf(" <--- New top element value is "
+					       "%ld!\n",
+					       top);
+				}
+			} else {
+				if (CFGDEBUG) {
+					printf("\n");
+				}
+			}
+		}
+	}
+	printf("Largest element: %02ld, located at m[%ld][%ld]\n", top, top_m,
+	       top_n);
 }
 
 /* ===================================80 chars=============================== */
