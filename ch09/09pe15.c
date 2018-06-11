@@ -59,62 +59,9 @@ void displayHeaderLine(void);
 void displayHeaderText(void);
 void displayFooter(void);
 /**************************************/
-/* myStrCpy: copies the string pointed to by src (including the terminating null
- * character) to the destination array of size dstsize pointed to by dst.
- * Truncation is allowed.
- *
- * Return codes: 0 for success, -1 for error
- */
-void myStrCpy(char * dst, int dstSize, const char * src)
-{
-	int n, nullSpotted = 0;
-
-	/* keep copying till a null terminator has been found (copy it too)
-	 * if null not found, quit copying after copying dstSize many chars */
-	for (n = 0; n < dstSize && !nullSpotted; n++) {
-		dst[n] = src[n];
-		if(src[n] == '\0') {
-			nullSpotted = 1;
-			break;
-		}
-	}
-}
-
-/*
- * return value	indicates
- * <0 the first character that does not match has a lower value in ptr1 than in 
- *    ptr2
- * 0 the contents of both strings are equal
- * >0 the first character that does not match has a greater value in ptr1 than
- *    in ptr2
- */
-int myStrCmp(const char *str1, const char *str2)
-{
-	unsigned long len1, len2, n;
-	int r = 0;
-
-	len1 = strlen(str1);
-	len2 = strlen(str2);
-
-	for(n = 0; n < strlen(str1); n++) {
-		if (str1[n] != str2[n]) {
-			r = str1[n] - str2[n];
-			return r;
-		}
-	}
-	return 0;
-}
-
-void myStrCat(char *dst, const char *src)
-{
-	int i, n;
-
-	i = strlen(dst);
-
-	for (n = 0; src[n] != '\0'; n++) {
-		dst[i + n] = src[n];
-	}
-}
+void myStrCpy(char * dst, int dstSize, const char * src);
+int myStrCmp(const char *str1, const char *str2);
+void myStrCat(char *dst, const char *src);
 
 /* PROGRAM ENTRY POINT */
 int main(void)
@@ -188,6 +135,62 @@ void displayFooter(void)
 	printf("\n");
 }
 /**************************************/
+/* myStrCpy: copies the string pointed to by src (including the terminating null
+ * character) to the destination array of size dstsize pointed to by dst.
+ * Truncation is allowed.
+ *
+ * Return codes: 0 for success, -1 for error
+ */
+void myStrCpy(char * dst, int dstSize, const char * src)
+{
+	int n, nullSpotted = 0;
+
+	/* keep copying till a null terminator has been found (copy it too)
+	 * if null not found, quit copying after copying dstSize many chars */
+	for (n = 0; n < dstSize && !nullSpotted; n++) {
+		dst[n] = src[n];
+		if(src[n] == '\0') {
+			nullSpotted = 1;
+			break;
+		}
+	}
+}
+
+/*
+ * return value	indicates
+ * <0 the first character that does not match has a lower value in ptr1 than in 
+ *    ptr2
+ * 0 the contents of both strings are equal
+ * >0 the first character that does not match has a greater value in ptr1 than
+ *    in ptr2
+ */
+int myStrCmp(const char *str1, const char *str2)
+{
+	unsigned long len1, len2, n;
+	int r = 0;
+
+	len1 = strlen(str1);
+	len2 = strlen(str2);
+
+	for(n = 0; n < strlen(str1); n++) {
+		if (str1[n] != str2[n]) {
+			r = str1[n] - str2[n];
+			return r;
+		}
+	}
+	return 0;
+}
+
+void myStrCat(char *dst, const char *src)
+{
+	int i, n;
+
+	i = strlen(dst);
+
+	for (n = 0; src[n] != '\0'; n++) {
+		dst[i + n] = src[n];
+	}
+}
 
 /* ===================================80 chars=============================== */
 /* EOF */
