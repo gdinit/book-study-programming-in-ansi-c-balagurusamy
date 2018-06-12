@@ -17,6 +17,7 @@ all:
 	clang -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length 09pe15.c -o binary/09pe15
 	clang -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length 09pe16.c -o binary/09pe16
 	clang -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length 09pe17.c -o binary/09pe17
+	clang -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length 09pe18.c -o binary/09pe18
 
 .PHONY : clean
 
