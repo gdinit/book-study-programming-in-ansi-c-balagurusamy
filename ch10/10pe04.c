@@ -212,7 +212,7 @@ void displayDateMonthDDYYYYFormat(struct date_struct_t *d)
 {
 	printf("Entered Date is: ");
 	printMonthName(d);
-	printf(" %d, %d\n", d->m, d->y);
+	printf(" %d, %d\n", d->d, d->y);
 }
 
 void displayMessageRequestInputDDMMYYYY(void)
