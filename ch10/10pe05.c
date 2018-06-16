@@ -76,7 +76,7 @@ void getInputDDMMYYYY(struct date_struct_t *d);
 void requestTakeDateInput(struct date_struct_t *d);
 void validateDateInput(struct date_struct_t *d);
 int checkCurrentDateLegality(struct date_struct_t *d);
-int getThisMonthMaxdays(struct date_struct_t *d);
+int getThisMonthMaxDays(struct date_struct_t *d);
 void incrementMonthCorrectly(struct date_struct_t *d);
 void shiftDateIfNecessary(struct date_struct_t *d);
 void addDay(struct date_struct_t *d);
@@ -442,13 +442,13 @@ int checkCurrentDateLegality(struct date_struct_t *d)
 	return day_legality;
 }
 
-int getThisMonthMaxdays(struct date_struct_t *d)
+int getThisMonthMaxDays(struct date_struct_t *d)
 {
 	int is_leap = -1;
 	int this_month_max_days = -1;
 
 	if (CFGDEBUG) {
-		printf("DEBUG\tgetThisMonthMaxdays reports:\t\td->d=%d d->m=%d "
+		printf("DEBUG\tgetThisMonthMaxDays reports:\t\td->d=%d d->m=%d "
 		       "d->y=%d\n",
 		       d->d, d->m, d->y);
 	}
@@ -498,7 +498,7 @@ int getThisMonthMaxdays(struct date_struct_t *d)
 	}
 
 	if (CFGDEBUG) {
-		printf("DEBUG\tgetThisMonthMaxdays returning: "
+		printf("DEBUG\tgetThisMonthMaxDays returning: "
 		       "this_month_max_days=%d\n",
 		       this_month_max_days);
 	}
@@ -531,7 +531,7 @@ void shiftDateIfNecessary(struct date_struct_t *d)
 			       "= %d\n",
 			       day_legality);
 		}
-		this_month_max_days = getThisMonthMaxdays(d);
+		this_month_max_days = getThisMonthMaxDays(d);
 		d->d -= this_month_max_days;
 		incrementMonthCorrectly(d);
 		day_legality = checkCurrentDateLegality(d);
