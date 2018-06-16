@@ -36,7 +36,7 @@
 #define STR(x) #x
 #define XSTR(x) STR(x)
 /**************************************/
-#define TITLE "DATE ENTRY USING LONG INTEGER FORMAT"
+#define TITLE "NEXTDATE FUNCTION TO ADD N DAYS TO A GIVEN DATE"
 #define CFGDEBUG 0
 #define YEAR_MIN 1
 #define YEAR_MAX 2400
