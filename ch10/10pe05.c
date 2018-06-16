@@ -33,7 +33,7 @@
 #define STR(x) #x
 #define XSTR(x) STR(x)
 /**************************************/
-#define TITLE "..."
+#define TITLE "ADD DAY FUNCTION FOR DATE STRUCT"
 #define CFGDEBUG 0
 #define YEAR_MIN 1
 #define YEAR_MAX 2400
