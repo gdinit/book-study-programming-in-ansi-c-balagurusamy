@@ -32,7 +32,7 @@
 /**************************************/
 #define TITLE "DATE ENTRY USING LONG INTEGER FORMAT"
 #define CFGDEBUG 0
-#define YEAR_MIN 1
+#define YEAR_MIN 1000
 #define YEAR_MAX 2400
 #define YEAR_UNKNOWN -1
 #define YEAR_COMMON 0
@@ -77,63 +77,36 @@ int getThisMonthMaxDays(struct date_struct_t *d);
 void incrementMonthCorrectly(struct date_struct_t *d);
 void shiftDateIfNecessary(struct date_struct_t *d);
 void addDay(struct date_struct_t *d);
-
-void displayDateDDMonthYYYYFormat(struct date_struct_t *d)
-{
-	printf("Date is: ");
-	printf("%d ", d->d);
-	printMonthName(d);
-	printf(" %d\n", d->y);
-}
-
-void displayDateDDMonthYYYYFormatPlain(struct date_struct_t *d)
-{
-	printf("%d ", d->d);
-	printMonthName(d);
-	printf(" %d", d->y);
-}
-
-void getInputYYYYMMDD(struct date_struct_t *d)
-{
-	scanf("%4d%2d%2d", &d->y, &d->m, &d->d);
-}
-
-void displayMessageRequestInputYYYYMMDD(void)
-{
-	printf("Enter the date in YYYYMMDD format with leading zeros (e.g.: "
-	       "19450815): ");
-}
-
-void requestTakeDateInputYYYYMMDD(struct date_struct_t *d)
-{
-	displayMessageRequestInputYYYYMMDD();
-	getInputYYYYMMDD(d);
-}
+int getDigitCountOfLongInt(long int n);
+void displayDateDDMonthYYYYFormat(struct date_struct_t *d);
+void displayDateDDMonthYYYYFormatPlain(struct date_struct_t *d);
+void getInputYYYYMMDD(struct date_struct_t *d);
+void getInputYYYYMMDDi(long int *i);
+void displayMessageRequestInputYYYYMMDD(void);
+void requestTakeDateInputYYYYMMDD(struct date_struct_t *d);
+void requestTakeDateInputYYYYMMDDi(long int *i);
+void splitDateInputLongIntSaveToStruct(long int *i, struct date_struct_t *d);
 
 /* PROGRAM ENTRY POINT */
 int main(void)
 {
+	long int i = 0;
 	struct date_struct_t d;
 
 	d.d = d.m = d.y = 0;
+
 	cls();
 	displayHeaderLine();
 	displayHeaderText();
-
-	printf(
-	    "Supported year range: " XSTR(YEAR_MIN) " - " XSTR(YEAR_MAX) "\n");
-
-	requestTakeDateInputYYYYMMDD(&d);
+	printf("\nSupported year range: " XSTR(YEAR_MIN) " - " XSTR(
+	    YEAR_MAX) "\n");
+	requestTakeDateInputYYYYMMDDi(&i);
+	printf("Entered long int is:\t%ld\n", i);
+	splitDateInputLongIntSaveToStruct(&i, &d);
 	validateDateInput(&d);
 	printf("Entered date is:\t");
 	displayDateDDMonthYYYYFormatPlain(&d);
 	printf("\n");
-
-	addDay(&d);
-	printf("Next day's date is:\t");
-	displayDateDDMonthYYYYFormatPlain(&d);
-	printf("\n");
-
 	displayFooter();
 
 	return EXIT_SUCCESS;
@@ -277,9 +250,16 @@ void validateDateInput(struct date_struct_t *d)
 {
 	int is_leap = checkIfLeap(d->y, 0);
 
-	/* Eliminate obvious issues: DAY */
-	if (d->d < 1 || d->d > 31) {
-		printf("ERROR: Illegal day of month: %d!\n", d->d);
+	/* Eliminate obvious issues: YEAR */
+	if (d->y < YEAR_MIN) {
+		printf("ERROR: Illegal year -- too low value: %d! Supported "
+		       "min year is: " XSTR(YEAR_MIN) "\n",
+		       d->y);
+		exit(EXIT_FAILURE);
+	} else if (d->y > YEAR_MAX) {
+		printf("ERROR: Illegal year -- too high value: %d! Supported "
+		       "max year is: " XSTR(YEAR_MAX) "\n",
+		       d->y);
 		exit(EXIT_FAILURE);
 	}
 
@@ -289,16 +269,9 @@ void validateDateInput(struct date_struct_t *d)
 		exit(EXIT_FAILURE);
 	}
 
-	/* Eliminate obvious issues: YEAR */
-	if (d->y < YEAR_MIN) {
-		printf("ERROR: Illegal year -- too low value: %d! Supported "
-		       "min is: " XSTR(YEAR_MIN) "\n",
-		       d->y);
-		exit(EXIT_FAILURE);
-	} else if (d->y > YEAR_MAX) {
-		printf("ERROR: Illegal year -- too high value: %d! Supported "
-		       "max is: " XSTR(YEAR_MAX) "\n",
-		       d->y);
+	/* Eliminate obvious issues: DAY */
+	if (d->d < 1 || d->d > 31) {
+		printf("ERROR: Illegal day of month: %d!\n", d->d);
 		exit(EXIT_FAILURE);
 	}
 
@@ -328,13 +301,12 @@ void validateDateInput(struct date_struct_t *d)
 		} else if (is_leap && d->d == 29) { /* legal */
 			break;
 		} else if (!is_leap && d->d == 29) {
-			printf("%d is a common year, month %d cannot be %d days"
+			printf("%d is a common year, February cannot be %d days"
 			       "! \n",
-			       d->y, d->m, d->d);
+			       d->y, d->d);
 			exit(EXIT_FAILURE);
 		} else if (d->d >= 30) {
-			printf("month %d can never have %d days!\n", d->m,
-			       d->d);
+			printf("February can never have %d days!\n", d->d);
 			exit(EXIT_FAILURE);
 		}
 	case 1:  /* JAN */
@@ -375,12 +347,6 @@ int checkCurrentDateLegality(struct date_struct_t *d)
 	int this_month_max_days = -1;
 	int day_legality = LEGALITY_UNKNOWN;
 
-	if (CFGDEBUG) {
-		printf("DEBUG\tcheckCurrentDateLegality reports:\td->d=%d d->m="
-		       "%d d->y=%d\n",
-		       d->d, d->m, d->y);
-	}
-
 	if (d->y < YEAR_MIN || d->y > YEAR_MAX) {
 		day_legality = LEGALITY_ILLEGAL;
 		if (CFGDEBUG) {
@@ -414,17 +380,9 @@ int checkCurrentDateLegality(struct date_struct_t *d)
 		case 2: /* FEB */
 			is_leap = checkIfLeap(d->y, 0);
 			if (is_leap) {
-				if (CFGDEBUG) {
-					printf("DEBUG\tjust hit "
-					       "this_month_max_days = 29;\n");
-				}
 				this_month_max_days = 29;
 				break;
 			} else {
-				if (CFGDEBUG) {
-					printf("DEBUG\tjust hit "
-					       "this_month_max_days = 28;\n");
-				}
 				this_month_max_days = 28;
 				break;
 			}
@@ -435,20 +393,12 @@ int checkCurrentDateLegality(struct date_struct_t *d)
 		case 8:  /* AUG */
 		case 10: /* OCT */
 		case 12: /* DEC */
-			if (CFGDEBUG) {
-				printf("DEBUG\tjust hit this_month_max_days = "
-				       "31;\n");
-			}
 			this_month_max_days = 31;
 			break;
 		case 4:  /* APR */
 		case 6:  /* JUN */
 		case 9:  /* SEP */
 		case 11: /* NOV */
-			if (CFGDEBUG) {
-				printf("DEBUG\tjust hit this_month_max_days = "
-				       "30;\n");
-			}
 			this_month_max_days = 30;
 			break;
 		default:
@@ -481,27 +431,13 @@ int getThisMonthMaxDays(struct date_struct_t *d)
 	int is_leap = -1;
 	int this_month_max_days = -1;
 
-	if (CFGDEBUG) {
-		printf("DEBUG\tgetThisMonthMaxDays reports:\t\td->d=%d d->m=%d "
-		       "d->y=%d\n",
-		       d->d, d->m, d->y);
-	}
-
 	switch (d->m) {
 	case 2: /* FEB */
 		is_leap = checkIfLeap(d->y, 0);
 		if (is_leap) {
-			if (CFGDEBUG) {
-				printf("DEBUG\tjust hit this_month_max_days = "
-				       "29;\n");
-			}
 			this_month_max_days = 29;
 			break;
 		} else {
-			if (CFGDEBUG) {
-				printf("DEBUG\tjust hit this_month_max_days = "
-				       "28;\n");
-			}
 			this_month_max_days = 28;
 			break;
 		}
@@ -512,29 +448,17 @@ int getThisMonthMaxDays(struct date_struct_t *d)
 	case 8:  /* AUG */
 	case 10: /* OCT */
 	case 12: /* DEC */
-		if (CFGDEBUG) {
-			printf("DEBUG\tjust hit this_month_max_days = 31;\n");
-		}
 		this_month_max_days = 31;
 		break;
 	case 4:  /* APR */
 	case 6:  /* JUN */
 	case 9:  /* SEP */
 	case 11: /* NOV */
-		if (CFGDEBUG) {
-			printf("DEBUG\tjust hit this_month_max_days = 30;\n");
-		}
 		this_month_max_days = 30;
 		break;
 	default:
 		printf("ERROR: Invalid month entry %d!\n", d->m);
 		exit(EXIT_FAILURE);
-	}
-
-	if (CFGDEBUG) {
-		printf("DEBUG\tgetThisMonthMaxDays returning: "
-		       "this_month_max_days=%d\n",
-		       this_month_max_days);
 	}
 	return this_month_max_days;
 }
@@ -560,11 +484,6 @@ void shiftDateIfNecessary(struct date_struct_t *d)
 	int day_legality = checkCurrentDateLegality(d);
 
 	while (day_legality == LEGALITY_ILLEGAL) {
-		if (CFGDEBUG) {
-			printf("DEBUG\tshiftDateIfNecessary:\t\t\tday_legality "
-			       "= %d\n",
-			       day_legality);
-		}
 		this_month_max_days = getThisMonthMaxDays(d);
 		d->d -= this_month_max_days;
 		incrementMonthCorrectly(d);
@@ -574,17 +493,95 @@ void shiftDateIfNecessary(struct date_struct_t *d)
 
 void addDay(struct date_struct_t *d)
 {
-	if (CFGDEBUG) {
-		printf("DEBUG\tpre-mod d->d is: %d\n", d->d);
-	}
-	if (CFGDEBUG) {
-		printf("addDay(): Adding a day...\n");
-	}
 	d->d++;
-	if (CFGDEBUG) {
-		printf("DEBUG\tpost-mod d->d is: %d\n", d->d);
-	}
 	shiftDateIfNecessary(d);
+}
+
+int getDigitCountOfLongInt(long int n)
+{
+	int ret = 1;
+	while (n /= 10) {
+		ret++;
+	}
+	return ret;
+}
+void displayDateDDMonthYYYYFormat(struct date_struct_t *d)
+{
+	printf("Date is: ");
+	printf("%d ", d->d);
+	printMonthName(d);
+	printf(" %d\n", d->y);
+}
+
+void displayDateDDMonthYYYYFormatPlain(struct date_struct_t *d)
+{
+	printf("%d ", d->d);
+	printMonthName(d);
+	printf(" %d", d->y);
+}
+
+void getInputYYYYMMDD(struct date_struct_t *d)
+{
+	scanf("%4d%2d%2d", &d->y, &d->m, &d->d);
+}
+
+void getInputYYYYMMDDi(long int *i) { scanf("%ld", i); }
+
+void displayMessageRequestInputYYYYMMDD(void)
+{
+	printf("Enter the date in YYYYMMDD format with leading zeros (e.g.: "
+	       "19450815): ");
+}
+
+void requestTakeDateInputYYYYMMDD(struct date_struct_t *d)
+{
+	displayMessageRequestInputYYYYMMDD();
+	getInputYYYYMMDD(d);
+}
+
+void requestTakeDateInputYYYYMMDDi(long int *i)
+{
+	displayMessageRequestInputYYYYMMDD();
+	getInputYYYYMMDDi(i);
+}
+
+/*
+ * Expects an 8 digit long int representation of a date between years 1 to 2400
+ *
+ * Earliest possible date:	10000101 = 1 January 1000
+ * Latest possible date:	24001201 = 31 December 2400
+ */
+void splitDateInputLongIntSaveToStruct(long int *i, struct date_struct_t *d)
+{
+	long int num = *i;
+	int digits = getDigitCountOfLongInt(*i);
+	int year, month, day;
+	int digit_array[8] = {0};
+
+	year = month = day = 0;
+	if (digits != 8) {
+		printf("\nERROR:\tInput length must be 8 but it is %d!\n"
+		       "\tPlease enter the date in the following format without"
+		       " spaces, such as: 1945081\n\n",
+		       digits);
+		exit(EXIT_FAILURE);
+	}
+	while (digits--) {
+		digit_array[digits] = num % 10;
+		num /= 10;
+	}
+	year += digit_array[0] * 1000;
+	year += digit_array[1] * 100;
+	year += digit_array[2] * 10;
+	year += digit_array[3] * 1;
+	month += digit_array[4] * 10;
+	month += digit_array[5] * 1;
+	day += digit_array[6] * 10;
+	day += digit_array[7] * 1;
+
+	d->y = year;
+	d->m = month;
+	d->d = day;
 }
 
 /* ===================================80 chars=============================== */
