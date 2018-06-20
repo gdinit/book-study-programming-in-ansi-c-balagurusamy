@@ -96,7 +96,7 @@ void zInitAllEntries(struct player_t db[DB_SIZE]);
 void mainLoop(struct player_t db[DB_SIZE]);
 void fillWithTestData(struct player_t db[DB_SIZE]);
 void toUpperStr(char *p_str);
-void toUpperFirstChar(char *p_str);
+void toUpperFirstCharLowerRest(char *p_str);
 void displayOneEntry(const struct player_t db[DB_SIZE], const int id);
 /* void displayOneEntry(struct player_t db[DB_SIZE], int id); */
 void displayAllEntries(struct player_t db[DB_SIZE]);
@@ -114,6 +114,7 @@ void handleDataInputCountry(struct player_t db[DB_SIZE], int id);
 int handleChooseEntryToEdit(void);
 void handleDataEntry(struct player_t db[DB_SIZE]);
 void enforceCapitalisationPolicy(struct player_t db[DB_SIZE]);
+void enforceCapitalisationPolicy1(struct player_t db[DB_SIZE], int id);
 
 /* PROGRAM ENTRY POINT */
 int main(void)
@@ -517,11 +518,16 @@ void toUpperStr(char *p_str)
 	}
 }
 
-void toUpperFirstChar(char *p_str)
+void toUpperFirstCharLowerRest(char *p_str)
 {
+	unsigned long int n;
+	unsigned long int len = strlen(p_str);
+
+	for (n = 0; n < len; n++) {
+		p_str[n] = tolower(p_str[n]);
+	}
 	p_str[0] = toupper(p_str[0]);
 }
-
 
 /* TODO: CONST CORRECT THIS 
 void displayOneEntry(const struct player_t db[DB_SIZE], const int id)
@@ -838,6 +844,16 @@ void displayMsgReqInputChooseID(void)
 	       "): ");
 }
 
+
+/* Lastname should be first letter uppercase, rest lowercase e.g.: Johnson
+ * Initials should be all uppercase e.g. A G D
+ */
+void enforceCapitalisationPolicy1(struct player_t db[DB_SIZE], int id)
+{
+	toUpperFirstCharLowerRest(db[id].la);
+	toUpperStr(db[id].in);
+}
+
 /* Lastname should be first letter uppercase, rest lowercase e.g.: Johnson
  * Initials should be all uppercase e.g. A G D
  */
@@ -846,7 +862,7 @@ void enforceCapitalisationPolicy(struct player_t db[DB_SIZE])
 	int n;
 
 	for (n = 0; n < DB_SIZE; n++) {
-		toUpperFirstChar(db[n].la);
+		toUpperFirstCharLowerRest(db[n].la);
 		toUpperStr(db[n].in);
 	}
 }
@@ -858,7 +874,7 @@ void handleDataInputLastname(struct player_t db[DB_SIZE], int id)
 	displayMsgReqInputLastname();
 	FLUSH
 	scanf("%" XSTR(LASTNAME_LENGTH) "[^\n]", s);
-	toUpperStr(s);
+	toUpperFirstCharLowerRest(s);
 	strcpy(db[id].la, s); /* TODO: use safer string copy (str5cpy) */
 }
 
@@ -929,6 +945,7 @@ void handleDataEntry(struct player_t db[DB_SIZE])
 	handleDataInputInitials(db, id);
 	handleDataInputBatAvg(db, id);
 	handleDataInputCountry(db, id);
+	enforceCapitalisationPolicy1(db, id);
 	printf("Updated record %d as follows:\n", id + 1);
 	displayOneEntry(db, id);
 }
