@@ -1,4 +1,9 @@
-/* bubble_sort(array, n); */
+/*
+ * C Bubble Sort implementation
+ *
+ * Authors:	ProgrammingSimplified.com Team
+ * URL:		https://www.programmingsimplified.com/about
+ */
 
 void bubble_sort_asc_int(int list[], int n)
 {
