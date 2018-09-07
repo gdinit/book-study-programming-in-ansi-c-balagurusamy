@@ -68,27 +68,94 @@
 #define XGETW _getw
 #endif
 
-/* on Borland C++, we use putw/getw.
-Couldn't make this work with __BORLANDC__.
-For now, moving on with simplistic (and quite wrong!)
-"if not win/unix/apple then it must be Borland" logic! */
-/*
-#ifdef _WIN32
-#elif defined __unix__
-#elif defined __APPLE__
-#define XPUTW putw
-#define XGETW getw
-#endif
-*/
-
-void bubble_sort_asc_int(int list[], int n);
-
 void cls(void);
 void displayHeaderLine(void);
 void displayHeaderText(void);
 void displayFooter(void);
 /**************************************/
+void bubble_sort_asc_int(int list[], int n);
+void create_file_data_1(void);
+void create_file_data_2(void);
+void create_file_data_3(int arr[NUM_ENTRIES]);
+void read_display_file_data_1(void);
+void read_display_file_data_2(void);
+void read_display_file_data_3(void);
+int read_file_data1_into_memory(int arr[NUM_ENTRIES]);
+void read_file_data2_into_memory(int arr[NUM_ENTRIES], int next_slot);
+void init_array(int arr[NUM_ENTRIES]);
+void display_array(int arr[NUM_ENTRIES]);
 
+/* PROGRAM ENTRY POINT */
+int main(void)
+{
+	int arr[NUM_ENTRIES];
+	int next_slot;
+
+	cls();
+	displayHeaderLine();
+	displayHeaderText();
+	printf("\n");
+
+	printf("========================================\n");
+	init_array(arr);
+	display_array(arr);
+	create_file_data_1();
+	create_file_data_2();
+	printf("========================================\n\n");
+
+	printf("========================================\n");
+	next_slot = read_file_data1_into_memory(arr);
+	read_file_data2_into_memory(arr, next_slot);
+	
+	display_array(arr);
+	printf("sorting array...\n");
+	bubble_sort_asc_int(arr, NUM_ENTRIES);
+	display_array(arr);
+	printf("========================================\n\n");
+
+	printf("========================================\n");
+	create_file_data_3(arr);
+	printf("========================================\n");
+	printf("\n");
+
+	displayFooter();
+
+	return EXIT_SUCCESS;
+}
+
+/**************************************/
+void cls(void)
+{
+	int n;
+	for (n = 0; n < LINES_TO_CLEAR_SCREEN; n++) {
+		printf("\n");
+	}
+}
+
+void displayHeaderLine(void)
+{
+	int n;
+	for (n = 0; n < DASH_COUNT_FOR_HEADER_FOOTER; n++) {
+		printf("-");
+	}
+	printf("\n");
+}
+
+void displayHeaderText(void)
+{
+	char s[] = TITLE;
+	printf("%s\n", s);
+}
+
+void displayFooter(void)
+{
+	int n = 0;
+	for (n = 0; n < DASH_COUNT_FOR_HEADER_FOOTER; n++) {
+		printf("-");
+	}
+	printf("\n");
+}
+/**************************************/
 void create_file_data_1(void)
 {
 	FILE *fp1;
@@ -258,78 +325,6 @@ void display_array(int arr[NUM_ENTRIES])
 	} while (n <= NUM_ENTRIES);
 	/*printf("\n");*/
 }
-
-/* PROGRAM ENTRY POINT */
-int main(void)
-{
-	int arr[NUM_ENTRIES];
-	int next_slot;
-
-	cls();
-	displayHeaderLine();
-	displayHeaderText();
-	printf("\n");
-
-	printf("========================================\n");
-	init_array(arr);
-	display_array(arr);
-	create_file_data_1();
-	create_file_data_2();
-	printf("========================================\n\n");
-
-	printf("========================================\n");
-	next_slot = read_file_data1_into_memory(arr);
-	read_file_data2_into_memory(arr, next_slot);
-	
-	display_array(arr);
-	printf("sorting array...\n");
-	bubble_sort_asc_int(arr, NUM_ENTRIES);
-	display_array(arr);
-	printf("========================================\n\n");
-
-	printf("========================================\n");
-	create_file_data_3(arr);
-	printf("========================================\n");
-	printf("\n");
-
-	displayFooter();
-
-	return EXIT_SUCCESS;
-}
-
-/**************************************/
-void cls(void)
-{
-	int n;
-	for (n = 0; n < LINES_TO_CLEAR_SCREEN; n++) {
-		printf("\n");
-	}
-}
-
-void displayHeaderLine(void)
-{
-	int n;
-	for (n = 0; n < DASH_COUNT_FOR_HEADER_FOOTER; n++) {
-		printf("-");
-	}
-	printf("\n");
-}
-
-void displayHeaderText(void)
-{
-	char s[] = TITLE;
-	printf("%s\n", s);
-}
-
-void displayFooter(void)
-{
-	int n = 0;
-	for (n = 0; n < DASH_COUNT_FOR_HEADER_FOOTER; n++) {
-		printf("-");
-	}
-	printf("\n");
-}
-/**************************************/
 
 /* ===================================80 chars=============================== */
 /* EOF */
