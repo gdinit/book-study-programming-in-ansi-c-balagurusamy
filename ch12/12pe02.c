@@ -35,8 +35,9 @@
 #define STR(x) #x
 #define XSTR(x) STR(x)
 /**************************************/
-#define TITLE "READ 2 SORTED INTEGER ARRAYS FROM FILE AND CREATE A NEW MERGED "\
-	      "SORTED FILE"
+#define TITLE                                                                  \
+	"READ 2 SORTED INTEGER ARRAYS FROM FILE AND CREATE A NEW MERGED "      \
+	"SORTED FILE"
 #define CFGDEBUG 1
 #define DATA1_FILENAME "DATA1.bin" /* Write file with odd numbers */
 #define DATA2_FILENAME "DATA2.bin" /* Write file with even numbers */
@@ -106,7 +107,7 @@ int main(void)
 	printf("========================================\n");
 	next_slot = read_file_data1_into_memory(arr);
 	read_file_data2_into_memory(arr, next_slot);
-	
+
 	display_array(arr);
 	printf("sorting array...\n");
 	bubble_sort_asc_int(arr, NUM_ENTRIES);
@@ -164,7 +165,7 @@ void create_file_data_1(void)
 	fp1 = fopen(DATA1_FILENAME, "wb");
 	printf("\nOpened file DATA1 to write\n");
 	printf("Writing numbers:\t\t\t\t\t");
-	for (n = 1; n < 10; n+=2) {
+	for (n = 1; n < 10; n += 2) {
 		XPUTW(n, fp1);
 		printf(" %d", n);
 	}
@@ -181,7 +182,7 @@ void create_file_data_2(void)
 	fp2 = fopen(DATA2_FILENAME, "wb");
 	printf("Opened file DATA2 to write\n");
 	printf("Writing numbers:\t\t\t\t\t");
-	for (n = 2; n <= 10; n+=2) {
+	for (n = 2; n <= 10; n += 2) {
 		XPUTW(n, fp2);
 		printf(" %d", n);
 	}
@@ -200,7 +201,7 @@ void create_file_data_3(int arr[NUM_ENTRIES])
 	printf("Writing numbers stored in memory to the file DATA3:\t");
 	for (n = 0; n < NUM_ENTRIES; n++) {
 		/* simply ignore empty slots (which are set to -1) */
-		if(arr[n] != -1) {
+		if (arr[n] != -1) {
 			XPUTW(arr[n], fp3);
 			printf(" %2d", arr[n]);
 		}
