@@ -33,7 +33,7 @@
 #define STR(x) #x
 #define XSTR(x) STR(x)
 /**************************************/
-#define TITLE "PROGRAM TO READ INTS FROM A FILE AND CALCULATE SUM OF ALL"
+#define TITLE "PROGRAM TO COPY A FILE IDENTICALLY OR AFTER FILTERING OUT A CHAR"
 #define CFGDEBUG 1
 #define SOURCE_FILENAME "source.txt"
 #define TARGET_FILENAME1 "target1.txt"
