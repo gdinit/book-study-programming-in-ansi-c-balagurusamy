@@ -22,6 +22,9 @@
  *	"definitely lost: 4,256 bytes in 9 blocks"
  *  	"ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)""
  *
+ * TODO list
+ * -add "enter 0 as price to go back"
+ *
  * IMPROVEMENT IDEAS
  * -remove all dynamic memory usage
  * -Ask for each commit:	'Y' to commit 'N' (or ENTER) to cancel
@@ -47,8 +50,8 @@
 #define CFGDEBUG 1
 #define MAIN_DATABASE_FILENAME "db_main.bin"
 #define TEMP_DATABASE_FILENAME "db_temp.bin"
-#define PRODUCT_LINE_MAX_SIZE 1024
-#define FIELD_SIZE 32
+#define LINE_DATA_MAX_SIZE 1024
+#define FIELD_DATA_MAX_SIZE 32
 #define MAX_LINES 4096
 #define MENU_ENTRY_LOWEST 1
 #define MENU_ENTRY_HIGHEST 5
@@ -69,6 +72,14 @@
 #endif
 /* END: FLUSH rev.03 */
 
+struct storage_t {
+	char id[FIELD_DATA_MAX_SIZE]; /* id */
+	char pc[FIELD_DATA_MAX_SIZE]; /* product_code */
+	char pd[FIELD_DATA_MAX_SIZE]; /* product_desc */
+	char pr[FIELD_DATA_MAX_SIZE]; /* price */
+	char pl[LINE_DATA_MAX_SIZE]; /* pl */
+};
+
 void cls(void);
 void displayHeaderLine(void);
 void displayHeaderText(void);
@@ -82,11 +93,11 @@ int handle_choose_entry_to_delete(int lines);
 void enforce_title_case(char *p_str);
 void enforce_all_caps(char *p_str);
 void display_msg_req_product_code(void);
-void handle_data_input_product_code(char data_slot[FIELD_SIZE + 1]);
+void handle_data_input_product_code(char data_slot[FIELD_DATA_MAX_SIZE + 1]);
 void display_msg_req_product_desc(void);
-void handle_data_input_product_desc(char data_slot[FIELD_SIZE + 1]);
+void handle_data_input_product_desc(char data_slot[FIELD_DATA_MAX_SIZE + 1]);
 void display_msg_req_price(void);
-void handle_data_input_price(char data_slot[FIELD_SIZE + 1]);
+void handle_data_input_price(char data_slot[FIELD_DATA_MAX_SIZE + 1]);
 void copy_tempdb_to_maindb(const char *db_main_file, const char *db_temp_file);
 void modify_existing_product(const char *db_main_file);
 void add_new_product(const char *db_main_file);
@@ -170,7 +181,7 @@ int count_lines_in_file(const char *db_main_file)
 {
 	FILE *fp_maindb;
 	int count = 0;
-	char buf[PRODUCT_LINE_MAX_SIZE];
+	char buf[LINE_DATA_MAX_SIZE];
 
 	if (CFGDEBUG) {
 		printf("Opening file %s with r (read-only) access mode...\n",
@@ -311,11 +322,11 @@ void enforce_all_caps(char *p_str)
 
 void display_msg_req_product_code(void)
 {
-	printf("\nEnter product code (" XSTR(FIELD_SIZE) " chars max) or 0 to "
+	printf("\nEnter product code (" XSTR(FIELD_DATA_MAX_SIZE) " chars max) or 0 to "
 							 "go back: ");
 }
 
-void handle_data_input_product_code(char data_slot[FIELD_SIZE + 1])
+void handle_data_input_product_code(char data_slot[FIELD_DATA_MAX_SIZE + 1])
 {
 	static char temp;
 	display_msg_req_product_code();
@@ -339,17 +350,17 @@ void handle_data_input_product_code(char data_slot[FIELD_SIZE + 1])
 /*....*/
 #endif
 	/**************************************/
-	scanf("%" XSTR(FIELD_SIZE) "[^\n]", data_slot);
+	scanf("%" XSTR(FIELD_DATA_MAX_SIZE) "[^\n]", data_slot);
 	enforce_all_caps(data_slot);
 }
 
 void display_msg_req_product_desc(void)
 {
-	printf("Enter product description (" XSTR(FIELD_SIZE) " chars max) or 0"
+	printf("Enter product description (" XSTR(FIELD_DATA_MAX_SIZE) " chars max) or 0"
 							      " to go back: ");
 }
 
-void handle_data_input_product_desc(char data_slot[FIELD_SIZE + 1])
+void handle_data_input_product_desc(char data_slot[FIELD_DATA_MAX_SIZE + 1])
 {
 	static char temp;
 	display_msg_req_product_desc();
@@ -371,16 +382,16 @@ void handle_data_input_product_desc(char data_slot[FIELD_SIZE + 1])
 /*....*/
 #endif
 	/**************************************/
-	scanf("%" XSTR(FIELD_SIZE) "[^\n]", data_slot);
+	scanf("%" XSTR(FIELD_DATA_MAX_SIZE) "[^\n]", data_slot);
 	enforce_title_case(data_slot);
 }
 
 void display_msg_req_price(void)
 {
-	printf("Enter price (" XSTR(FIELD_SIZE) " chars max): ");
+	printf("Enter price (" XSTR(FIELD_DATA_MAX_SIZE) " chars max): ");
 }
 
-void handle_data_input_price(char data_slot[FIELD_SIZE + 1])
+void handle_data_input_price(char data_slot[FIELD_DATA_MAX_SIZE + 1])
 {
 	static char temp;
 	display_msg_req_price();
@@ -402,7 +413,7 @@ void handle_data_input_price(char data_slot[FIELD_SIZE + 1])
 /*....*/
 #endif
 	/**************************************/
-	scanf("%" XSTR(FIELD_SIZE) "[^\n]", data_slot);
+	scanf("%" XSTR(FIELD_DATA_MAX_SIZE) "[^\n]", data_slot);
 	/* TODO: add "check isdigit?" step here to prevent incorrect entries */
 }
 
@@ -449,16 +460,20 @@ void modify_existing_product(const char *db_main_file)
 	const char db_temp_file[] = TEMP_DATABASE_FILENAME;
 	FILE *fp_maindb;
 	FILE *fp_tempdb;
-	char *id_char;
-	char *product_code;
-	char *product_desc;
-	char *price;
-	char *product_line;
 	int id = -2;
 	int lines = count_lines_in_file(db_main_file);
 	char ch;
 	int current_line = 1;
-	char buf[PRODUCT_LINE_MAX_SIZE];
+	char buf[LINE_DATA_MAX_SIZE];
+	struct storage_t s;
+
+	/* initialize struct */
+	strcpy(s.id, "");
+	strcpy(s.pc, "");
+	strcpy(s.pd, "");
+	strcpy(s.pr, "");
+	strcpy(s.pl, "");
+
 	id = handle_choose_entry_to_edit(lines);
 	if (0 == id) {
 		printf("Going back to Main Menu\n");
@@ -498,48 +513,40 @@ void modify_existing_product(const char *db_main_file)
 		printf("\nHere is the chosen record:\t");
 		printf("%s", buf);
 	}
-	printf("Product ID number will stay the same.\n");
+
+	sprintf(s.id, "%d", id);
+	printf("Product ID number (%s) will stay the same.\n", s.id);
 
 	/* ask for fields */
-	id_char = malloc(FIELD_SIZE);
-	sprintf(id_char, "%d", id);
-
-	product_code = malloc(FIELD_SIZE);
-	product_code[0] = '\0';
-	handle_data_input_product_code(product_code);
-	/* did the user request a go-back-to-main-menu? */
-	if ('0' == product_code[0]) {
+	handle_data_input_product_code(s.pc);
+	if ('0' == s.pc[0]) { /* did the user request a go-back-to-main-menu? */
 		printf("Going back to Main Menu\n");
 		return;
+	} else {
+		printf("Product Code has been read as: %s\n\n", s.pc);
 	}
-	printf("Product Code has been read as: %s\n\n", product_code);
 
-	product_desc = malloc(FIELD_SIZE);
-	product_desc[0] = '\0';
-	handle_data_input_product_desc(product_desc);
-	if ('0' == product_desc[0]) {
+	handle_data_input_product_desc(s.pd);
+	if ('0' == s.pd[0]) { /* did the user request a go-back-to-main-menu? */
 		printf("Going back to Main Menu\n");
 		return;
+	} else {
+		printf("Product Description has been read as: %s\n\n", s.pd);
 	}
-	printf("Product Description has been read as: %s\n\n", product_desc);
 
-	price = malloc(FIELD_SIZE);
-	price[0] = '\0';
-	handle_data_input_price(price);
-	printf("Price has been read as: %s\n", price);
+	handle_data_input_price(s.pr);
+	printf("Price has been read as: %s\n", s.pr);
 
 	/* combine fields to form a product-entry-line */
-	product_line = malloc(PRODUCT_LINE_MAX_SIZE);
-	product_line[0] = '\0';
-	strcat(product_line, id_char);
-	strcat(product_line, "|");
-	strcat(product_line, product_code);
-	strcat(product_line, "|");
-	strcat(product_line, product_desc);
-	strcat(product_line, "|");
-	strcat(product_line, price);
-	strcat(product_line, "\n");
-	printf("\nNew Product Line is:\t\t\t%s", product_line);
+	strcat(s.pl, s.id);
+	strcat(s.pl, "|");
+	strcat(s.pl, s.pc);
+	strcat(s.pl, "|");
+	strcat(s.pl, s.pd);
+	strcat(s.pl, "|");
+	strcat(s.pl, s.pr);
+	strcat(s.pl, "\n");
+	printf("\nNew Product Line is:\t\t\t%s", s.pl);
 
 	/* create a temp new db file - if it exists, wipe the existing file */
 	if (CFGDEBUG) {
@@ -582,7 +589,7 @@ void modify_existing_product(const char *db_main_file)
 		}
 	}
 
-	fputs(product_line, fp_tempdb); /* write the updated line to temp db */
+	fputs(s.pl, fp_tempdb); /* write the updated line to temp db */
 
 	/* copy over entries AFTER the modified entry to the new db file but
 	 * first seek the next line as the modified line should not be copied
@@ -610,11 +617,6 @@ void modify_existing_product(const char *db_main_file)
 	fclose(fp_tempdb);
 	fclose(fp_maindb);
 	copy_tempdb_to_maindb(db_main_file, db_temp_file);
-	free(id_char);
-	free(product_code);
-	free(product_desc);
-	free(price);
-	free(product_line);
 }
 
 void add_new_product(const char *db_main_file)
@@ -622,56 +624,49 @@ void add_new_product(const char *db_main_file)
 	int lines = count_lines_in_file(db_main_file);
 	int new_id = lines + 1;
 	FILE *fp_maindb;
-	char *id_char;
-	char *product_code;
-	char *product_desc;
-	char *price;
-	char *product_line;
+	struct storage_t s;
+
+	/* initialize struct */
+	strcpy(s.id, "");
+	strcpy(s.pc, "");
+	strcpy(s.pd, "");
+	strcpy(s.pr, "");
+	strcpy(s.pl, "");
 
 	/* set new product id automatically */
 	printf("New product ID has been automatically set to: %d\n", new_id);
+	sprintf(s.id, "%d", new_id);
 
 	/* prompt & obtain fields from user */
-	id_char = malloc(FIELD_SIZE);
-	sprintf(id_char, "%d", new_id);
-
-	product_code = malloc(FIELD_SIZE);
-	product_code[0] = '\0';
-	handle_data_input_product_code(product_code);
-
-	/* did the user request a go-back-to-main-menu? */
-	if ('0' == product_code[0]) {
+	handle_data_input_product_code(s.pc);
+	if ('0' == s.pc[0]) { /* did the user request a go-back-to-main-menu? */
 		printf("Going back to Main Menu\n");
 		return;
+	} else {
+		printf("Product Code has been read as: %s\n\n", s.pc);
 	}
-	printf("Product Code has been read as: %s\n\n", product_code);
 
-	product_desc = malloc(FIELD_SIZE);
-	product_desc[0] = '\0';
-	handle_data_input_product_desc(product_desc);
-	if ('0' == product_desc[0]) {
+	handle_data_input_product_desc(s.pd);
+	if ('0' == s.pd[0]) { /* did the user request a go-back-to-main-menu? */
 		printf("Going back to Main Menu\n");
 		return;
+	} else {
+		printf("Product Description has been read as: %s\n\n", s.pd);
 	}
-	printf("Product Description has been read as: %s\n\n", product_desc);
 
-	price = malloc(FIELD_SIZE);
-	price[0] = '\0';
-	handle_data_input_price(price);
-	printf("Price has been read as: %s\n", price);
+	handle_data_input_price(s.pr);
+	printf("Price has been read as: %s\n", s.pr);
 
 	/* combine fields to form a product-entry-line */
-	product_line = malloc(PRODUCT_LINE_MAX_SIZE);
-	product_line[0] = '\0';
-	strcat(product_line, id_char);
-	strcat(product_line, "|");
-	strcat(product_line, product_code);
-	strcat(product_line, "|");
-	strcat(product_line, product_desc);
-	strcat(product_line, "|");
-	strcat(product_line, price);
-	strcat(product_line, "\n");
-	printf("\nNew Product Line is:\t\t\t%s", product_line);
+	strcat(s.pl, s.id);
+	strcat(s.pl, "|");
+	strcat(s.pl, s.pc);
+	strcat(s.pl, "|");
+	strcat(s.pl, s.pd);
+	strcat(s.pl, "|");
+	strcat(s.pl, s.pr);
+	strcat(s.pl, "\n");
+	printf("\nNew Product Line is:\t\t\t%s", s.pl);
 
 	/* fopen main db and append as last line */
 	if ((fp_maindb = fopen(db_main_file, "a")) == NULL) {
@@ -682,13 +677,8 @@ void add_new_product(const char *db_main_file)
 			printf("\tSuccessfully opened file %s\n", db_main_file);
 		}
 	}
-	fputs(product_line, fp_maindb); /* write updated line into main db */
+	fputs(s.pl, fp_maindb); /* write updated line into main db */
 	fclose(fp_maindb);
-	free(id_char);
-	free(product_code);
-	free(product_desc);
-	free(price);
-	free(product_line);
 }
 
 void renumber_entries(const char *db_main_file)
@@ -697,23 +687,11 @@ void renumber_entries(const char *db_main_file)
 	FILE *fp_maindb;
 	FILE *fp_tempdb;
 	int current_line;
-	char buf[PRODUCT_LINE_MAX_SIZE];
+	char buf[LINE_DATA_MAX_SIZE];
 	int id;
-	char *id_char;
-	char *product_code;
-	char *product_desc;
-	char *price;
-	char *product_line;
+	struct storage_t s;
 
 	id = -1;
-	id_char = malloc(FIELD_SIZE);
-	id_char[0] = '\0';
-	product_code = malloc(FIELD_SIZE);
-	product_code[0] = '\0';
-	product_desc = malloc(FIELD_SIZE);
-	product_desc[0] = '\0';
-	price = malloc(FIELD_SIZE);
-	price[0] = '\0';
 
 	/* open file for read-only access */
 	if (CFGDEBUG) {
@@ -749,45 +727,44 @@ void renumber_entries(const char *db_main_file)
 	current_line = 0;
 	/* loop: read a line, write a line, until we reach record to modify */
 	while (fgets(buf, sizeof(buf), fp_maindb) != NULL) {
+		/* empty initialize struct fields */
+		strcpy(s.id, "");
+		strcpy(s.pc, "");
+		strcpy(s.pd, "");
+		strcpy(s.pr, "");
+		strcpy(s.pl, "");
 		/* read a line into buffer & break apart to tokens */
 		/*
 		1	|WG01	|Water Glass	|499	<-- a DB line
 		%[^|]	|%[^|]	|%[^|]		|%[^|]	<-- sscanf format
 		%[^|]|%[^|]|%[^|]|%[^|]			<-- sscanf merged
 		*/
-		sscanf(buf, "%d|%31[^|]|%31[^|]|%31[^|]", &id, product_code,
-		       product_desc, price);
+		sscanf(buf, "%d|%31[^|]|%31[^|]|%31[^|]", &id, s.pc, s.pd, s.pr);
 		id = current_line + 1;
+		sprintf(s.id, "%d", id); /* convert numeric to string */
 		if (CFGDEBUG) {
 			printf("-----------------------------------------------"
 			       "---------------------------------\n");
-			printf("%d\n", id);
-			printf("%s\n", product_code);
-			printf("%s\n", product_desc);
-			printf("%s\n", price);
+			printf("%s\n", s.id);
+			printf("%s\n", s.pc);
+			printf("%s\n", s.pd);
+			printf("%s\n", s.pr);
 		}
-		current_line++;
-
-		/* TODO switch to sprintf() here */
 		/* combine fields to form a product-entry-line */
-		product_line = malloc(PRODUCT_LINE_MAX_SIZE);
-		product_line[0] = '\0';
-		id_char = malloc(FIELD_SIZE); /* possibly remove this line? */
-		id_char[0] = '\0';	    /* possibly remove this line? */
-		sprintf(id_char, "%d", id);
-		strcat(product_line, id_char);
-		strcat(product_line, "|");
-		strcat(product_line, product_code);
-		strcat(product_line, "|");
-		strcat(product_line, product_desc);
-		strcat(product_line, "|");
-		strcat(product_line, price);
+		strcat(s.pl, s.id);
+		strcat(s.pl, "|");
+		strcat(s.pl, s.pc);
+		strcat(s.pl, "|");
+		strcat(s.pl, s.pd);
+		strcat(s.pl, "|");
+		strcat(s.pl, s.pr);
+		/*strcat(s.pl, "\n");*/
 		if (CFGDEBUG) {
-			printf("\nNew Product Line is:\t\t\t|%s|\n",
-			       product_line);
+			printf("\nNew Product Line is:\t\t\t|%s|\n", s.pl);
 		}
 		/* write the updated line into temp db */
-		fputs(product_line, fp_tempdb);
+		fputs(s.pl, fp_tempdb);
+		current_line++;
 	}
 	fclose(fp_tempdb);
 	fclose(fp_maindb);
@@ -799,11 +776,6 @@ void renumber_entries(const char *db_main_file)
 	} else {
 		fprintf(stderr, "Error deleting the file %s.\n", db_temp_file);
 	}
-	free(id_char);
-	free(product_code);
-	free(product_desc);
-	free(price);
-	free(product_line);
 }
 
 void delete_product(const char *db_main_file)
@@ -815,7 +787,7 @@ void delete_product(const char *db_main_file)
 	int lines = count_lines_in_file(db_main_file);
 	char ch;
 	int current_line = 1;
-	char buf[PRODUCT_LINE_MAX_SIZE];
+	char buf[LINE_DATA_MAX_SIZE];
 	/*id = handle_choose_entry_to_edit(lines);*/
 	id = handle_choose_entry_to_delete(lines);
 	if (0 == id) {
@@ -938,7 +910,7 @@ void delete_product(const char *db_main_file)
 void display_all_products(const char *db_main_file)
 {
 	FILE *fp_maindb;
-	char buf[PRODUCT_LINE_MAX_SIZE] = "";
+	char buf[LINE_DATA_MAX_SIZE] = "";
 	int count = 0;
 
 	if (CFGDEBUG) {
@@ -1109,7 +1081,7 @@ int add_product_to_db(const char *id, const char *product_code,
 {
 	FILE *fp_maindb;
 	int id_int = 0;
-	char *product_line;
+	char product_line[FIELD_DATA_MAX_SIZE];
 
 	/* only when adding the very first entry, wipe the db file */
 	id_int = atoi(id);
@@ -1147,7 +1119,6 @@ int add_product_to_db(const char *id, const char *product_code,
 			}
 		}
 	}
-	product_line = malloc(PRODUCT_LINE_MAX_SIZE);
 	product_line[0] = '\0';
 	strcat(product_line, id);
 	strcat(product_line, "|");
@@ -1157,6 +1128,7 @@ int add_product_to_db(const char *id, const char *product_code,
 	strcat(product_line, "|");
 	strcat(product_line, price);
 	strcat(product_line, "\n");
+
 	if (CFGDEBUG) {
 		printf("Product line is:\t%s", product_line);
 	}
@@ -1165,89 +1137,48 @@ int add_product_to_db(const char *id, const char *product_code,
 	if (CFGDEBUG) {
 		printf("\tClosed file %s\n", db_main_file);
 	}
-	free(product_line);
+	
 	return 0;
 }
 
-/*
- * TODO simplify this function. Use something like fputs instead of this below
- */
 int create_default_db(const char *db_main_file)
-/**
- * DATABASE FORMAT & DEFAULT DATABASE CONTENT
- * Product ID	| Product Code	| Product description	| Price
- * 1		| WG01		| Water Glass		| 4.99
- * 2		| WG02		| Wine Glass		| 9.99
- * 3		| EC01		| Espresso Cup		| 6.99
- * 4		| CG01		| Cocktail Glass	| 8.99
- * 5		| TM01		| Tea Mug		| 5.99
- **/
 {
-	char *id;
-	char *product_code;
-	char *product_desc;
-	char *price;
+	/**
+	 * DATABASE FORMAT & DEFAULT DATABASE CONTENT
+	 * Product ID	| Product Code	| Product description	| Price
+	 * 1		| WG01		| Water Glass		| 4.99
+	 * 2		| WG02		| Wine Glass		| 9.99
+	 * 3		| EC01		| Espresso Cup		| 6.99
+	 * 4		| CG01		| Cocktail Glass	| 8.99
+	 * 5		| TM01		| Tea Mug		| 5.99
+	 **/
+	FILE *fp_maindb;
+	char default_products[] =	"1|WG01|Water Glass|4.99\n"
+					"2|WG02|Wine Glass|9.99\n"
+					"3|EC01|Espresso Cup|6.99\n"
+					"4|CG01|Cocktail Glass|8.99\n"
+					"5|TM01|Tea Mug|5.99\n";
 
-	printf("Adding default entries to the database %s...\n", db_main_file);
+	if (CFGDEBUG) {
+		printf("\tCreating/Overwriting file %s with w"
+		       "(overwrite) access mode...\n",
+		       db_main_file);
+	}
+	if ((fp_maindb = fopen(db_main_file, "w")) == NULL) {
+		printf("ERROR: Cannot open file %s!\n", db_main_file);
+		return 1;
+	} else {
+		if (CFGDEBUG) {
+			printf("\tSuccessfully opened file %s\n",
+			       db_main_file);
+		}
+	}
 
-	id = malloc(FIELD_SIZE);
-	product_code = malloc(FIELD_SIZE);
-	product_desc = malloc(FIELD_SIZE);
-	price = malloc(FIELD_SIZE);
-
-	id[0] = '\0';
-	strcat(id, "1");
-	product_code[0] = '\0';
-	strcat(product_code, "WG01");
-	product_desc[0] = '\0';
-	strcat(product_desc, "Water Glass");
-	price[0] = '\0';
-	strcat(price, "4.99");
-	add_product_to_db(id, product_code, product_desc, price, db_main_file);
-
-	id[0] = '\0';
-	strcat(id, "2");
-	product_code[0] = '\0';
-	strcat(product_code, "WG02");
-	product_desc[0] = '\0';
-	strcat(product_desc, "Wine Glass");
-	price[0] = '\0';
-	strcat(price, "9.99");
-	add_product_to_db(id, product_code, product_desc, price, db_main_file);
-
-	id[0] = '\0';
-	strcat(id, "3");
-	product_code[0] = '\0';
-	strcat(product_code, "EC01");
-	product_desc[0] = '\0';
-	strcat(product_desc, "Espresso Cup");
-	price[0] = '\0';
-	strcat(price, "6.99");
-	add_product_to_db(id, product_code, product_desc, price, db_main_file);
-
-	id[0] = '\0';
-	strcat(id, "4");
-	product_code[0] = '\0';
-	strcat(product_code, "CG01");
-	product_desc[0] = '\0';
-	strcat(product_desc, "Cocktail Glass");
-	price[0] = '\0';
-	strcat(price, "8.99");
-	add_product_to_db(id, product_code, product_desc, price, db_main_file);
-
-	id[0] = '\0';
-	strcat(id, "5");
-	product_code[0] = '\0';
-	strcat(product_code, "TM01");
-	product_desc[0] = '\0';
-	strcat(product_desc, "Tea Mug");
-	price[0] = '\0';
-	strcat(price, "5.99");
-	add_product_to_db(id, product_code, product_desc, price, db_main_file);
-	free(id);
-	free(product_code);
-	free(product_desc);
-	free(price);
+	fputs(default_products, fp_maindb);
+	fclose(fp_maindb);
+	if (CFGDEBUG) {
+		printf("\tClosed file %s\n", db_main_file);
+	}
 	return 0;
 }
 
