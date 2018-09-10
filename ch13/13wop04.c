@@ -31,7 +31,7 @@
 #define STR(x) #x
 #define XSTR(x) STR(x)
 /**************************************/
-#define TITLE "LINKED LIST DEMO"
+#define TITLE "LINKED LIST - INSERTION DEMO"
 #define CFGDEBUG 1
 #ifndef NULL
 #define NULL 0
