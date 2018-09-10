@@ -37,6 +37,9 @@
 #define NULL 0
 #endif
 
+#define SIZE1 10
+#define SIZE2 15
+
 void cls(void);
 void displayHeaderLine(void);
 void displayHeaderText(void);
@@ -53,20 +56,20 @@ int main(void)
 	displayHeaderText();
 	printf("\n");
 
-	if ((buffer = (char *)malloc(10)) == NULL) {
+	if ((buffer = (char *)malloc(SIZE1)) == NULL) {
 		printf("malloc failed!\n");
 		exit(EXIT_FAILURE);
 	}
 
-	printf("Buffer of size %d created\n", _msize(buffer));
+	printf("Buffer of size %d created\n", SIZE1);
 	strcpy(buffer, "HYDERABAD");
 	printf("\nBuffer contains: %s\n", buffer);
 
-	if((buffer = (char *)realloc(buffer, 15)) == NULL) {
+	if((buffer = (char *)realloc(buffer, SIZE2)) == NULL) {
 		printf("realloc failed.\n");
 		exit(EXIT_FAILURE);
 	}
-	printf("\nBuffer size modified.\n");
+	printf("\nBuffer size modified to %d\n", SIZE2);
 	printf("\nBuffer stil contains: %s\n", buffer);
 	strcpy(buffer, "SECUNDERABAD");
 	printf("\nBuffer now contains: %s\n", buffer);
