@@ -38,17 +38,20 @@
 #define MATRIX_EL_MIN 2 /* Matrix element - minimum value */
 #define MATRIX_EL_MAX 9 /* Matrix element - maximum value */
 
-/* BEGIN: FLUSH */
+/* BEGIN: FLUSH rev.03 */
 #ifdef _WIN32
 #define FLUSH fflush(stdin);
-#elif defined __unix__
-#define FLUSH fpurge(stdin);
+/*#elif defined __unix__
+#define FLUSH fpurge(stdin);*/
 #elif defined __APPLE__
 #define FLUSH fpurge(stdin);
+#elif defined __gnu_linux__
+#include <stdio_ext.h>
+#define FLUSH __fpurge(stdin);
 #else
 #define FLUSH fflush(stdin);
 #endif
-/* END: FLUSH */
+/* END: FLUSH rev.03 */
 
 struct matrix_size_t {
 	unsigned long int rows1;

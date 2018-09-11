@@ -42,17 +42,20 @@
 #define FAILURE -1
 #define SUCCESS 0
 
-/* BEGIN: FLUSH */
+/* BEGIN: FLUSH rev.03 */
 #ifdef _WIN32
 #define FLUSH fflush(stdin);
-#elif defined __unix__
-#define FLUSH fpurge(stdin);
+/*#elif defined __unix__
+#define FLUSH fpurge(stdin);*/
 #elif defined __APPLE__
 #define FLUSH fpurge(stdin);
+#elif defined __gnu_linux__
+#include <stdio_ext.h>
+#define FLUSH __fpurge(stdin);
 #else
 #define FLUSH fflush(stdin);
 #endif
-/* END: FLUSH */
+/* END: FLUSH rev.03 */
 
 void cls(void);
 void displayHeaderLine(void);
