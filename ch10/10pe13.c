@@ -52,17 +52,20 @@
 #define MENU_ENTRY_LOWEST 0
 #define MENU_ENTRY_HIGHEST 8
 
-/* BEGIN: FLUSH */
+/* BEGIN: FLUSH rev.03 */
 #ifdef _WIN32
 #define FLUSH fflush(stdin);
-#elif defined __unix__
-#define FLUSH fpurge(stdin);
+/*#elif defined __unix__
+#define FLUSH fpurge(stdin);*/
 #elif defined __APPLE__
 #define FLUSH fpurge(stdin);
+#elif defined __gnu_linux__
+#include <stdio_ext.h>
+#define FLUSH __fpurge(stdin);
 #else
 #define FLUSH fflush(stdin);
 #endif
-/* END: FLUSH */
+/* END: FLUSH rev.03 */
 
 struct hotel_t {
 	char name[NAME_LENGTH_PLUS_ONE];

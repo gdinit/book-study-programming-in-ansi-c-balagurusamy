@@ -42,17 +42,20 @@
 #define LEGALITY_LEGAL 0
 #define MAX_MONTH_CHARS 10 /* longest month name is September = 9 chars */
 
-/* BEGIN: FLUSH */
+/* BEGIN: FLUSH rev.03 */
 #ifdef _WIN32
 #define FLUSH fflush(stdin);
-#elif defined __unix__
-#define FLUSH fpurge(stdin);
+/*#elif defined __unix__
+#define FLUSH fpurge(stdin);*/
 #elif defined __APPLE__
 #define FLUSH fpurge(stdin);
+#elif defined __gnu_linux__
+#include <stdio_ext.h>
+#define FLUSH __fpurge(stdin);
 #else
 #define FLUSH fflush(stdin);
 #endif
-/* END: FLUSH */
+/* END: FLUSH rev.03 */
 
 struct date_struct_t {
 	int d;
