@@ -25,6 +25,9 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
+/* Needed to stop annoying MS _s warnings when compiled with llvm on Windows! */
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -83,7 +86,7 @@ Number	0.0	0.1	0.2	...	0.9
 void printTable(void)
 {
 	int r = 0, tmp = 0;
-	float j = 0.0f, c = 0.0f;
+	float j = 0.0f;
 
 	printf("\n");
 	for (r = 0; r <= 9; r++) {
@@ -114,10 +117,6 @@ int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
 	char ch = '\0';
-	int marks[MAX_SUBJECTS] = {-1};
-	int *pmarks = &marks[0];
-	int readCount = 0;
-	int *preadCount = &readCount;
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */

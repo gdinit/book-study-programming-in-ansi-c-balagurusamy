@@ -9,6 +9,9 @@ of numbers. Use scanf to read the numbers. Reading should be terminated
 when the value 0 is encountered.
 */
 
+/* Needed to stop annoying MS _s warnings when compiled with llvm on Windows! */
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 
 static int promptForNumber(const char *const which)

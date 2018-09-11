@@ -22,6 +22,9 @@ Future Improvement Ideas
 -fix the space to exit thing (make it cross platform or remove)
 */
 
+/* Needed to stop annoying MS _s warnings when compiled with llvm on Windows! */
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <math.h>
 #include <stdio.h>
 /* exit(), EXIT_FAILURE */

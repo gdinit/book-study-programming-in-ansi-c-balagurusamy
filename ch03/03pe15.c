@@ -16,6 +16,9 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
+/* Needed to stop annoying MS _s warnings when compiled with llvm on Windows! */
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <math.h>
 #include <stdio.h>
 
@@ -45,7 +48,6 @@ int main(void)
 {
 	/* BEGIN: Declare Variables ***************************************** */
 	char ch = '\0';
-	int m = 0, n = 0;
 	double d1 = 0.0, d2 = 0.0, d3 = 0.0;
 	double sum = 0.0, avg = 0.0, max = 0.0, min = 0.0;
 	/* END: Declare Variables ******************************************* */

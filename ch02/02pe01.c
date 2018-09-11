@@ -22,6 +22,9 @@ extern unsigned _floatconvert;
 #pragma extref _floatconvert
 #endif
 
+/* Needed to stop annoying MS _s warnings when compiled with llvm on Windows! */
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 
 int main(void)

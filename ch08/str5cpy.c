@@ -1,3 +1,5 @@
+/* clang-format off */
+
 /*	@(#)	str5cpy.c	*/
 /* 
  *	v 2.0, 2016/05, Eric Sanchis <eric.sanchis@iut-rodez.fr>
@@ -59,4 +61,4 @@ dst[nb] = '\0' ;
 return OKNOTRUNC ;
 }
 
-
+/* clang-format on */

@@ -22,6 +22,9 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
+/* Needed to stop annoying MS _s warnings when compiled with llvm on Windows! */
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -107,7 +110,7 @@ void getCustomerData(customer *pcusta)
 	}
 }
 
-int countCustomers(customer *pcusta)
+int countCustomers(void)
 {
 	int n;
 	for (n = 0; n < CUST_ARR_SIZE; n++) {
@@ -173,7 +176,7 @@ int main(void)
 	cls();
 	displayHeader();
 	getCustomerData(pcusta);
-	if (countCustomers(pcusta) > 0) {
+	if (countCustomers() > 0) {
 		calcDisplayCharges(pcusta);
 	}
 	displayFooter();

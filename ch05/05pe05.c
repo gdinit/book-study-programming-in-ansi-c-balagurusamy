@@ -20,6 +20,9 @@ Compiled & tested with:
 gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
 */
 
+/* Needed to stop annoying MS _s warnings when compiled with llvm on Windows! */
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -79,7 +82,7 @@ void printSubject(int id)
 
 void getMarks(int *pmarks)
 {
-	int n = 0, in = 0, mat = 0, pyh = 0, che = 0, id = 0;
+	int n = 0, in = 0, id = 0;
 	do {
 		printSubject(id);
 		printf(" Enter between 0 and 100, or -1 to abort: ");
@@ -151,8 +154,6 @@ int main(void)
 	char ch = '\0';
 	int marks[MAX_SUBJECTS] = {-1};
 	int *pmarks = &marks[0];
-	int readCount = 0;
-	int *preadCount = &readCount;
 	/* END: Declare Variables ******************************************* */
 
 	/* BEGIN: Program Main Code ***************************************** */

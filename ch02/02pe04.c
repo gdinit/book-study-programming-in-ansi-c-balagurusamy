@@ -8,6 +8,9 @@
 	with the numbers.
 */
 
+/* Needed to stop annoying MS _s warnings when compiled with llvm on Windows! */
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 
 /* Required to prevent -> "scanf: floating point formats not linked" */

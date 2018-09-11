@@ -1,0 +1,90 @@
+str5cpy - copy a (sub)string
+
+SYNOPSYS
+
+	#include "str5.h"
+
+	int str5cpy( char * dst, size_t dstsize, const char * src, size_t nb, size_t mode ) ;
+
+	int strtcpy( char * dst, size_t dstsize, const char * src);
+
+DESCRIPTION
+
+The str5cpy() function copies up to the first (not null) nb characters from
+the source string pointed to by src to the destination array pointed to by dst
+and adds a terminating null byte ('\0').
+
+The parameter dstsize indicates the size of the destination array dst.
+
+Parameter mode specifies if truncation is allowed (TRUNC) or not allowed
+(NOTRUNC).
+
+If srclen is the length of the string pointed to by src and srclen is less than
+nb, str5cpy() only writes srclen characters of src and an additional null byte
+to dst.
+The copy is actually made if the size dstsize of the destination buffer dst is
+large enough or if the TRUNC mode is chosen.
+
+When the size dstsize of the destination buffer dst is too small and the
+TRUNC mode is chosen, only dstsize-1 characters are copied and the string is
+terminated with a null byte.
+
+Strtcpy() copies the string pointed to by src (including the terminating null
+character) to the destination array of size dstsize pointed to by dst.
+Truncation is allowed.
+
+The behavior of str5cpy() and strtcpy() functions is undefined if:
+- the destination array dst and the source string src overlap
+- dstsize is different from 0 and does not correspond to the actual size of
+the destination buffer dst.
+
+
+RETURN VALUE
+
+Str5cpy() returns:
+- a non negative integer after success:
+    . OKNOTRUNC: no truncation was done during the copy
+    . OKTRUNC: an allowed truncation was done during the copy
+- and a negative integer after error:
+    . EDSTPAR: a parameter related to the destination buffer is considered as
+      incorrect (dst is a NULL pointer or dstsize is equal to 0)
+    . ESRCPAR: src is a NULL pointer
+    . EMODPAR: mode is invalid
+    . ETRUNC: dstzise is too small and truncation is not allowed (NOTRUNC
+      mode).
+
+Strtcpy() returns OKNOTRUNC or OKTRUNC after success and EDSTPAR or ESRCPAR
+after error.
+
+The destination buffer dst remains unchanged if one of the above error
+conditions is realized.
+
+
+CONFORMING TO
+
+C89 and beyond.
+
+
+NOTES
+
+Programmers do not need to calculate the length of the src string: they only
+need to indicate the size of the destination buffer dst as fourth parameter.
+No extra null byte will be added. String copy becomes easy. For example, to
+prevent truncation:
+
+   char dst[DSTSIZE] ;
+   int r ;
+
+   if ( (r = str5cpy(dst,sizeof(dst),src,sizeof(dst),NOTRUNC)) < 0 )
+   {  /* error */ }
+
+
+To copy the first n bytes of src:
+
+   r = str5cpy(dst,sizeof(dst),src,n,NOTRUNC) ; /* or TRUNC */
+
+
+To copy the string src with an allowed truncation:
+
+   r = strtcpy(dst,DSTSIZE,src) ;
+

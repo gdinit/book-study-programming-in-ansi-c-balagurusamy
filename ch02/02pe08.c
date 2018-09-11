@@ -8,6 +8,9 @@ assign their sum to an integer variable, and then output the values of all the
 three variable.
 */
 
+/* Needed to stop annoying MS _s warnings when compiled with llvm on Windows! */
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 
 int main(void)
