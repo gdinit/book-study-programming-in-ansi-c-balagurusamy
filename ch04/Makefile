@@ -15,7 +15,7 @@ ifeq ($(OS),Windows_NT)
 else
 # non-MS-Windows
 	clang -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length 04pe01.c -o binary/04pe01
-	clang -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length 04pe04.c -o binary/04pe04
+	clang -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length -lm 04pe04.c -o binary/04pe04
 	clang -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length 04pe05.c -o binary/04pe05
 	clang -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length 04pe06.c -o binary/04pe06
 	clang -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment -Wparentheses -Wformat-zero-length 04pe07.c -o binary/04pe07
