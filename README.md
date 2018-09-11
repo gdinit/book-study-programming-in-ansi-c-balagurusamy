@@ -20,7 +20,8 @@ Note: Before committing to this git repo, I *also* test each example with a more
 
 Each example is tested for strict ANSI C compatibility as follows:
 ```
-gcc -std=c89 -pedantic -Wall -Werror $filename.c -o binary/$filename
+clang -x c -std=c89 -pedantic-errors -Wall -Werror -Wextra -Wcomment \
+-Wparentheses -Wformat-zero-length filename.c -o binary/filename
 ```
 
 ## Contributing
